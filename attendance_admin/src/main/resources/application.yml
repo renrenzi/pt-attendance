@@ -9,9 +9,9 @@ spring:
     active: prod
   datasource:
     driver-class-name: org.gjt.mm.mysql.Driver
-    url: jdbc:mysql://175.178.127.92:3373/stu_attendence?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
-    username: renrenzi
-    password: 123456a!
+    url: jdbc:mysql://Ip:端口/stu_attendence?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: 你的账号
+    password: 你的密码
     druid:
       initial-size: 5 #连接池初始化大小
       min-idle: 10 #最小空闲连接数
@@ -23,14 +23,14 @@ spring:
         login-password: druid
   redis:
     database: 0
-    host: 175.178.127.92
+    host: IP
     port: 6379
-    password: wBa3u2KqvDKET.B
+    password: 密码
   rabbitmq:
-    host: 175.178.127.92
-    username: admin
+    host: IP
+    username: 用户名
     port: 5672
-    password: 123456
+    password:  密码
     publisher-returns: true
 mybatis-plus:
   type-aliases-package: com.jj.stu.attendance.admim.entity
