@@ -1,2 +1,9 @@
 server:
   port: 9527
+
+spring:
+  datasource:
+    url:
+    username:
+    password:
+
