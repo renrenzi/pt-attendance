@@ -11,6 +11,10 @@
     </parent>
 
     <dependencies>
+        <dependency>
+            <artifactId>attendance-dao</artifactId>
+            <groupId>com.renrenzi</groupId>
+        </dependency>
         <!-- rabbitmq 依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -95,12 +99,6 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-        </dependency>
-        <!-- lombok 依赖 -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
         </dependency>
         <!-- test 依赖 -->
         <dependency>
