@@ -11,12 +11,14 @@
     </parent>
 
     <groupId>com.renrenzi</groupId>
-    <artifactId>stu_attendance</artifactId>
+    <artifactId>pt-attendance</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>attendance_admin</module>
+        <module>attendance-admin</module>
+        <module>attendance-base</module>
+        <module>attendance-dao</module>
     </modules>
 
     <!-- 统一管理jar包版本 -->
@@ -29,6 +31,8 @@
         <lombok.version>1.16.18</lombok.version>
         <mysql.version>5.1.47</mysql.version>
         <druid.version>1.1.23</druid.version>
+        <pagehelper-starter.version>1.3.0</pagehelper-starter.version>
+        <mybatis-generator.version>1.4.0</mybatis-generator.version>
         <mybatis.spring.boot.version>2.2.0</mybatis.spring.boot.version>
         <knife4j.version>2.0.4</knife4j.version>
         <satoken.version>1.29.0</satoken.version>
@@ -38,7 +42,11 @@
 
     <dependencyManagement>
         <dependencies>
-
+            <dependency>
+                <artifactId>attendance-base</artifactId>
+                <groupId>com.renrenzi</groupId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-spring-boot-starter</artifactId>
@@ -97,6 +105,18 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
+            </dependency>
+            <!-- MyBatis 生成器 -->
+            <dependency>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-core</artifactId>
+                <version>${mybatis-generator.version}</version>
+            </dependency>
+            <!--MyBatis分页插件starter-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper-starter.version}</version>
             </dependency>
             <!-- mybatis 依赖 -->
             <dependency>
