@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>attendance_base</artifactId>
+    <artifactId>attendance-base</artifactId>
 
     <dependencies>
         <dependency>

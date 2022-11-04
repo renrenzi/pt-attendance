@@ -42,7 +42,11 @@
 
     <dependencyManagement>
         <dependencies>
-
+            <dependency>
+                <artifactId>attendance-base</artifactId>
+                <groupId>com.renrenzi</groupId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-spring-boot-starter</artifactId>

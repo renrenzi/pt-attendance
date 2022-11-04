@@ -39,6 +39,7 @@
         <!--生成全部表tableName设为%-->
         <table tableName="%">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <domainObjectRenamingRule searchString="^S" replaceString="" />
         </table>
     </context>
 </generatorConfiguration>

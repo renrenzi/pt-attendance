@@ -9,9 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>attendance_dao</artifactId>
+    <artifactId>attendance-dao</artifactId>
 
     <dependencies>
+        <!-- base 通用模块 -->
+        <dependency>
+            <artifactId>attendance-base</artifactId>
+            <groupId>com.renrenzi</groupId>
+        </dependency>
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
