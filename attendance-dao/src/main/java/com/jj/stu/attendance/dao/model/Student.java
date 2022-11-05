@@ -3,7 +3,6 @@ package com.jj.stu.attendance.dao.model;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
-
 public class Student implements Serializable {
     private Integer id;
 

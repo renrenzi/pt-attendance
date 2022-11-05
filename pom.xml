@@ -38,14 +38,21 @@
         <satoken.version>1.29.0</satoken.version>
         <logstash.version>5.3</logstash.version>
         <hutool.version>5.4.0</hutool.version>
+        <attendance.base.version>1.0-SNAPSHOT</attendance.base.version>
+        <attendance.dao.version>1.0-SNAPSHOT</attendance.dao.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <artifactId>attendance-dao</artifactId>
+                <groupId>com.renrenzi</groupId>
+                <version>${attendance.dao.version}</version>
+            </dependency>
+            <dependency>
                 <artifactId>attendance-base</artifactId>
                 <groupId>com.renrenzi</groupId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${attendance.base.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
