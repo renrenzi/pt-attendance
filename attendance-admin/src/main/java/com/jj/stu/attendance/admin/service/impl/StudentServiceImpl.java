@@ -7,6 +7,7 @@ import com.jj.stu.attendance.dao.request.StudentBatchInsertRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * @author 任人子
@@ -20,6 +21,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void batchAddStudent(StudentBatchInsertRequest request) {
         for(Student student : request.getStudentList()){
+            student.setCreateDate(new Date());
             mapper.insertSelective(student);
         }
     }
