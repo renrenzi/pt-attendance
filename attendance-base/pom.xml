@@ -12,6 +12,10 @@
     <artifactId>attendance-base</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
         <!-- lombok 依赖 -->
         <dependency>
             <groupId>org.projectlombok</groupId>

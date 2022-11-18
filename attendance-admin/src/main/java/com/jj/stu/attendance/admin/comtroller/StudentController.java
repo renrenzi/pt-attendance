@@ -1,6 +1,7 @@
 package com.jj.stu.attendance.admin.comtroller;
 
 import com.jj.stu.attendance.admin.service.StudentService;
+import com.jj.stu.attendance.base.util.ValidateUtil;
 import com.jj.stu.attendance.dao.request.student.StudentBatchInsertRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,9 +28,7 @@ public class StudentController {
     @PostMapping("/batch/add/student")
     @ApiOperation("批量添加学生")
     public void batchAddStudent(@RequestBody StudentBatchInsertRequest request){
-        if(CollectionUtils.isEmpty(request.getStudentList())){
-            return;
-        }
+        ValidateUtil.validate(request);
         studentService.batchAddStudent(request);
     }
 }

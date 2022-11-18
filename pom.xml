@@ -34,16 +34,24 @@
         <pagehelper-starter.version>1.3.0</pagehelper-starter.version>
         <mybatis-generator.version>1.4.0</mybatis-generator.version>
         <mybatis.spring.boot.version>2.2.0</mybatis.spring.boot.version>
+        <mybatis-plus.version>3.4.0</mybatis-plus.version>
         <knife4j.version>2.0.4</knife4j.version>
         <satoken.version>1.29.0</satoken.version>
         <logstash.version>5.3</logstash.version>
         <hutool.version>5.4.0</hutool.version>
+        <hibernate.validator.version>6.2.5.Final</hibernate.validator.version>
+
         <attendance.base.version>1.0-SNAPSHOT</attendance.base.version>
         <attendance.dao.version>1.0-SNAPSHOT</attendance.dao.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate.validator.version}</version>
+            </dependency>
             <dependency>
                 <artifactId>attendance-dao</artifactId>
                 <groupId>com.renrenzi</groupId>
@@ -91,7 +99,7 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>3.4.0</version>
+                <version>${mybatis-plus.version}</version>
             </dependency>
             <!-- Spring-Boot -->
             <dependency>
@@ -105,7 +113,7 @@
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.28</version>
+                <version>${mysql.version}</version>
             </dependency>
             <!-- druid 依赖 -->
             <dependency>

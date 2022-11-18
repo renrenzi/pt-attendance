@@ -2,7 +2,9 @@ package com.jj.stu.attendance.dao.request.student;
 
 import com.jj.stu.attendance.dao.model.Student;
 import lombok.Data;
+import lombok.NonNull;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 /**
@@ -11,5 +13,6 @@ import java.util.List;
  */
 @Data
 public class StudentBatchInsertRequest {
+    @NotEmpty
     List<Student> studentList;
 }
