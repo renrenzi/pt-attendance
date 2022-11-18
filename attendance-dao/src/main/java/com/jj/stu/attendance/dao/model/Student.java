@@ -1,8 +1,10 @@
 package com.jj.stu.attendance.dao.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
+@TableName("s_student")
 public class Student implements Serializable {
     private Integer id;
 

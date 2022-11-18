@@ -167,6 +167,17 @@
       </if>
     </trim>
   </insert>
+  <insert id="batchInsert">
+    insert into s_student (id, username, password, nick_name,
+    clazz_id, sex, mobile,
+    create_date)
+    values
+    <foreach collection="studentList" item="item" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.username,jdbcType=INTEGER}, #{item.password,jdbcType=VARCHAR}, #{item.nickName,jdbcType=VARCHAR},
+      #{item.clazzId,jdbcType=INTEGER}, #{item.sex,jdbcType=VARCHAR}, #{item.mobile,jdbcType=VARCHAR},
+      #{item.createDate,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
   <select id="countByExample" parameterType="com.jj.stu.attendance.dao.model.StudentExample" resultType="java.lang.Long">
     select count(*) from s_student
     <if test="_parameter != null">

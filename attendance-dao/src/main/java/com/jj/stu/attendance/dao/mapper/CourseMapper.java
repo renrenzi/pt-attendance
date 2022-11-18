@@ -1,11 +1,12 @@
 package com.jj.stu.attendance.dao.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jj.stu.attendance.dao.model.Course;
 import com.jj.stu.attendance.dao.model.CourseExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface CourseMapper {
+public interface CourseMapper extends BaseMapper<Course> {
     long countByExample(CourseExample example);
 
     int deleteByExample(CourseExample example);
