@@ -1,11 +1,12 @@
 package com.jj.stu.attendance.dao.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jj.stu.attendance.dao.model.Clazz;
 import com.jj.stu.attendance.dao.model.ClazzExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface ClazzMapper {
+public interface ClazzMapper extends BaseMapper<Clazz> {
     long countByExample(ClazzExample example);
 
     int deleteByExample(ClazzExample example);

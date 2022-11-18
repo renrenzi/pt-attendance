@@ -1,16 +1,15 @@
 package com.jj.stu.attendance.admin.comtroller;
 
-import cn.hutool.core.collection.CollectionUtil;
 import com.jj.stu.attendance.admin.service.StudentService;
-import com.jj.stu.attendance.dao.request.StudentBatchInsertRequest;
+import com.jj.stu.attendance.dao.request.student.StudentBatchInsertRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
-import java.util.Collection;
 
 /**
  * 学生管理
@@ -19,7 +18,7 @@ import java.util.Collection;
  */
 @RequestMapping("/student")
 @RestController
-@Api(tags = "StudentController")
+@Api(tags = "学生管理")
 public class StudentController {
 
     @Resource
@@ -27,7 +26,7 @@ public class StudentController {
 
     @PostMapping("/batch/add/student")
     @ApiOperation("批量添加学生")
-    public void batchAddStudent(StudentBatchInsertRequest request){
+    public void batchAddStudent(@RequestBody StudentBatchInsertRequest request){
         if(CollectionUtils.isEmpty(request.getStudentList())){
             return;
         }

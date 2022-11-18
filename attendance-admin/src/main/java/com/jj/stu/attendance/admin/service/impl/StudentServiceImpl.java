@@ -1,9 +1,10 @@
 package com.jj.stu.attendance.admin.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jj.stu.attendance.admin.service.StudentService;
 import com.jj.stu.attendance.dao.mapper.StudentMapper;
 import com.jj.stu.attendance.dao.model.Student;
-import com.jj.stu.attendance.dao.request.StudentBatchInsertRequest;
+import com.jj.stu.attendance.dao.request.student.StudentBatchInsertRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,7 +15,7 @@ import java.util.Date;
  * @date 2022/11/4  - {TIME}
  */
 @Service
-public class StudentServiceImpl implements StudentService {
+public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> implements StudentService {
     @Resource
     private StudentMapper mapper;
 

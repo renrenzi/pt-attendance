@@ -1,11 +1,12 @@
 package com.jj.stu.attendance.dao.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jj.stu.attendance.dao.model.Admin;
 import com.jj.stu.attendance.dao.model.AdminExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface AdminMapper {
+public interface AdminMapper extends BaseMapper<Admin> {
     long countByExample(AdminExample example);
 
     int deleteByExample(AdminExample example);

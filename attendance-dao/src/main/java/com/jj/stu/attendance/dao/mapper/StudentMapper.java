@@ -1,11 +1,12 @@
 package com.jj.stu.attendance.dao.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jj.stu.attendance.dao.model.Student;
 import com.jj.stu.attendance.dao.model.StudentExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface StudentMapper {
+public interface StudentMapper extends BaseMapper<Student> {
     long countByExample(StudentExample example);
 
     int deleteByExample(StudentExample example);
@@ -27,4 +28,6 @@ public interface StudentMapper {
     int updateByPrimaryKeySelective(Student record);
 
     int updateByPrimaryKey(Student record);
+
+    void batchInsert(@Param("studentList")List<Student> studentList);
 }
