@@ -13,6 +13,12 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * 所选课程服务impl
+ *
+ * @author 张俊杰
+ * @date 2022/11/19
+ */
 @Service
 public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper, SelectedCourse> implements SelectedCourseService {
     @Resource

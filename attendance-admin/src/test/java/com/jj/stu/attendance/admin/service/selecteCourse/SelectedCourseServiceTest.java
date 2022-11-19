@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.admin.selecteCourse;
+package com.jj.stu.attendance.admin.service.selecteCourse;
 
 import com.jj.stu.attendance.admin.BaseTest;
 import com.jj.stu.attendance.admin.service.SelectedCourseService;

@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.admin.comtroller;
+package com.jj.stu.attendance.admin.controller;
 
 
 import com.jj.stu.attendance.admin.service.ClazzService;
@@ -16,6 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
+/**
+ * clazz控制器
+ *
+ * @author 张俊杰
+ * @date 2022/11/19
+ */
 @RestController
 @Api(tags = "专业管理")
 @RequestMapping("/clazz")
@@ -23,6 +29,12 @@ public class ClazzController {
     @Resource
     private ClazzService clazzService;
 
+    /**
+     * 页面clazz列表
+     *
+     * @param request 请求
+     * @return {@link Result}<{@link PageClazzResponse}>
+     */
     @ApiOperation("分页获取专业列表")
     @PostMapping("/page/clazz/list")
     public Result<PageClazzResponse> pageClazzList(@RequestBody PageClazzRequest request){

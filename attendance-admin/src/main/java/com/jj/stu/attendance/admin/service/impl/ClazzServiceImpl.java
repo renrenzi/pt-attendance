@@ -13,6 +13,12 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * impl clazz服务
+ *
+ * @author 张俊杰
+ * @date 2022/11/19
+ */
 @Service
 public class ClazzServiceImpl extends ServiceImpl<ClazzMapper, Clazz> implements ClazzService {
 

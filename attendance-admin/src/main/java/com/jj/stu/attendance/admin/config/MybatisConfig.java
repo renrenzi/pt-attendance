@@ -5,7 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
+ * mybatis配置
  * mybatis dao 扫描配置
+ *
  * @author 任人子
  * @date 2022/2/24  - {TIME}
  */

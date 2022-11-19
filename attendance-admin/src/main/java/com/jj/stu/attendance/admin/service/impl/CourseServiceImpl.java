@@ -16,6 +16,12 @@ import javax.annotation.Resource;
 import java.util.List;
 
 
+/**
+ * 当然服务impl
+ *
+ * @author 张俊杰
+ * @date 2022/11/19
+ */
 @Service
 public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> implements CourseService {
 
