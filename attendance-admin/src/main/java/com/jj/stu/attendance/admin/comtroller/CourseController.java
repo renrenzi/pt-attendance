@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
+ * 当然制控器
  *
+ * @author 张俊杰
+ * @date 2022/11/19
  */
 @Api(tags = "课程管理")
 @RequestMapping("/course")
@@ -26,6 +29,12 @@ public class CourseController {
     @Resource
     private CourseService courseService;
 
+    /**
+     * 课程列表页
+     *
+     * @param request 请求
+     * @return {@link Result}<{@link PageCourseListResponse}>
+     */
     @ApiOperation("分页获取课程列表")
     @PostMapping("/page/course/list")
     public Result<PageCourseListResponse> pageCourseList(@RequestBody PageCourseListRequest request){

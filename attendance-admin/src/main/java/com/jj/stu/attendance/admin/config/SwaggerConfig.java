@@ -6,7 +6,11 @@ import org.springframework.context.annotation.Configuration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
+ * 配置
  * Admin swagger 配置
+ *
+ * @author 张俊杰
+ * @date 2022/11/19
  */
 @Configuration
 @EnableSwagger2

@@ -15,6 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
+/**
+ * 选修课控制器
+ *
+ * @author 张俊杰
+ * @date 2022/11/19
+ */
 @Api(tags = "选课管理")
 @RequestMapping("/selectedCourse")
 @RestController
@@ -22,6 +28,12 @@ public class SelectedCourseController {
     @Resource
     private SelectedCourseService selectedCourseService;
 
+    /**
+     * 页面选择课程列表
+     *
+     * @param request 请求
+     * @return {@link Result}<{@link PageSelectedCourseResponse}>
+     */
     @ApiOperation("分页获取选课列表")
     @PostMapping("/page/slected/course/list")
     public Result<PageSelectedCourseResponse> pageSelectedCourseList(@RequestBody PageSelectedCourseRequest request){
