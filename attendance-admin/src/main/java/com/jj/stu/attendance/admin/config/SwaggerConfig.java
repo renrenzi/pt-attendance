@@ -18,7 +18,7 @@ public class SwaggerConfig extends BaseSwaggerConfig {
     @Override
     public SwaggerProperties swaggerProperties() {
         return SwaggerProperties.builder()
-                .apiBasePackage("com.jj.stu.attendance.admin.comtroller")
+                .apiBasePackage("com.jj.stu.attendance.admin.controller")
                 .title("Admin后台管理中心")
                 .description("Admin后台管理中心相关接口文档")
                 .version("1.0")

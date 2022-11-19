@@ -1,11 +1,10 @@
-package com.jj.stu.attendance.admin.comtroller;
+package com.jj.stu.attendance.admin.controller;
 
 import com.jj.stu.attendance.admin.service.StudentService;
 import com.jj.stu.attendance.base.util.ValidateUtil;
 import com.jj.stu.attendance.dao.request.student.StudentBatchInsertRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

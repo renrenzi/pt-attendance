@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.admin.teacher;
+package com.jj.stu.attendance.admin.service.teacher;
 
 import com.jj.stu.attendance.admin.BaseTest;
 import com.jj.stu.attendance.admin.service.TeacherService;

@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.admin.clazz;
+package com.jj.stu.attendance.admin.service.clazz;
 
 import com.jj.stu.attendance.admin.BaseTest;
 import com.jj.stu.attendance.admin.service.ClazzService;

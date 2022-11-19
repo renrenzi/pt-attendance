@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.admin.student;
+package com.jj.stu.attendance.admin.service.student;
 
 import com.jj.stu.attendance.admin.BaseTest;
 import com.jj.stu.attendance.dao.mapper.StudentMapper;

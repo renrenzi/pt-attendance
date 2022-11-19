@@ -1,6 +1,5 @@
 package com.jj.stu.attendance.admin.controller;
 
-import com.jj.stu.attendance.admin.comtroller.StudentController;
 import com.jj.stu.attendance.dao.model.Student;
 import com.jj.stu.attendance.dao.request.student.StudentBatchInsertRequest;
 import org.junit.jupiter.api.Test;

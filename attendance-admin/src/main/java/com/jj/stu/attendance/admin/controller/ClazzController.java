@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.admin.comtroller;
+package com.jj.stu.attendance.admin.controller;
 
 
 import com.jj.stu.attendance.admin.service.ClazzService;

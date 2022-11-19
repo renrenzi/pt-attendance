@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.admin.comtroller;
+package com.jj.stu.attendance.admin.controller;
 
 import com.jj.stu.attendance.admin.service.SelectedCourseService;
 import com.jj.stu.attendance.base.basic.Result;
@@ -35,7 +35,7 @@ public class SelectedCourseController {
      * @return {@link Result}<{@link PageSelectedCourseResponse}>
      */
     @ApiOperation("分页获取选课列表")
-    @PostMapping("/page/slected/course/list")
+    @PostMapping("/page/selected/course/list")
     public Result<PageSelectedCourseResponse> pageSelectedCourseList(@RequestBody PageSelectedCourseRequest request){
         ValidateUtil.validate(request);
         return ResultGenerator.getResultByOk(selectedCourseService.pageSelectedCourseList(request));
