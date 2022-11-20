@@ -1,14 +1,21 @@
 package com.jj.stu.attendance.admin.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.StudentService;
+import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.dao.mapper.StudentMapper;
 import com.jj.stu.attendance.dao.model.Student;
+import com.jj.stu.attendance.dao.request.student.PageStudentRequest;
 import com.jj.stu.attendance.dao.request.student.StudentBatchInsertRequest;
+import com.jj.stu.attendance.dao.response.student.PageStudentResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 学生服务impl
@@ -19,13 +26,22 @@ import java.util.Date;
 @Service
 public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> implements StudentService {
     @Resource
-    private StudentMapper mapper;
+    private StudentMapper studentMapper;
+
+    @Override
+    public PageStudentResponse pageStudentList(PageStudentRequest request) {
+        PageHelper.startPage(request.getPageNum(), request.getPageSize());
+        List<Student> studentList = studentMapper.selectList(new QueryWrapper<>());
+        return new PageStudentResponse()
+                .setStudentList(studentList)
+                .setTotalSize(studentList.size());
+    }
 
     @Override
     public void batchAddStudent(StudentBatchInsertRequest request) {
         for(Student student : request.getStudentList()){
             student.setCreateDate(new Date());
-            mapper.insertSelective(student);
+            studentMapper.insertSelective(student);
         }
     }
 }

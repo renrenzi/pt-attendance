@@ -1,10 +1,18 @@
 package com.jj.stu.attendance.admin.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.TeacherService;
 import com.jj.stu.attendance.dao.mapper.TeacherMapper;
 import com.jj.stu.attendance.dao.model.Teacher;
+import com.jj.stu.attendance.dao.request.teacher.PageTeacherRequest;
+import com.jj.stu.attendance.dao.response.teacher.PageTeacherResponse;
+import jdk.nashorn.internal.ir.annotations.Reference;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 教师服务impl
@@ -15,4 +23,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> implements TeacherService {
 
+    @Resource
+    private TeacherMapper  teacherMapper;
+
+    @Override
+    public PageTeacherResponse pageTeacherList(PageTeacherRequest request) {
+        PageHelper.startPage(request.getPageNum(), request.getPageSize());
+        List<Teacher> teacherList = teacherMapper.selectList(new QueryWrapper<>());
+        return new PageTeacherResponse()
+                .setTeacherList(teacherList)
+                .setTotalSize(teacherList.size());
+    }
 }

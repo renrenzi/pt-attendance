@@ -1,8 +1,12 @@
 package com.jj.stu.attendance.admin.controller;
 
 import com.jj.stu.attendance.admin.service.StudentService;
+import com.jj.stu.attendance.base.basic.Result;
+import com.jj.stu.attendance.base.basic.ResultGenerator;
 import com.jj.stu.attendance.base.util.ValidateUtil;
+import com.jj.stu.attendance.dao.request.student.PageStudentRequest;
 import com.jj.stu.attendance.dao.request.student.StudentBatchInsertRequest;
+import com.jj.stu.attendance.dao.response.student.PageStudentResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +30,13 @@ public class StudentController {
     @Resource
     private StudentService studentService;
 
+    @ApiOperation("分页获取学生列表")
+    @PostMapping("/page/student/list")
+    public Result<PageStudentResponse> pageStudentList(@RequestBody PageStudentRequest request){
+        ValidateUtil.validate(request);
+        return ResultGenerator.getResultByOk(studentService.pageStudentList(request));
+    }
+    
     /**
      * 批量添加学生
      *

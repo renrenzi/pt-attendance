@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 
-@TableName("leave")
+@TableName("s_leave")
 public class Leave implements Serializable {
     private Integer id;
 
