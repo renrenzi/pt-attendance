@@ -1,6 +1,8 @@
 package com.jj.stu.attendance.base.util;
 
+import com.jj.stu.attendance.base.exception.ApiException;
 import org.hibernate.validator.HibernateValidator;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -8,7 +10,6 @@ import javax.validation.Validator;
 import java.util.Set;
 
 public class ValidateUtil {
-
     private static Validator validator = Validation
             .byProvider(HibernateValidator.class)
             .configure().failFast(true)
@@ -18,7 +19,7 @@ public class ValidateUtil {
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(obj);
         if (constraintViolations.size() > 0){
             ConstraintViolation<T> item = constraintViolations.iterator().next();
-            throw new RuntimeException(String.format("参数校验失败：[%s] %s", item.getPropertyPath(), item.getMessage()));
+            throw new ApiException(String.format("参数校验失败：[%s] %s", item.getPropertyPath(), item.getMessage()));
         }
     }
 }
