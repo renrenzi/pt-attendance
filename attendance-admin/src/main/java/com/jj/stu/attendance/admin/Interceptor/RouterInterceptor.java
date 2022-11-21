@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * @author 任人子
  * @date 2022/3/26  - {TIME}
  */
-//@Configuration
+@Configuration
 public class RouterInterceptor implements WebMvcConfigurer {
     @Resource
     private RedisService redisService;
