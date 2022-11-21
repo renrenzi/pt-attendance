@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2022/11/2  - {TIME}
  */
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.jj.stu.attendance"})
 public class StuAttendanceAdminApplication {
 
     public static void main(String[] args) {
