@@ -13,5 +13,11 @@ import com.jj.stu.attendance.dao.response.attendance.PageAttendanceResponse;
  * @date 2022/11/19
  */
 public interface AttendanceService extends IService<Attendance> {
+    /**
+     * 页面出席名单
+     *
+     * @param request 请求
+     * @return {@link PageAttendanceResponse}
+     */
     PageAttendanceResponse pageAttendanceList(PageAttendanceRequest request);
 }

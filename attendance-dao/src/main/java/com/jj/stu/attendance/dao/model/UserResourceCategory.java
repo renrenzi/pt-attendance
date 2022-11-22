@@ -1,5 +1,7 @@
 package com.jj.stu.attendance.dao.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -14,6 +16,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 public class UserResourceCategory implements Serializable {
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     @ApiModelProperty(value = "分类名称")

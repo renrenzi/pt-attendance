@@ -12,5 +12,11 @@ import com.jj.stu.attendance.dao.response.leave.PageLeaveResponse;
  * @date 2022/11/20
  */
 public interface LeaveService extends IService<Leave> {
+    /**
+     * 页面离开列表
+     *
+     * @param request 请求
+     * @return {@link PageLeaveResponse}
+     */
     PageLeaveResponse pageLeaveList(PageLeaveRequest request);
 }

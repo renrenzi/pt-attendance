@@ -164,7 +164,18 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <select id="selectTeacherListByIds" resultType="com.jj.stu.attendance.dao.model.Teacher">
+      select
+      <include refid="Base_Column_List" />
+      from s_teacher
+      <if test="teacherIds != null and teacherIds.size() > 0">
+        where id in
+        <foreach collection="teacherIds" item="id" separator="," open="(" close=")">
+          #{id}
+        </foreach>
+      </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update s_teacher
     <set>
       <if test="record.id != null">
