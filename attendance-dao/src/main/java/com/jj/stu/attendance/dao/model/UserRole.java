@@ -1,5 +1,7 @@
 package com.jj.stu.attendance.dao.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -15,6 +17,7 @@ import java.util.Date;
 @Accessors(chain = true)
 public class UserRole implements Serializable {
     @ApiModelProperty(value = "角色Id")
+    @TableId(type = IdType.AUTO)
     private Integer roleId;
 
     @ApiModelProperty(value = "角色名称")

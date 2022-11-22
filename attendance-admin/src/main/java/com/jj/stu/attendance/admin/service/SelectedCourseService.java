@@ -5,6 +5,14 @@ import com.jj.stu.attendance.dao.model.SelectedCourse;
 import com.jj.stu.attendance.dao.request.selectedCourse.PageSelectedCourseRequest;
 import com.jj.stu.attendance.dao.response.selectedCourse.PageSelectedCourseResponse;
 
+import java.util.List;
+
 public interface SelectedCourseService extends IService<SelectedCourse> {
+    /**
+     * 页面选择课程列表
+     *
+     * @param request 请求
+     * @return {@link PageSelectedCourseResponse}
+     */
     PageSelectedCourseResponse pageSelectedCourseList(PageSelectedCourseRequest request);
 }

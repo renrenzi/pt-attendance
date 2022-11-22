@@ -6,5 +6,11 @@ import com.jj.stu.attendance.dao.request.clazz.PageClazzRequest;
 import com.jj.stu.attendance.dao.response.clazz.PageClazzResponse;
 
 public interface ClazzService extends IService<Clazz> {
+    /**
+     * 页面clazz列表
+     *
+     * @param request 请求
+     * @return {@link PageClazzResponse}
+     */
     PageClazzResponse pageClazzList(PageClazzRequest request);
 }

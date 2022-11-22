@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * @author 任人子
  * @date 2022/3/26  - {TIME}
  */
-@Configuration
+// @Configuration
 public class RouterInterceptor implements WebMvcConfigurer {
     @Resource
     private RedisService redisService;
@@ -35,7 +35,7 @@ public class RouterInterceptor implements WebMvcConfigurer {
                 for (Map.Entry<Object, Object> entry : roleResourceMap.entrySet()) {
                     String url = (String) entry.getKey();
                     String[] roleList = ((List<String>) (entry.getValue())).stream().map(
-                            item -> item.split("_")[1]).collect(Collectors.toList()).toArray(new String[0]);
+                            item -> item.split("_")[1]).toArray(String[]::new);
                     SaRouter.match(url, r -> StpUtil.checkRoleOr(roleList));
                 }
             }

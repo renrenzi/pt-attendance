@@ -178,7 +178,7 @@
   </update>
 
   <delete id="deleteByList">
-    delete from tb_role_resource_relation where
+    delete from s_user_role_resource_relation where
     <foreach collection="roleResourceRelationList" item="item" separator="or">
       role_id = #{item.roleId}
     </foreach>

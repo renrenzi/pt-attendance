@@ -38,7 +38,7 @@
         <knife4j.version>2.0.4</knife4j.version>
         <satoken.version>1.29.0</satoken.version>
         <logstash.version>5.3</logstash.version>
-        <hutool.version>5.4.0</hutool.version>
+        <hutool.version>5.8.10</hutool.version>
         <hibernate.validator.version>6.2.5.Final</hibernate.validator.version>
 
         <attendance.base.version>1.0-SNAPSHOT</attendance.base.version>

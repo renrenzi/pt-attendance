@@ -3,17 +3,21 @@ package com.jj.stu.attendance.admin.controller;
 import com.jj.stu.attendance.admin.service.SelectedCourseService;
 import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.basic.ResultGenerator;
+import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.base.util.ValidateUtil;
 import com.jj.stu.attendance.dao.request.selectedCourse.PageSelectedCourseRequest;
 import com.jj.stu.attendance.dao.response.selectedCourse.PageSelectedCourseResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * 选修课控制器
@@ -27,7 +31,6 @@ import javax.annotation.Resource;
 public class SelectedCourseController {
     @Resource
     private SelectedCourseService selectedCourseService;
-
     /**
      * 页面选择课程列表
      *
