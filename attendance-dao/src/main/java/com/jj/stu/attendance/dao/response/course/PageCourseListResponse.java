@@ -8,5 +8,5 @@ import java.util.List;
 @Data
 public class PageCourseListResponse {
     List<PageCourseDto> pageCourseDtoList;
-    Integer totalSize;
+    Long totalSize;
 }

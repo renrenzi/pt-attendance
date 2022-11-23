@@ -2,6 +2,7 @@ package com.jj.stu.attendance.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.StudentService;
 import com.jj.stu.attendance.base.basic.Result;
@@ -30,11 +31,11 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
 
     @Override
     public PageStudentResponse pageStudentList(PageStudentRequest request) {
-        PageHelper.startPage(request.getPageNum(), request.getPageSize());
+        Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
         List<Student> studentList = studentMapper.selectList(new QueryWrapper<>());
         return new PageStudentResponse()
                 .setStudentList(studentList)
-                .setTotalSize(studentList.size());
+                .setTotalSize(page.getTotal());
     }
 
     @Override

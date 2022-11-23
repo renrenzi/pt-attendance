@@ -19,7 +19,7 @@ public class PageLeaveResponse {
     /**
      * 总大小
      */
-    private Integer totalSize;
+    private Long totalSize;
 
     /**
      * 离开列表

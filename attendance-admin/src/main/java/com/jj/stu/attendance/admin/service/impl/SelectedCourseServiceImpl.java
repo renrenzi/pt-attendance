@@ -2,6 +2,7 @@ package com.jj.stu.attendance.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.SelectedCourseService;
 import com.jj.stu.attendance.dao.mapper.SelectedCourseMapper;
@@ -27,9 +28,9 @@ public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper,
     @Override
     public PageSelectedCourseResponse pageSelectedCourseList(PageSelectedCourseRequest request) {
         QueryWrapper<SelectedCourse> selectedCourseQueryWrapper = new QueryWrapper<>();
-        PageHelper.startPage(request.getPageNum(), request.getPageSize());
+        Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
         List<SelectedCourse> selectedCourseList = selectedCourseMapper.selectList(selectedCourseQueryWrapper);
         return new PageSelectedCourseResponse().setSelectedCourseList(selectedCourseList)
-                .setTotalSize(selectedCourseList.size());
+                .setTotalSize(page.getTotal());
     }
 }

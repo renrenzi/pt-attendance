@@ -12,5 +12,5 @@ import java.util.List;
 public class PageSelectedCourseResponse {
     List<SelectedCourse> selectedCourseList;
 
-    Integer totalSize;
+    Long totalSize;
 }

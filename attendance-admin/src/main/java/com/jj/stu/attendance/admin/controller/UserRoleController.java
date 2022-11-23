@@ -51,17 +51,7 @@ public class UserRoleController {
         if (condition == null || condition.getPageNum() == null || condition.getPageSize() == null) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
-        QueryWrapper<UserRole> query = new QueryWrapper<>(userRole);
-        query.lambda().orderByDesc(UserRole::getCreateTime);
-        Page<UserRole> page = new Page<>(condition.getPageNum(), condition.getPageSize());
-        userRoleService.page(page, query);
-        if (page.getRecords() == null) {
-            return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_GATEWAY);
-        }
-        PageResult<UserRole> pageResult = new PageResult<>();
-        pageResult.setTotalSize(page.getTotal());
-        pageResult.setData(page.getRecords());
-        return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, pageResult);
+        return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, userRoleService.pageRole(condition, userRole));
     }
 
     @ApiOperation("添加角色")

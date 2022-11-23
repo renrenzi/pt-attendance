@@ -2,6 +2,7 @@ package com.jj.stu.attendance.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.LeaveService;
 import com.jj.stu.attendance.dao.mapper.LeaveMapper;
@@ -26,10 +27,10 @@ public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, Leave> implements
     private LeaveMapper leaveMapper;
     @Override
     public PageLeaveResponse pageLeaveList(PageLeaveRequest request) {
-        PageHelper.startPage(request.getPageNum(), request.getPageSize());
+        Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
         List<Leave> leaveList = leaveMapper.selectList(new QueryWrapper<>());
         return new PageLeaveResponse()
                 .setLeaveList(leaveList)
-                .setTotalSize(leaveList.size());
+                .setTotalSize(page.getTotal());
     }
 }

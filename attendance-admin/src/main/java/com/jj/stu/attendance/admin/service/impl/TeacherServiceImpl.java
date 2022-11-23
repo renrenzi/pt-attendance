@@ -2,6 +2,7 @@ package com.jj.stu.attendance.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.TeacherService;
 import com.jj.stu.attendance.dao.mapper.TeacherMapper;
@@ -28,10 +29,10 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
 
     @Override
     public PageTeacherResponse pageTeacherList(PageTeacherRequest request) {
-        PageHelper.startPage(request.getPageNum(), request.getPageSize());
+        Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
         List<Teacher> teacherList = teacherMapper.selectList(new QueryWrapper<>());
         return new PageTeacherResponse()
                 .setTeacherList(teacherList)
-                .setTotalSize(teacherList.size());
+                .setTotalSize(page.getTotal());
     }
 }
