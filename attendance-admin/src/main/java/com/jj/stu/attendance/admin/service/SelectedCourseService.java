@@ -15,4 +15,11 @@ public interface SelectedCourseService extends IService<SelectedCourse> {
      * @return {@link PageSelectedCourseResponse}
      */
     PageSelectedCourseResponse pageSelectedCourseList(PageSelectedCourseRequest request);
+
+    /**
+     * 批量删除所选课程列表
+     *
+     * @param selectedCourseIds 选修课id
+     */
+    void batchDeleteSelectedCourseList(List<Integer> selectedCourseIds);
 }

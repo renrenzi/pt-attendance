@@ -31,6 +31,15 @@ import java.util.List;
 public class SelectedCourseController {
     @Resource
     private SelectedCourseService selectedCourseService;
+    @ApiOperation("批量刪除選課列表")
+    @PostMapping("/batch/delete/selected/course/list")
+    public Result<String> batchDeleteSelectedCourseList(@RequestBody List<Integer> selectedCourseIds){
+        if(CollectionUtils.isEmpty(selectedCourseIds)){
+            throw new ApiException("選課列表爲空");
+        }
+        selectedCourseService.batchDeleteSelectedCourseList(selectedCourseIds);
+        return  ResultGenerator.getResultByOk("批量刪除選課列表成功");
+    }
     /**
      * 页面选择课程列表
      *

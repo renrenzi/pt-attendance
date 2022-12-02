@@ -35,6 +35,8 @@ public class ClazzController {
     @ApiOperation("修改专业详情")
     @PostMapping("/edit/clazz/detail")
     public Result<String> editClazzDetail(@RequestBody ManageClazzRequest request){
+        ValidateUtil.validate(request);
+        clazzService.editClazzDetail(request);
         return  ResultGenerator.getResultByOk("修改专业详情");
     }
     @ApiOperation("批量刪除专业列表")

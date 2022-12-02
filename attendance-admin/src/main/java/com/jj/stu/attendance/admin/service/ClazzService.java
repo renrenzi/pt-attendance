@@ -2,6 +2,7 @@ package com.jj.stu.attendance.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jj.stu.attendance.dao.model.Clazz;
+import com.jj.stu.attendance.dao.request.clazz.ManageClazzRequest;
 import com.jj.stu.attendance.dao.request.clazz.PageClazzRequest;
 import com.jj.stu.attendance.dao.response.clazz.PageClazzResponse;
 
@@ -22,4 +23,11 @@ public interface ClazzService extends IService<Clazz> {
      * @param clazzIds clazz id
      */
     void batchDeleteClazzList(List<Integer> clazzIds);
+
+    /**
+     * 编辑clazz细节
+     *
+     * @param request 请求
+     */
+    void editClazzDetail(ManageClazzRequest request);
 }

@@ -8,11 +8,14 @@ import com.jj.stu.attendance.admin.service.ClazzService;
 import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.dao.mapper.ClazzMapper;
 import com.jj.stu.attendance.dao.model.Clazz;
+import com.jj.stu.attendance.dao.model.Course;
+import com.jj.stu.attendance.dao.request.clazz.ManageClazzRequest;
 import com.jj.stu.attendance.dao.request.clazz.PageClazzRequest;
 import com.jj.stu.attendance.dao.response.clazz.PageClazzResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,6 +29,16 @@ public class ClazzServiceImpl extends ServiceImpl<ClazzMapper, Clazz> implements
 
     @Resource
     private ClazzMapper clazzMapper;
+
+    @Override
+    public void editClazzDetail(ManageClazzRequest request) {
+        Clazz clazz = request.getClazz();
+        if(clazzMapper.selectById(clazz.getId()) == null){
+            clazzMapper.insertSelective(clazz);
+        }else {
+            clazzMapper.updateByPrimaryKeySelective(clazz);
+        }
+    }
 
     @Override
     public void batchDeleteClazzList(List<Integer> clazzIds) {

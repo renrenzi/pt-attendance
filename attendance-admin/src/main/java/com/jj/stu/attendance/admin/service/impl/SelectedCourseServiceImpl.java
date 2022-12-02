@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.SelectedCourseService;
+import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.dao.mapper.SelectedCourseMapper;
 import com.jj.stu.attendance.dao.model.SelectedCourse;
 import com.jj.stu.attendance.dao.request.selectedCourse.PageSelectedCourseRequest;
@@ -24,6 +25,14 @@ import java.util.List;
 public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper, SelectedCourse> implements SelectedCourseService {
     @Resource
     private SelectedCourseMapper selectedCourseMapper;
+
+    @Override
+    public void batchDeleteSelectedCourseList(List<Integer> selectedCourseIds) {
+        int res = selectedCourseMapper.deleteBatchIds(selectedCourseIds);
+        if( res != 1){
+            throw new ApiException("批量刪除選課列表失敗");
+        }
+    }
 
     @Override
     public PageSelectedCourseResponse pageSelectedCourseList(PageSelectedCourseRequest request) {
