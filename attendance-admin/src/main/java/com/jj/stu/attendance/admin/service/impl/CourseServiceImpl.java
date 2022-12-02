@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.CourseService;
+import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.dao.dto.PageCourseDto;
 import com.jj.stu.attendance.dao.mapper.CourseMapper;
 import com.jj.stu.attendance.dao.mapper.TeacherMapper;
@@ -39,6 +40,13 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     @Resource
     private TeacherMapper teacherMapper;
 
+    @Override
+    public void addCourse(EditCourseRequest request) {
+        int res = courseMapper.insertSelective(request.getCourse());
+        if(res != 1){
+            throw new ApiException("添加課程失敗");
+        }
+    }
 
     @Override
     public void editCourseDetail(EditCourseRequest request) {

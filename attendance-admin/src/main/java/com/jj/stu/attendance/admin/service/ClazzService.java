@@ -5,6 +5,8 @@ import com.jj.stu.attendance.dao.model.Clazz;
 import com.jj.stu.attendance.dao.request.clazz.PageClazzRequest;
 import com.jj.stu.attendance.dao.response.clazz.PageClazzResponse;
 
+import java.util.List;
+
 public interface ClazzService extends IService<Clazz> {
     /**
      * 页面clazz列表
@@ -13,4 +15,11 @@ public interface ClazzService extends IService<Clazz> {
      * @return {@link PageClazzResponse}
      */
     PageClazzResponse pageClazzList(PageClazzRequest request);
+
+    /**
+     * 批量删除clazz列
+     *
+     * @param clazzIds clazz id
+     */
+    void batchDeleteClazzList(List<Integer> clazzIds);
 }

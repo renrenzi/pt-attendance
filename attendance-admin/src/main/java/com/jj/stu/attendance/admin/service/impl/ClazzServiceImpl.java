@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.ClazzService;
+import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.dao.mapper.ClazzMapper;
 import com.jj.stu.attendance.dao.model.Clazz;
 import com.jj.stu.attendance.dao.request.clazz.PageClazzRequest;
@@ -27,8 +28,20 @@ public class ClazzServiceImpl extends ServiceImpl<ClazzMapper, Clazz> implements
     private ClazzMapper clazzMapper;
 
     @Override
+    public void batchDeleteClazzList(List<Integer> clazzIds) {
+        int res = clazzMapper.deleteBatchIds(clazzIds);
+        if(res < 0){
+            throw new ApiException("批量删除专业列表失败");
+        }
+    }
+
+    @Override
     public PageClazzResponse pageClazzList(PageClazzRequest request) {
+        Clazz clazz = request.getClazz();
         QueryWrapper<Clazz> wrapper = new QueryWrapper<>();
+        if(clazz != null && clazz.getName() != null){
+            wrapper.lambda().like(Clazz::getName, clazz.getName());
+        }
         Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
         List<Clazz> clazzList = clazzMapper.selectList(wrapper);
         return new PageClazzResponse()
