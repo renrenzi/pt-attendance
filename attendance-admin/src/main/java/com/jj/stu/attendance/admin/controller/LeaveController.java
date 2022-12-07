@@ -28,7 +28,6 @@ public class LeaveController {
 
     @Resource
     private LeaveService leaveService;
-
     @ApiOperation("分页获取请假列表")
     @PostMapping("/page/leave/list")
     public Result<PageLeaveResponse> pageLeaveList(@RequestBody PageLeaveRequest request){

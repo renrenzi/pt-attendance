@@ -17,7 +17,7 @@ public class AttendanceServiceTest extends BaseTest {
     @Test
     public void batchAddAttendanceTest(){
         List<Attendance> attendanceList = new ArrayList<>();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 10000; i < 40000; i++) {
             Attendance attendance = new Attendance();
             attendance.setId(i);
             attendance.setDate(new Date());

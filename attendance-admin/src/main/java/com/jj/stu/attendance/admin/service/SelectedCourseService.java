@@ -2,6 +2,7 @@ package com.jj.stu.attendance.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jj.stu.attendance.dao.model.SelectedCourse;
+import com.jj.stu.attendance.dao.request.selectedCourse.ManageSelectedCourseRequest;
 import com.jj.stu.attendance.dao.request.selectedCourse.PageSelectedCourseRequest;
 import com.jj.stu.attendance.dao.response.selectedCourse.PageSelectedCourseResponse;
 
@@ -22,4 +23,11 @@ public interface SelectedCourseService extends IService<SelectedCourse> {
      * @param selectedCourseIds 选修课id
      */
     void batchDeleteSelectedCourseList(List<Integer> selectedCourseIds);
+
+    /**
+     * 更新所选课程
+     *
+     * @param request 请求
+     */
+    void updateSelectedCourse(ManageSelectedCourseRequest request);
 }

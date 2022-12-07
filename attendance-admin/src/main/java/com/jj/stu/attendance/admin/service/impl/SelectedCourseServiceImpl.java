@@ -8,11 +8,13 @@ import com.jj.stu.attendance.admin.service.SelectedCourseService;
 import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.dao.mapper.SelectedCourseMapper;
 import com.jj.stu.attendance.dao.model.SelectedCourse;
+import com.jj.stu.attendance.dao.request.selectedCourse.ManageSelectedCourseRequest;
 import com.jj.stu.attendance.dao.request.selectedCourse.PageSelectedCourseRequest;
 import com.jj.stu.attendance.dao.response.selectedCourse.PageSelectedCourseResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,6 +27,16 @@ import java.util.List;
 public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper, SelectedCourse> implements SelectedCourseService {
     @Resource
     private SelectedCourseMapper selectedCourseMapper;
+
+    @Override
+    public void updateSelectedCourse(ManageSelectedCourseRequest request) {
+        SelectedCourse selectedCourse = request.getSelectedCourse();
+        if(selectedCourseMapper.selectById(selectedCourse.getId()) == null){
+            selectedCourseMapper.insertSelective(selectedCourse);
+        }else {
+            selectedCourseMapper.updateByPrimaryKeySelective(selectedCourse);
+        }
+    }
 
     @Override
     public void batchDeleteSelectedCourseList(List<Integer> selectedCourseIds) {
