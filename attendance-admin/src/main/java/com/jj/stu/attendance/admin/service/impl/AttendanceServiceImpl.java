@@ -5,11 +5,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.AttendanceService;
+import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.dao.mapper.AttendanceMapper;
 import com.jj.stu.attendance.dao.model.Attendance;
+import com.jj.stu.attendance.dao.request.attendance.ManageAttendanceRequest;
 import com.jj.stu.attendance.dao.request.attendance.PageAttendanceRequest;
 import com.jj.stu.attendance.dao.response.attendance.PageAttendanceResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -31,5 +34,24 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
         return new PageAttendanceResponse()
                 .setTotalSize(page.getTotal())
                 .setAttendanceList(attendanceList);
+    }
+
+    @Override
+    public void batchDeleteAttendanceList(List<Integer> attendanceIds) {
+        attendanceMapper.deleteBatchIds(attendanceIds);
+    }
+
+    @Override
+    @Transactional(rollbackFor = {Exception.class})
+    public void updateAttendanceInfo(ManageAttendanceRequest request) {
+        int result;
+        if (attendanceMapper.selectById(request.getAttendance().getId()) == null){
+            result = attendanceMapper.insert(request.getAttendance());
+        }else {
+            result = attendanceMapper.updateByPrimaryKeySelective(request.getAttendance());
+        }
+        if (result != 1){
+            throw new ApiException("修改考勤信息失败");
+        }
     }
 }
