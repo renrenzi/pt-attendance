@@ -40,9 +40,6 @@ public class RouterInterceptor implements WebMvcConfigurer {
                 }
             }
         })).addPathPatterns("/**")
-                .excludePathPatterns("/blog/comment/createComment")
-                .excludePathPatterns("/blog/tag/getBlogTag")
-                .excludePathPatterns("/blog/link/pageLinkList")
                 .excludePathPatterns("/front/view/**")
                 .excludePathPatterns("/admin/login");
     }
