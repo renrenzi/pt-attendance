@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -65,14 +66,19 @@ public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper,
         List<SelectedCourse> selectedCourseList = selectedCourseMapper.selectList(selectedCourseQueryWrapper);
         List<Integer> courseIds = selectedCourseList.stream().map(SelectedCourse::getCourseId).collect(Collectors.toList());
         List<Integer> studentIds = selectedCourseList.stream().map(SelectedCourse::getStudentId).collect(Collectors.toList());
-        Map<Integer, String> courseIdToNameMap = courseMapper.selectBatchIds(courseIds).stream().collect(Collectors.toMap(Course::getId, Course::getName, (v2, v1) -> v1));
-        Map<Integer, Integer> studentIdToNameMap = studentMapper.selectBatchIds(studentIds).stream().collect(Collectors.toMap(Student::getId, Student::getUsername, (v2, v1) -> v1));
+        Map<Integer, Course> courseIdToNameMap = courseMapper.selectBatchIds(courseIds).stream().collect(Collectors.toMap(Course::getId, Function.identity(), (v2, v1) -> v1));
+        Map<Integer, Student> studentIdToNameMap = studentMapper.selectBatchIds(studentIds).stream().collect(Collectors.toMap(Student::getId, Function.identity(), (v2, v1) -> v1));
         List<SelectedCourseDTO> responseList = new ArrayList<>();
         for(SelectedCourse selectedCourse: selectedCourseList){
             SelectedCourseDTO selectedCourseDTO = new SelectedCourseDTO();
             BeanUtil.copyProperties(selectedCourse, selectedCourseDTO);
-            selectedCourseDTO.setCourseName(courseIdToNameMap.get(selectedCourse.getCourseId()));
-            selectedCourseDTO.setStudentId(studentIdToNameMap.get(selectedCourse.getStudentId()));
+            selectedCourseDTO.setCourseName(courseIdToNameMap.getOrDefault(selectedCourse.getCourseId(), new Course()).getName());
+            Student student = studentIdToNameMap.get(selectedCourse.getStudentId());
+            if (student != null){
+                selectedCourseDTO.setUserName(student.getUsername());
+                selectedCourseDTO.setNickName(student.getNickName());
+            }
+            responseList.add(selectedCourseDTO);
         }
         return new PageSelectedCourseResponse().setSelectedCourseList(responseList)
                 .setTotalSize(page.getTotal());

@@ -13,6 +13,8 @@ public class SelectedCourseDTO {
 
     private Integer userName;
 
+    private String nickName;
+
     @ApiModelProperty(value = "课程Id")
     private Integer courseId;
 
