@@ -48,12 +48,7 @@ public class ClazzController {
         clazzService.batchDeleteClazzList(clazzIds);
         return ResultGenerator.getResultByOk("批量删除专业列表成功");
     }
-    /**
-     * 页面clazz列表
-     *
-     * @param request 请求
-     * @return {@link Result}<{@link PageClazzResponse}>
-     */
+
     @ApiOperation("分页获取专业列表")
     @PostMapping("/page/clazz/list")
     public Result<PageClazzResponse> pageClazzList(@RequestBody PageClazzRequest request){

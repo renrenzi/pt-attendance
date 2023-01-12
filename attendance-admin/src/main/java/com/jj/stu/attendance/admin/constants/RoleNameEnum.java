@@ -2,7 +2,7 @@ package com.jj.stu.attendance.admin.constants;
 
 /**
  * 角色名称枚举
- * @author LENOVO
+ * @author renrenzi
  */
 public enum RoleNameEnum {
 

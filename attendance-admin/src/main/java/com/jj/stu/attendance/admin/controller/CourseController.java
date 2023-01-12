@@ -59,12 +59,7 @@ public class CourseController {
         courseService.batchDeleteCourseByIds(courseIds);
         return ResultGenerator.getResultByOk("成功删除课程信息");
     }
-    /**
-     * 课程列表页
-     *
-     * @param request 请求
-     * @return {@link Result}<{@link PageCourseListResponse}>
-     */
+
     @ApiOperation("分页获取课程列表")
     @PostMapping("/page/course/list")
     public Result<PageCourseListResponse> pageCourseList(@RequestBody PageCourseListRequest request){

@@ -10,7 +10,7 @@ import com.jj.stu.attendance.dao.response.attendance.PageAttendanceResponse;
 import java.util.List;
 
 /**
- * 参加服务
+ * 出勤服务
  *
  * @author 张俊杰
  * @date 2022/11/19
@@ -24,7 +24,17 @@ public interface AttendanceService extends IService<Attendance> {
      */
     PageAttendanceResponse pageAttendanceList(PageAttendanceRequest request);
 
+    /**
+     * 批量删除考勤列表
+     *
+     * @param attendanceIds 出勤ID
+     */
     void batchDeleteAttendanceList(List<Integer> attendanceIds);
 
+    /**
+     * 更新出勤信息
+     *
+     * @param request 要求
+     */
     void updateAttendanceInfo(ManageAttendanceRequest request);
 }

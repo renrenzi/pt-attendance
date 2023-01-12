@@ -37,11 +37,7 @@ public class StudentController {
         return ResultGenerator.getResultByOk(studentService.pageStudentList(request));
     }
     
-    /**
-     * 批量添加学生
-     *
-     * @param request 请求
-     */
+
     @PostMapping("/batch/add/student")
     @ApiOperation("批量添加学生")
     public void batchAddStudent(@RequestBody StudentBatchInsertRequest request){

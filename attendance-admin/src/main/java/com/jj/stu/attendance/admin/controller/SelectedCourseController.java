@@ -48,12 +48,7 @@ public class SelectedCourseController {
         selectedCourseService.batchDeleteSelectedCourseList(selectedCourseIds);
         return  ResultGenerator.getResultByOk("批量刪除選課列表成功");
     }
-    /**
-     * 页面选择课程列表
-     *
-     * @param request 请求
-     * @return {@link Result}<{@link PageSelectedCourseResponse}>
-     */
+
     @ApiOperation("分页获取选课列表")
     @PostMapping("/page/selected/course/list")
     public Result<PageSelectedCourseResponse> pageSelectedCourseList(@RequestBody PageSelectedCourseRequest request){

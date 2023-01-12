@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
+ * 管理员控制器
  *
  * @author renrenzi
+ * @date 2023/01/12
  */
 @Api(tags = "用户管理")
 @RestController

@@ -20,11 +20,12 @@ import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.List;
 
+
 /**
- * 离开控制器
+ * 请假控制器
  *
- * @author 张俊杰
- * @date 2022/11/20
+ * @author LENOVO
+ * @date 2023/01/12
  */
 @Api(tags = "请假管理")
 @RequestMapping("/leave")

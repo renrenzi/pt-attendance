@@ -18,14 +18,14 @@ public interface ClazzService extends IService<Clazz> {
     PageClazzResponse pageClazzList(PageClazzRequest request);
 
     /**
-     * 批量删除clazz列
+     * 批量删除clazz列表
      *
      * @param clazzIds clazz id
      */
     void batchDeleteClazzList(List<Integer> clazzIds);
 
     /**
-     * 编辑clazz细节
+     * 编辑clazz详细信息
      *
      * @param request 请求
      */

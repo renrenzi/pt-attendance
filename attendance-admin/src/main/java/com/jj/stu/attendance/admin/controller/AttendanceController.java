@@ -7,6 +7,7 @@ import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.base.util.ValidateUtil;
 import com.jj.stu.attendance.dao.request.attendance.ManageAttendanceRequest;
 import com.jj.stu.attendance.dao.request.attendance.PageAttendanceRequest;
+import com.jj.stu.attendance.dao.request.attendance.PunchTheClockRequest;
 import com.jj.stu.attendance.dao.response.attendance.PageAttendanceResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,6 +33,12 @@ public class AttendanceController {
 
     @Resource
     private AttendanceService attendanceService;
+
+    @ApiOperation("打卡")
+    @PostMapping("/punch/the/clock")
+    public Result punchTheClock(@RequestBody PunchTheClockRequest request){
+        return null;
+    }
 
     @ApiOperation("修改考勤信息")
     @PostMapping("/update/attendance/info")
