@@ -39,7 +39,7 @@ public class DocumentGenerator {
                 //打开目录
                 .openOutputDir(true)
                 //文件类型
-                .fileType(EngineFileType.MD)
+                .fileType(EngineFileType.WORD)
                 //生成模板实现
                 .produceType(EngineTemplateType.freemarker)
                 //自定义文件名称
