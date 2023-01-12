@@ -37,7 +37,8 @@ public class AttendanceController {
     @ApiOperation("打卡")
     @PostMapping("/punch/the/clock")
     public Result punchTheClock(@RequestBody PunchTheClockRequest request){
-        return null;
+        ValidateUtil.validate(request);
+        return attendanceService.punchTheClock(request);
     }
 
     @ApiOperation("修改考勤信息")

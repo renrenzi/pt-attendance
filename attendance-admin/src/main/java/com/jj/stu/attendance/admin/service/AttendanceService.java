@@ -2,9 +2,11 @@ package com.jj.stu.attendance.admin.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.dao.model.Attendance;
 import com.jj.stu.attendance.dao.request.attendance.ManageAttendanceRequest;
 import com.jj.stu.attendance.dao.request.attendance.PageAttendanceRequest;
+import com.jj.stu.attendance.dao.request.attendance.PunchTheClockRequest;
 import com.jj.stu.attendance.dao.response.attendance.PageAttendanceResponse;
 
 import java.util.List;
@@ -37,4 +39,12 @@ public interface AttendanceService extends IService<Attendance> {
      * @param request 要求
      */
     void updateAttendanceInfo(ManageAttendanceRequest request);
+
+    /**
+     * 打卡
+     *
+     * @param request 要求
+     * @return {@link Result}
+     */
+    Result punchTheClock(PunchTheClockRequest request);
 }
