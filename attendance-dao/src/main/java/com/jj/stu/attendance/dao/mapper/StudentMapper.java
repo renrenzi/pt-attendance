@@ -30,4 +30,7 @@ public interface StudentMapper extends BaseMapper<Student> {
     int updateByPrimaryKey(Student record);
 
     void batchInsert(@Param("studentList")List<Student> studentList);
+
+    void batchUpdateAdminId(@Param("studentIds")List<Integer> studentIds, @Param("adminIds") List<Integer> adminIds);
+
 }

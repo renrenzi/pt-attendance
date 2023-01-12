@@ -26,6 +26,7 @@ public class Student implements Serializable {
     @ApiModelProperty(value = "创建时间")
     private Date createDate;
 
+    private Integer adminId;
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -90,6 +91,14 @@ public class Student implements Serializable {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public Integer getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(Integer adminId) {
+        this.adminId = adminId;
     }
 
     @Override

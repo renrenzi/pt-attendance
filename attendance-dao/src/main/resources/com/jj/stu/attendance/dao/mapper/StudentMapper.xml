@@ -10,6 +10,7 @@
     <result column="sex" jdbcType="VARCHAR" property="sex" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="admin_id" jdbcType="TIMESTAMP" property="createDate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, nick_name, clazz_id, sex, mobile, create_date
+    id, username, password, nick_name, clazz_id, sex, mobile, create_date, admin_id
   </sql>
   <select id="selectByExample" parameterType="com.jj.stu.attendance.dao.model.StudentExample" resultMap="BaseResultMap">
     select
@@ -251,9 +252,12 @@
       <if test="createDate != null">
         create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="adminId != null">
+        admin_id = #{adminId,jdbcType=INTEGER}
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
-      and username = #{username,jdbcType=INTEGER}
+
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jj.stu.attendance.dao.model.Student">
     update s_student
@@ -266,4 +270,11 @@
     where id = #{id,jdbcType=INTEGER}
       and username = #{username,jdbcType=INTEGER}
   </update>
+
+  <select id="batchUpdateAdminId">
+    update s_student
+    <foreach collection="adminIds" open="(" close=")" separator="," item="adminId">
+      set adminI
+    </foreach>
+  </select>
 </mapper>
