@@ -171,12 +171,12 @@
   <insert id="batchInsert">
     insert into s_student (id, username, password, nick_name,
     clazz_id, sex, mobile,
-    create_date)
+    create_date, admin_id)
     values
     <foreach collection="studentList" item="item" separator=",">
       (#{item.id,jdbcType=INTEGER}, #{item.username,jdbcType=INTEGER}, #{item.password,jdbcType=VARCHAR}, #{item.nickName,jdbcType=VARCHAR},
       #{item.clazzId,jdbcType=INTEGER}, #{item.sex,jdbcType=VARCHAR}, #{item.mobile,jdbcType=VARCHAR},
-      #{item.createDate,jdbcType=TIMESTAMP})
+      #{item.createDate,jdbcType=TIMESTAMP}, #{item.adminId})
     </foreach>
   </insert>
   <select id="countByExample" parameterType="com.jj.stu.attendance.dao.model.StudentExample" resultType="java.lang.Long">

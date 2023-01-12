@@ -28,4 +28,6 @@ public interface AdminMapper extends BaseMapper<Admin> {
     int updateByPrimaryKeySelective(Admin record);
 
     int updateByPrimaryKey(Admin record);
+
+    Admin findAdminByCondition(@Param("userName") String userName,@Param("password") String password);
 }

@@ -9,6 +9,7 @@
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="update_user" jdbcType="TIMESTAMP" property="updateUser" />
+    <result column="state" jdbcType="INTEGER" property="state" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_name, pass_word, create_time, create_user, update_time, update_user
+    id, user_name, pass_word, create_time, create_user, update_time, update_user, state
   </sql>
   <select id="selectByExample" parameterType="com.jj.stu.attendance.dao.model.AdminExample" resultMap="BaseResultMap">
     select
@@ -106,7 +107,7 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into s_admin (user_name, pass_word, create_time, 
-      create_user, update_time, update_user
+      create_user, update_time, update_user, state
       )
     values (#{userName,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=TIMESTAMP}
@@ -240,4 +241,14 @@
       update_user = #{updateUser,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="findAdminByCondition" resultMap="BaseResultMap">
+    select
+      id, user_name, pass_word, create_time, create_user, update_time, update_user, state
+    from s_admin
+    where
+      user_name = #{userName,jdbcType=VARCHAR}
+      AND pass_word = #{password,jdbcType=VARCHAR}
+      AND state = 0
+  </select>
 </mapper>

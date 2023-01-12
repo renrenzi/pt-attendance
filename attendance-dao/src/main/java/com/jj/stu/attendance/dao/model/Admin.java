@@ -27,6 +27,8 @@ public class Admin implements Serializable {
     @ApiModelProperty(value = "修改人")
     private Date updateUser;
 
+    private Integer state;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -83,6 +85,14 @@ public class Admin implements Serializable {
 
     public void setUpdateUser(Date updateUser) {
         this.updateUser = updateUser;
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 
     @Override
