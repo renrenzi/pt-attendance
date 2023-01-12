@@ -10,13 +10,19 @@ public class SelectedCourseDTO {
 
     @ApiModelProperty(value = "学生Id")
     private Integer studentId;
-
+    /**
+     * 学号
+     */
     private Integer userName;
-
+    /**
+     * 昵称
+     */
     private String nickName;
 
     @ApiModelProperty(value = "课程Id")
     private Integer courseId;
-
+    /**
+     * 课程名称
+     */
     private String courseName;
 }

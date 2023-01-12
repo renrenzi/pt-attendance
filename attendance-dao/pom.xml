@@ -12,6 +12,10 @@
     <artifactId>attendance-dao</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>cn.smallbun.screw</groupId>
+            <artifactId>screw-core</artifactId>
+        </dependency>
         <!-- base 通用模块 -->
         <dependency>
             <artifactId>attendance-base</artifactId>
