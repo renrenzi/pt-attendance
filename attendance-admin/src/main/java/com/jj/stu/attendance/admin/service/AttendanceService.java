@@ -3,8 +3,11 @@ package com.jj.stu.attendance.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jj.stu.attendance.dao.model.Attendance;
+import com.jj.stu.attendance.dao.request.attendance.ManageAttendanceRequest;
 import com.jj.stu.attendance.dao.request.attendance.PageAttendanceRequest;
 import com.jj.stu.attendance.dao.response.attendance.PageAttendanceResponse;
+
+import java.util.List;
 
 /**
  * 参加服务
@@ -14,10 +17,14 @@ import com.jj.stu.attendance.dao.response.attendance.PageAttendanceResponse;
  */
 public interface AttendanceService extends IService<Attendance> {
     /**
-     * 页面出席名单
+     * 分页获取考勤列表
      *
      * @param request 请求
      * @return {@link PageAttendanceResponse}
      */
     PageAttendanceResponse pageAttendanceList(PageAttendanceRequest request);
+
+    void batchDeleteAttendanceList(List<Integer> attendanceIds);
+
+    void updateAttendanceInfo(ManageAttendanceRequest request);
 }

@@ -34,6 +34,14 @@ public class CourseController {
     @Resource
     private CourseService courseService;
 
+    @ApiOperation("添加課程")
+    @PostMapping("/add/course")
+    public Result<String> addCourse(@RequestBody EditCourseRequest request){
+        ValidateUtil.validate(request);
+        courseService.addCourse(request);
+        return ResultGenerator.getResultByOk("添加課程成功");
+    }
+
     @ApiOperation("修改课程信息")
     @PostMapping("/edit/course/detail")
     public Result<String> editCourseDetail(@RequestBody EditCourseRequest request){

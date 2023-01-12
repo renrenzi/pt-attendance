@@ -64,17 +64,7 @@ public class UserResourceController {
         if(condition == null || condition.getPageNum() == null || condition.getPageSize() == null){
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
-        QueryWrapper<UserResource> query = new QueryWrapper<>(userResource);
-        query.lambda().orderByDesc(UserResource::getCreateTime);
-        Page<UserResource> page = new Page<>(condition.getPageNum(), condition.getPageSize());
-        userResourceService.page(page, query);
-        if(page.getRecords() == null){
-            return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_GATEWAY);
-        }
-        PageResult<UserResource> pageResult = new PageResult<>();
-        pageResult.setTotalSize(page.getTotal());
-        pageResult.setData(page.getRecords());
-        return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, pageResult);
+        return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, userResourceService.pageResource(condition, userResource));
     }
     @ApiOperation("添加资源")
     @PostMapping("/addResource")

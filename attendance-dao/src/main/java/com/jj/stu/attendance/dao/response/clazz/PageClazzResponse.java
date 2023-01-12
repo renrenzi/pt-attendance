@@ -13,5 +13,5 @@ public class PageClazzResponse {
 
     List<Clazz> clazzList;
 
-    Integer totalSize;
+    Long totalSize;
 }

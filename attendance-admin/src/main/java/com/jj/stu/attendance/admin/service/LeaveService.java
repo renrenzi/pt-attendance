@@ -2,8 +2,11 @@ package com.jj.stu.attendance.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jj.stu.attendance.dao.model.Leave;
+import com.jj.stu.attendance.dao.request.leave.ManageLeaveRequest;
 import com.jj.stu.attendance.dao.request.leave.PageLeaveRequest;
 import com.jj.stu.attendance.dao.response.leave.PageLeaveResponse;
+
+import java.util.List;
 
 /**
  * 离开服务
@@ -19,4 +22,16 @@ public interface LeaveService extends IService<Leave> {
      * @return {@link PageLeaveResponse}
      */
     PageLeaveResponse pageLeaveList(PageLeaveRequest request);
+
+    /**
+     * 批量删除请假列表
+     * @param leaveIds
+     */
+    void batchDeleteLeaveList(List<Integer> leaveIds);
+
+    /**
+     * 修改请假信息
+     * @param request
+     */
+    void updateLeaveInfo(ManageLeaveRequest request);
 }

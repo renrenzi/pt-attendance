@@ -20,7 +20,7 @@ public class PageStudentResponse {
     /**
      * 总大小
      */
-    private Integer totalSize;
+    private Long totalSize;
 
     /**
      * 学生列表

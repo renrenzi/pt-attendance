@@ -4,6 +4,12 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
+/**
+ * 所选课程
+ *
+ * @author LENOVO
+ * @date 2022/12/07
+ */
 @TableName("s_selected_course")
 public class SelectedCourse implements Serializable {
     private Integer id;

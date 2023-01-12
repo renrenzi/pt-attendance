@@ -2,11 +2,12 @@ package com.jj.stu.attendance.admin.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 ;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.CourseService;
+import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.dao.dto.PageCourseDto;
 import com.jj.stu.attendance.dao.mapper.CourseMapper;
 import com.jj.stu.attendance.dao.mapper.TeacherMapper;
@@ -15,11 +16,11 @@ import com.jj.stu.attendance.dao.model.Teacher;
 import com.jj.stu.attendance.dao.request.course.EditCourseRequest;
 import com.jj.stu.attendance.dao.request.course.PageCourseListRequest;
 import com.jj.stu.attendance.dao.response.course.PageCourseListResponse;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -39,11 +40,23 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     @Resource
     private TeacherMapper teacherMapper;
 
+    @Override
+    public void addCourse(EditCourseRequest request) {
+        int res = courseMapper.insertSelective(request.getCourse());
+        if(res != 1){
+            throw new ApiException("添加課程失敗");
+        }
+    }
 
     @Override
     public void editCourseDetail(EditCourseRequest request) {
         Course course = request.getCourse();
-        courseMapper.updateByPrimaryKeySelective(course);
+        if(courseMapper.selectById(course.getId()) == null){
+            course.setCourseDate(new Date());
+            courseMapper.insertSelective(course);
+        }else {
+            courseMapper.updateByPrimaryKeySelective(course);
+        }
     }
 
     @Override
@@ -60,7 +73,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
             wrapper.lambda().like(Course::getName, request.getCourse().getName());
         }
         wrapper.lambda().orderByDesc(Course::getCourseDate);
-        PageHelper.startPage(request.getPageNum(), request.getPageSize());
+        Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
         List<Course> courseList = courseMapper.selectList(wrapper);
 
         List<PageCourseDto> pageCourseDtoList = BeanUtil.copyToList(courseList, PageCourseDto.class);
@@ -71,7 +84,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
             item.setTeacherName(teacherIdToUserNameMap.get(item.getTeacherId()));
         });
         response.setPageCourseDtoList(pageCourseDtoList);
-        response.setTotalSize(courseList.size());
+        response.setTotalSize(page.getTotal());
         return response;
     }
 }

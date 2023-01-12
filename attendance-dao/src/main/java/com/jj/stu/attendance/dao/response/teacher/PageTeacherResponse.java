@@ -19,7 +19,7 @@ public class PageTeacherResponse {
     /**
      * 总大小
      */
-    private Integer totalSize;
+    private Long totalSize;
 
     private List<Teacher> teacherList;
 }

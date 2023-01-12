@@ -30,4 +30,11 @@ public interface CourseService extends IService<Course> {
      * @param request 请求
      */
     void editCourseDetail(EditCourseRequest request);
+
+    /**
+     * 添加课程
+     *
+     * @param request 请求
+     */
+    void addCourse(EditCourseRequest request);
 }

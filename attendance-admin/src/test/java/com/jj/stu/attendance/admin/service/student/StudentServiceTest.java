@@ -16,7 +16,7 @@ public class StudentServiceTest extends BaseTest {
     @Test
     public void batchAddStudentTest(){
         List<Student> studentList = new ArrayList<>();
-        for (int i = 2; i < 1002; i++) {
+        for (int i = 70000; i < 100000; i++) {
             Student student = new Student();
             student.setId(i);
             student.setClazzId(i);

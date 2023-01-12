@@ -20,7 +20,7 @@ public class PageAttendanceResponse {
     /**
      * 总大小
      */
-    private Integer totalSize;
+    private Long totalSize;
 
     /**
      * 出席名单

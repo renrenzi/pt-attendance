@@ -5,6 +5,7 @@ import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.basic.ResultGenerator;
 import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.base.util.ValidateUtil;
+import com.jj.stu.attendance.dao.request.selectedCourse.ManageSelectedCourseRequest;
 import com.jj.stu.attendance.dao.request.selectedCourse.PageSelectedCourseRequest;
 import com.jj.stu.attendance.dao.response.selectedCourse.PageSelectedCourseResponse;
 import io.swagger.annotations.Api;
@@ -31,6 +32,22 @@ import java.util.List;
 public class SelectedCourseController {
     @Resource
     private SelectedCourseService selectedCourseService;
+    @ApiOperation("修改选课内容")
+    @PostMapping("/update/selected/course")
+    public Result<String> updateSelectedCourse(@RequestBody ManageSelectedCourseRequest request){
+        ValidateUtil.validate(request);
+        selectedCourseService.updateSelectedCourse(request);
+        return ResultGenerator.getResultByOk("修改选课内容成功");
+    }
+    @ApiOperation("批量刪除選課列表")
+    @PostMapping("/batch/delete/selected/course/list")
+    public Result<String> batchDeleteSelectedCourseList(@RequestBody List<Integer> selectedCourseIds){
+        if(CollectionUtils.isEmpty(selectedCourseIds)){
+            throw new ApiException("選課列表爲空");
+        }
+        selectedCourseService.batchDeleteSelectedCourseList(selectedCourseIds);
+        return  ResultGenerator.getResultByOk("批量刪除選課列表成功");
+    }
     /**
      * 页面选择课程列表
      *

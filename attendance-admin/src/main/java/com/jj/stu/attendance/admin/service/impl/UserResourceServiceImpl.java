@@ -2,7 +2,13 @@ package com.jj.stu.attendance.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.jj.stu.attendance.admin.basic.PageCondition;
+import com.jj.stu.attendance.admin.basic.PageResult;
 import com.jj.stu.attendance.admin.service.UserResourceService;
+import com.jj.stu.attendance.base.basic.ResultGenerator;
+import com.jj.stu.attendance.base.constants.HttpStatusEnum;
 import com.jj.stu.attendance.base.constants.StringConstants;
 import com.jj.stu.attendance.base.service.RedisService;
 import com.jj.stu.attendance.dao.mapper.UserResourceMapper;
@@ -58,5 +64,17 @@ public class UserResourceServiceImpl extends ServiceImpl<UserResourceMapper, Use
         redisService.del(StringConstants.RESOURCE_ROLE_MAP_KEY);
         redisService.hSetAll(StringConstants.RESOURCE_ROLE_MAP_KEY, roleResourceMap);
         return roleResourceMap;
+    }
+
+    @Override
+    public PageResult<UserResource> pageResource(PageCondition condition, UserResource userResource) {
+        QueryWrapper<UserResource> query = new QueryWrapper<>(userResource);
+        query.lambda().orderByDesc(UserResource::getCreateTime);
+        Page<Object> page = PageHelper.startPage(condition.getPageNum(), condition.getPageSize());
+        List<UserResource> userResourceList = userResourceMapper.selectList(query);
+        PageResult<UserResource> pageResult = new PageResult<>();
+        pageResult.setTotalSize(page.getTotal());
+        pageResult.setData(userResourceList);
+        return pageResult;
     }
 }

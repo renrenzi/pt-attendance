@@ -1,6 +1,8 @@
 package com.jj.stu.attendance.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.jj.stu.attendance.admin.basic.PageCondition;
+import com.jj.stu.attendance.admin.basic.PageResult;
 import com.jj.stu.attendance.dao.model.UserResource;
 
 import java.util.List;
@@ -18,4 +20,13 @@ public interface UserResourceService extends IService<UserResource> {
      * @return
      */
     Map<String, List<String>> initRoleResourceMap();
+
+    /**
+     * 页面资源
+     *
+     * @param condition    条件
+     * @param userResource 用户资源
+     * @return {@link Object}
+     */
+    PageResult<UserResource> pageResource(PageCondition condition, UserResource userResource);
 }

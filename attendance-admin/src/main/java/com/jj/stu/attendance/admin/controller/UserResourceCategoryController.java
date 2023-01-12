@@ -39,17 +39,8 @@ public class UserResourceCategoryController {
         if(condition == null || condition.getPageNum() == null || condition.getPageSize() == null){
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
-        QueryWrapper<UserResourceCategory> query = new QueryWrapper<>(userResourceCategory);
-        query.lambda().orderByDesc(UserResourceCategory::getCreateTime);
-        Page<UserResourceCategory> page = new Page<>(condition.getPageNum(), condition.getPageSize());
-        userResourceCategoryService.page(page, query);
-        if(page.getRecords() == null){
-            return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_GATEWAY);
-        }
-        PageResult<UserResourceCategory> pageResult = new PageResult<>();
-        pageResult.setTotalSize(page.getTotal());
-        pageResult.setData(page.getRecords());
-        return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, pageResult);
+
+        return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, userResourceCategoryService.pageResourceCategory(condition, userResourceCategory));
     }
     @ApiOperation("添加资源分类")
     @PostMapping("/addResourceCategory")
