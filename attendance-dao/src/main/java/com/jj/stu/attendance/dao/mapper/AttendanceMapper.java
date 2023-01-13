@@ -1,29 +1,16 @@
 package com.jj.stu.attendance.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.jj.stu.attendance.dao.model.Attendance;
-import com.jj.stu.attendance.dao.model.AttendanceExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import com.jj.stu.attendance.dao.model.Attendance;import com.jj.stu.attendance.dao.model.AttendanceExample;import org.apache.ibatis.annotations.Param;import java.util.List;
 
 public interface AttendanceMapper extends BaseMapper<Attendance> {
-    long countByExample(AttendanceExample example);
-
-    int deleteByExample(AttendanceExample example);
-
     int deleteByPrimaryKey(Integer id);
 
     int insert(Attendance record);
 
     int insertSelective(Attendance record);
 
-    List<Attendance> selectByExample(AttendanceExample example);
-
     Attendance selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") Attendance record, @Param("example") AttendanceExample example);
-
-    int updateByExample(@Param("record") Attendance record, @Param("example") AttendanceExample example);
 
     int updateByPrimaryKeySelective(Attendance record);
 

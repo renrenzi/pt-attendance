@@ -29,7 +29,7 @@ public class StudentServiceTest extends BaseTest {
             student.setAdminId(i);
             studentList.add(student);
         }
-        studentMapper.batchInsert(studentList);
+        //studentMapper.batchInsert(studentList);
     }
     @Test
     public void batchUpdateStudentTest(){
