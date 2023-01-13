@@ -5,10 +5,9 @@ import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.basic.ResultGenerator;
 import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.base.util.ValidateUtil;
-import com.jj.stu.attendance.dao.model.Course;
-import com.jj.stu.attendance.dao.request.course.EditCourseRequest;
-import com.jj.stu.attendance.dao.request.course.PageCourseListRequest;
-import com.jj.stu.attendance.dao.response.course.PageCourseListResponse;
+import com.jj.stu.attendance.dao.request.EditCourseRequest;
+import com.jj.stu.attendance.dao.request.PageCourseListRequest;
+import com.jj.stu.attendance.dao.response.PageCourseListResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.util.CollectionUtils;
@@ -59,12 +58,7 @@ public class CourseController {
         courseService.batchDeleteCourseByIds(courseIds);
         return ResultGenerator.getResultByOk("成功删除课程信息");
     }
-    /**
-     * 课程列表页
-     *
-     * @param request 请求
-     * @return {@link Result}<{@link PageCourseListResponse}>
-     */
+
     @ApiOperation("分页获取课程列表")
     @PostMapping("/page/course/list")
     public Result<PageCourseListResponse> pageCourseList(@RequestBody PageCourseListRequest request){

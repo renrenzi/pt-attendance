@@ -5,9 +5,10 @@ import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.basic.ResultGenerator;
 import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.base.util.ValidateUtil;
-import com.jj.stu.attendance.dao.request.attendance.ManageAttendanceRequest;
-import com.jj.stu.attendance.dao.request.attendance.PageAttendanceRequest;
-import com.jj.stu.attendance.dao.response.attendance.PageAttendanceResponse;
+import com.jj.stu.attendance.dao.request.ManageAttendanceRequest;
+import com.jj.stu.attendance.dao.request.PageAttendanceRequest;
+import com.jj.stu.attendance.dao.request.PunchTheClockRequest;
+import com.jj.stu.attendance.dao.response.PageAttendanceResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.util.CollectionUtils;
@@ -32,6 +33,13 @@ public class AttendanceController {
 
     @Resource
     private AttendanceService attendanceService;
+
+    @ApiOperation("打卡")
+    @PostMapping("/punch/the/clock")
+    public Result punchTheClock(@RequestBody PunchTheClockRequest request){
+        ValidateUtil.validate(request);
+        return attendanceService.punchTheClock(request);
+    }
 
     @ApiOperation("修改考勤信息")
     @PostMapping("/update/attendance/info")

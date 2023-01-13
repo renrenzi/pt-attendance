@@ -13,11 +13,10 @@ import com.jj.stu.attendance.dao.mapper.CourseMapper;
 import com.jj.stu.attendance.dao.mapper.TeacherMapper;
 import com.jj.stu.attendance.dao.model.Course;
 import com.jj.stu.attendance.dao.model.Teacher;
-import com.jj.stu.attendance.dao.request.course.EditCourseRequest;
-import com.jj.stu.attendance.dao.request.course.PageCourseListRequest;
-import com.jj.stu.attendance.dao.response.course.PageCourseListResponse;
+import com.jj.stu.attendance.dao.request.EditCourseRequest;
+import com.jj.stu.attendance.dao.request.PageCourseListRequest;
+import com.jj.stu.attendance.dao.response.PageCourseListResponse;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.Date;

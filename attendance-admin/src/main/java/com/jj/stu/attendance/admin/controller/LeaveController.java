@@ -5,9 +5,9 @@ import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.basic.ResultGenerator;
 import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.base.util.ValidateUtil;
-import com.jj.stu.attendance.dao.request.leave.ManageLeaveRequest;
-import com.jj.stu.attendance.dao.request.leave.PageLeaveRequest;
-import com.jj.stu.attendance.dao.response.leave.PageLeaveResponse;
+import com.jj.stu.attendance.dao.request.ManageLeaveRequest;
+import com.jj.stu.attendance.dao.request.PageLeaveRequest;
+import com.jj.stu.attendance.dao.response.PageLeaveResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.util.CollectionUtils;
@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.Collection;
 import java.util.List;
 
+
 /**
- * 离开控制器
+ * 请假控制器
  *
- * @author 张俊杰
- * @date 2022/11/20
+ * @author LENOVO
+ * @date 2023/01/12
  */
 @Api(tags = "请假管理")
 @RequestMapping("/leave")

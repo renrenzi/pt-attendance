@@ -1,54 +1,54 @@
 package com.jj.stu.attendance.dao.model;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModelProperty;
-import java.io.Serializable;
+import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
+/**
+ * 专业表
+ */
+@Data
 @TableName("s_clazz")
-public class Clazz implements Serializable {
+public class Clazz {
+    private static final long serialVersionUID = 1L;
+    /**
+     * 主键id
+     */
     private Integer id;
 
+    /**
+     * 专业名称
+     */
     private String name;
 
+    /**
+     * 专业描述
+     */
     private String info;
 
-    private static final long serialVersionUID = 1L;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
 
-    public Integer getId() {
-        return id;
-    }
+    /**
+     * 创建用户id
+     */
+    private Integer createUserId;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    /**
+     * 修改时间
+     */
+    private Date updateTime;
 
-    public String getName() {
-        return name;
-    }
+    /**
+     * 修改用户id
+     */
+    private Integer updateUserId;
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
-        sb.append(", info=").append(info);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
+    /**
+     * 1->启用 0 ->禁用
+     */
+    private Integer state;
 }

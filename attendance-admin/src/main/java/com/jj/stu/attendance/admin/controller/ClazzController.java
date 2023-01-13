@@ -6,9 +6,9 @@ import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.basic.ResultGenerator;
 import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.base.util.ValidateUtil;
-import com.jj.stu.attendance.dao.request.clazz.ManageClazzRequest;
-import com.jj.stu.attendance.dao.request.clazz.PageClazzRequest;
-import com.jj.stu.attendance.dao.response.clazz.PageClazzResponse;
+import com.jj.stu.attendance.dao.request.ManageClazzRequest;
+import com.jj.stu.attendance.dao.request.PageClazzRequest;
+import com.jj.stu.attendance.dao.response.PageClazzResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.util.CollectionUtils;
@@ -48,12 +48,7 @@ public class ClazzController {
         clazzService.batchDeleteClazzList(clazzIds);
         return ResultGenerator.getResultByOk("批量删除专业列表成功");
     }
-    /**
-     * 页面clazz列表
-     *
-     * @param request 请求
-     * @return {@link Result}<{@link PageClazzResponse}>
-     */
+
     @ApiOperation("分页获取专业列表")
     @PostMapping("/page/clazz/list")
     public Result<PageClazzResponse> pageClazzList(@RequestBody PageClazzRequest request){

@@ -4,9 +4,9 @@ import com.jj.stu.attendance.admin.service.StudentService;
 import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.basic.ResultGenerator;
 import com.jj.stu.attendance.base.util.ValidateUtil;
-import com.jj.stu.attendance.dao.request.student.PageStudentRequest;
-import com.jj.stu.attendance.dao.request.student.StudentBatchInsertRequest;
-import com.jj.stu.attendance.dao.response.student.PageStudentResponse;
+import com.jj.stu.attendance.dao.request.PageStudentRequest;
+import com.jj.stu.attendance.dao.request.StudentBatchInsertRequest;
+import com.jj.stu.attendance.dao.response.PageStudentResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,11 +37,7 @@ public class StudentController {
         return ResultGenerator.getResultByOk(studentService.pageStudentList(request));
     }
     
-    /**
-     * 批量添加学生
-     *
-     * @param request 请求
-     */
+
     @PostMapping("/batch/add/student")
     @ApiOperation("批量添加学生")
     public void batchAddStudent(@RequestBody StudentBatchInsertRequest request){

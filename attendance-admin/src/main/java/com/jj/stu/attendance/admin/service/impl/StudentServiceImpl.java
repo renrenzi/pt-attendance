@@ -5,16 +5,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.StudentService;
-import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.dao.mapper.StudentMapper;
 import com.jj.stu.attendance.dao.model.Student;
-import com.jj.stu.attendance.dao.request.student.PageStudentRequest;
-import com.jj.stu.attendance.dao.request.student.StudentBatchInsertRequest;
-import com.jj.stu.attendance.dao.response.student.PageStudentResponse;
+import com.jj.stu.attendance.dao.request.PageStudentRequest;
+import com.jj.stu.attendance.dao.request.StudentBatchInsertRequest;
+import com.jj.stu.attendance.dao.response.PageStudentResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

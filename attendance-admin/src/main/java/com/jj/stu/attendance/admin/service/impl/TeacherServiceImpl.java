@@ -7,9 +7,8 @@ import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.TeacherService;
 import com.jj.stu.attendance.dao.mapper.TeacherMapper;
 import com.jj.stu.attendance.dao.model.Teacher;
-import com.jj.stu.attendance.dao.request.teacher.PageTeacherRequest;
-import com.jj.stu.attendance.dao.response.teacher.PageTeacherResponse;
-import jdk.nashorn.internal.ir.annotations.Reference;
+import com.jj.stu.attendance.dao.request.PageTeacherRequest;
+import com.jj.stu.attendance.dao.response.PageTeacherResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

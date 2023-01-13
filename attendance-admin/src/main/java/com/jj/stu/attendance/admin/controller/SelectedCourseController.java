@@ -5,9 +5,9 @@ import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.basic.ResultGenerator;
 import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.base.util.ValidateUtil;
-import com.jj.stu.attendance.dao.request.selectedCourse.ManageSelectedCourseRequest;
-import com.jj.stu.attendance.dao.request.selectedCourse.PageSelectedCourseRequest;
-import com.jj.stu.attendance.dao.response.selectedCourse.PageSelectedCourseResponse;
+import com.jj.stu.attendance.dao.request.ManageSelectedCourseRequest;
+import com.jj.stu.attendance.dao.request.PageSelectedCourseRequest;
+import com.jj.stu.attendance.dao.response.PageSelectedCourseResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.util.CollectionUtils;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -48,12 +47,7 @@ public class SelectedCourseController {
         selectedCourseService.batchDeleteSelectedCourseList(selectedCourseIds);
         return  ResultGenerator.getResultByOk("批量刪除選課列表成功");
     }
-    /**
-     * 页面选择课程列表
-     *
-     * @param request 请求
-     * @return {@link Result}<{@link PageSelectedCourseResponse}>
-     */
+
     @ApiOperation("分页获取选课列表")
     @PostMapping("/page/selected/course/list")
     public Result<PageSelectedCourseResponse> pageSelectedCourseList(@RequestBody PageSelectedCourseRequest request){

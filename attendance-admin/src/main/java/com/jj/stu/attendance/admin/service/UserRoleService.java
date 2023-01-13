@@ -12,11 +12,11 @@ import com.jj.stu.attendance.dao.model.UserRole;
  */
 public interface UserRoleService extends IService<UserRole> {
     /**
-     * 页面作用
+     * 页面角色
      *
      * @param condition 条件
      * @param userRole  用户角色
-     * @return {@link Object}
+     * @return {@link PageResult}<{@link UserRole}>
      */
     PageResult<UserRole> pageRole(PageCondition condition, UserRole userRole);
 }

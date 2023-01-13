@@ -11,20 +11,19 @@ import com.jj.stu.attendance.dao.dto.LeaveVO;
 import com.jj.stu.attendance.dao.mapper.LeaveMapper;
 import com.jj.stu.attendance.dao.mapper.StudentMapper;
 import com.jj.stu.attendance.dao.model.Leave;
-import com.jj.stu.attendance.dao.model.SelectedCourse;
 import com.jj.stu.attendance.dao.model.Student;
-import com.jj.stu.attendance.dao.request.leave.ManageLeaveRequest;
-import com.jj.stu.attendance.dao.request.leave.PageLeaveRequest;
-import com.jj.stu.attendance.dao.response.leave.PageLeaveResponse;
+import com.jj.stu.attendance.dao.request.ManageLeaveRequest;
+import com.jj.stu.attendance.dao.request.PageLeaveRequest;
+import com.jj.stu.attendance.dao.response.PageLeaveResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import static org.springframework.data.util.Pair.toMap;
 
 /**
  * 离开服务impl
@@ -62,8 +61,11 @@ public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, Leave> implements
     public PageLeaveResponse pageLeaveList(PageLeaveRequest request) {
         Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
         List<Leave> leaveList = leaveMapper.selectList(new QueryWrapper<>());
-        List<Integer> studentIds = leaveList.stream().map(Leave::getStudentId).collect(Collectors.toList());
-        Map<Integer, Integer> map = studentMapper.selectBatchIds(studentIds).stream().collect(Collectors.toMap(Student::getId, Student::getUsername, (v2, v1) -> v1));
+        List<Integer> studentIds = leaveList.stream().map(Leave::getStudentId).distinct().collect(Collectors.toList());
+        Map<Integer, Integer> map = new HashMap<>(studentIds.size());
+        if (!CollectionUtils.isEmpty(studentIds)){
+            map = studentMapper.selectBatchIds(studentIds).stream().collect(Collectors.toMap(Student::getId, Student::getUsername, (v2, v1) -> v1));
+        }
         List<LeaveVO> responseList = new ArrayList<>();
         for(Leave leave : leaveList) {
             LeaveVO leaveVO = new LeaveVO();

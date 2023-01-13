@@ -1,81 +1,56 @@
 package com.jj.stu.attendance.dao.model;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModelProperty;
-import java.io.Serializable;
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
+/**
+ * 考勤表
+ */
+@Data
 @TableName("s_attendance")
-public class Attendance implements Serializable {
+public class Attendance {
+    private static final long serialVersionUID = 1L;
     private Integer id;
 
-    @ApiModelProperty(value = "课程Id")
+    /**
+     * 课程Id
+     */
     private Integer courseId;
 
-    @ApiModelProperty(value = "学生Id")
+    /**
+     * 学生Id
+     */
     private Integer studentId;
 
-    @ApiModelProperty(value = "考勤状态")
+    /**
+     * 考勤状态
+     */
     private String type;
 
-    @ApiModelProperty(value = "课程时间")
+    /**
+     * 课程时间
+     */
     private Date date;
 
-    private static final long serialVersionUID = 1L;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
 
-    public Integer getId() {
-        return id;
-    }
+    /**
+     * 创建用户id
+     */
+    private Integer createUserId;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
 
-    public Integer getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(Integer courseId) {
-        this.courseId = courseId;
-    }
-
-    public Integer getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", courseId=").append(courseId);
-        sb.append(", studentId=").append(studentId);
-        sb.append(", type=").append(type);
-        sb.append(", date=").append(date);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
+    /**
+     * 更新用户id
+     */
+    private Integer updateUserId;
 }

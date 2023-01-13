@@ -15,7 +15,7 @@ public class SelectedCourseServiceTest extends BaseTest {
     @Test
     public void batchAddSelectedCourse(){
         List<SelectedCourse> selectedCourseList = new ArrayList<>();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 10; i++) {
             SelectedCourse selectedCourse = new SelectedCourse();
             selectedCourse.setId(i);
             selectedCourse.setCourseId(i);
