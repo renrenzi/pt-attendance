@@ -1,12 +1,15 @@
 package com.jj.stu.attendance.dao.model;
 
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
  * 管理员表
  */
 @Data
+@TableName("s_admin")
 public class Admin {
     private static final long serialVersionUID = 1L;
     private Integer id;

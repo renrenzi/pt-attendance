@@ -1,12 +1,15 @@
 package com.jj.stu.attendance.dao.model;
 
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
  * 教师表
  */
 @Data
+@TableName("s_teacher")
 public class Teacher {
     private static final long serialVersionUID = 1L;
     private Integer id;

@@ -17,9 +17,11 @@ import com.jj.stu.attendance.dao.request.leave.ManageLeaveRequest;
 import com.jj.stu.attendance.dao.request.leave.PageLeaveRequest;
 import com.jj.stu.attendance.dao.response.leave.PageLeaveResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -62,8 +64,11 @@ public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, Leave> implements
     public PageLeaveResponse pageLeaveList(PageLeaveRequest request) {
         Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
         List<Leave> leaveList = leaveMapper.selectList(new QueryWrapper<>());
-        List<Integer> studentIds = leaveList.stream().map(Leave::getStudentId).collect(Collectors.toList());
-        Map<Integer, Integer> map = studentMapper.selectBatchIds(studentIds).stream().collect(Collectors.toMap(Student::getId, Student::getUsername, (v2, v1) -> v1));
+        List<Integer> studentIds = leaveList.stream().map(Leave::getStudentId).distinct().collect(Collectors.toList());
+        Map<Integer, Integer> map = new HashMap<>(studentIds.size());
+        if (!CollectionUtils.isEmpty(studentIds)){
+            map = studentMapper.selectBatchIds(studentIds).stream().collect(Collectors.toMap(Student::getId, Student::getUsername, (v2, v1) -> v1));
+        }
         List<LeaveVO> responseList = new ArrayList<>();
         for(Leave leave : leaveList) {
             LeaveVO leaveVO = new LeaveVO();
