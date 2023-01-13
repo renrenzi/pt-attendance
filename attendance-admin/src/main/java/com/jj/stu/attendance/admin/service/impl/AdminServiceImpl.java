@@ -2,8 +2,6 @@ package com.jj.stu.attendance.admin.service.impl;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.crypto.digest.DigestUtil;
-import cn.hutool.crypto.digest.Digester;
-import cn.hutool.crypto.digest.MD5;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jj.stu.attendance.admin.service.AdminService;
 import com.jj.stu.attendance.base.basic.Result;
@@ -12,8 +10,8 @@ import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.base.service.RedisService;
 import com.jj.stu.attendance.dao.mapper.AdminMapper;
 import com.jj.stu.attendance.dao.model.Admin;
-import com.jj.stu.attendance.dao.request.MiniLoginRequest;
-import com.jj.stu.attendance.dao.request.PageAdminListRequest;
+import com.jj.stu.attendance.meta.request.MiniLoginRequest;
+import com.jj.stu.attendance.meta.request.PageAdminListRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

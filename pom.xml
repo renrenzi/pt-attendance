@@ -19,6 +19,7 @@
         <module>attendance-admin</module>
         <module>attendance-base</module>
         <module>attendance-dao</module>
+        <module>attendance-meta</module>
     </modules>
 
     <!-- 统一管理jar包版本 -->
@@ -45,6 +46,7 @@
 
         <attendance.base.version>1.0-SNAPSHOT</attendance.base.version>
         <attendance.dao.version>1.0-SNAPSHOT</attendance.dao.version>
+        <attendance.meta.version>1.0-SNAPSHOT</attendance.meta.version>
     </properties>
 
     <dependencyManagement>
@@ -62,6 +64,11 @@
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate.validator.version}</version>
+            </dependency>
+            <dependency>
+                <artifactId>attendance-meta</artifactId>
+                <groupId>com.renrenzi</groupId>
+                <version>${attendance.meta.version}</version>
             </dependency>
             <dependency>
                 <artifactId>attendance-dao</artifactId>

@@ -12,9 +12,9 @@ import com.jj.stu.attendance.dao.mapper.LeaveMapper;
 import com.jj.stu.attendance.dao.mapper.StudentMapper;
 import com.jj.stu.attendance.dao.model.Leave;
 import com.jj.stu.attendance.dao.model.Student;
-import com.jj.stu.attendance.dao.request.ManageLeaveRequest;
-import com.jj.stu.attendance.dao.request.PageLeaveRequest;
-import com.jj.stu.attendance.dao.response.PageLeaveResponse;
+import com.jj.stu.attendance.meta.request.ManageLeaveRequest;
+import com.jj.stu.attendance.meta.request.PageLeaveRequest;
+import com.jj.stu.attendance.meta.response.PageLeaveResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 

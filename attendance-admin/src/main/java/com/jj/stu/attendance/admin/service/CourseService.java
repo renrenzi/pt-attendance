@@ -2,9 +2,9 @@ package com.jj.stu.attendance.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jj.stu.attendance.dao.model.Course;
-import com.jj.stu.attendance.dao.request.EditCourseRequest;
-import com.jj.stu.attendance.dao.request.PageCourseListRequest;
-import com.jj.stu.attendance.dao.response.PageCourseListResponse;
+import com.jj.stu.attendance.meta.request.EditCourseRequest;
+import com.jj.stu.attendance.meta.request.PageCourseListRequest;
+import com.jj.stu.attendance.meta.response.PageCourseListResponse;
 
 import java.util.List;
 

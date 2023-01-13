@@ -2,9 +2,9 @@ package com.jj.stu.attendance.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jj.stu.attendance.dao.model.SelectedCourse;
-import com.jj.stu.attendance.dao.request.ManageSelectedCourseRequest;
-import com.jj.stu.attendance.dao.request.PageSelectedCourseRequest;
-import com.jj.stu.attendance.dao.response.PageSelectedCourseResponse;
+import com.jj.stu.attendance.meta.request.ManageSelectedCourseRequest;
+import com.jj.stu.attendance.meta.request.PageSelectedCourseRequest;
+import com.jj.stu.attendance.meta.response.PageSelectedCourseResponse;
 
 import java.util.List;
 

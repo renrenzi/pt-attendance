@@ -7,9 +7,9 @@ import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.StudentService;
 import com.jj.stu.attendance.dao.mapper.StudentMapper;
 import com.jj.stu.attendance.dao.model.Student;
-import com.jj.stu.attendance.dao.request.PageStudentRequest;
-import com.jj.stu.attendance.dao.request.StudentBatchInsertRequest;
-import com.jj.stu.attendance.dao.response.PageStudentResponse;
+import com.jj.stu.attendance.meta.request.PageStudentRequest;
+import com.jj.stu.attendance.meta.request.StudentBatchInsertRequest;
+import com.jj.stu.attendance.meta.response.PageStudentResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

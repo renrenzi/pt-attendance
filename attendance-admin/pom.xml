@@ -12,7 +12,7 @@
 
     <dependencies>
         <dependency>
-            <artifactId>attendance-dao</artifactId>
+            <artifactId>attendance-meta</artifactId>
             <groupId>com.renrenzi</groupId>
         </dependency>
         <dependency>

@@ -14,14 +14,17 @@ import com.jj.stu.attendance.dao.mapper.StudentMapper;
 import com.jj.stu.attendance.dao.model.Course;
 import com.jj.stu.attendance.dao.model.SelectedCourse;
 import com.jj.stu.attendance.dao.model.Student;
-import com.jj.stu.attendance.dao.request.ManageSelectedCourseRequest;
-import com.jj.stu.attendance.dao.request.PageSelectedCourseRequest;
-import com.jj.stu.attendance.dao.response.PageSelectedCourseResponse;
+import com.jj.stu.attendance.meta.request.ManageSelectedCourseRequest;
+import com.jj.stu.attendance.meta.request.PageSelectedCourseRequest;
+import com.jj.stu.attendance.meta.response.PageSelectedCourseResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
