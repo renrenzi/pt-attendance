@@ -3,9 +3,9 @@ package com.jj.stu.attendance.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jj.stu.attendance.dao.model.Student;
-import com.jj.stu.attendance.dao.request.PageStudentRequest;
-import com.jj.stu.attendance.dao.request.StudentBatchInsertRequest;
-import com.jj.stu.attendance.dao.response.PageStudentResponse;
+import com.jj.stu.attendance.meta.request.PageStudentRequest;
+import com.jj.stu.attendance.meta.request.StudentBatchInsertRequest;
+import com.jj.stu.attendance.meta.response.PageStudentResponse;
 
 /**
  * @author 任人子

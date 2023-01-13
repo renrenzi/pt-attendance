@@ -1,25 +1,23 @@
-package com.jj.stu.attendance.dao.request;
+package com.jj.stu.attendance.meta.request;
 
-import com.jj.stu.attendance.dao.model.Leave;
+import com.jj.stu.attendance.dao.model.Attendance;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
 /**
- * 页面请求离开
+ * 页面出席请求
  *
  * @author 张俊杰
- * @date 2022/11/20
+ * @date 2022/11/19
  */
 @Data
-public class PageLeaveRequest {
-
+public class PageAttendanceRequest {
     /**
      * 页面num
      */
     @NotNull
     private Integer pageNum;
-
     /**
      * 页面大小
      */
@@ -27,7 +25,7 @@ public class PageLeaveRequest {
     private Integer pageSize;
 
     /**
-     * 离开
+     * 出席
      */
-    private Leave leave;
+    private Attendance attendance;
 }

@@ -1,10 +1,9 @@
-package com.jj.stu.attendance.dao.response;
+package com.jj.stu.attendance.meta.response;
 
 import com.jj.stu.attendance.dao.model.Attendance;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**

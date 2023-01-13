@@ -2,8 +2,8 @@ package com.jj.stu.attendance.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jj.stu.attendance.dao.model.Teacher;
-import com.jj.stu.attendance.dao.request.PageTeacherRequest;
-import com.jj.stu.attendance.dao.response.PageTeacherResponse;
+import com.jj.stu.attendance.meta.request.PageTeacherRequest;
+import com.jj.stu.attendance.meta.response.PageTeacherResponse;
 
 public interface TeacherService extends IService<Teacher> {
     /**

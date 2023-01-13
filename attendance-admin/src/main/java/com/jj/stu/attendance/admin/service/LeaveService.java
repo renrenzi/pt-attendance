@@ -2,9 +2,9 @@ package com.jj.stu.attendance.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jj.stu.attendance.dao.model.Leave;
-import com.jj.stu.attendance.dao.request.ManageLeaveRequest;
-import com.jj.stu.attendance.dao.request.PageLeaveRequest;
-import com.jj.stu.attendance.dao.response.PageLeaveResponse;
+import com.jj.stu.attendance.meta.request.ManageLeaveRequest;
+import com.jj.stu.attendance.meta.request.PageLeaveRequest;
+import com.jj.stu.attendance.meta.response.PageLeaveResponse;
 
 import java.util.List;
 

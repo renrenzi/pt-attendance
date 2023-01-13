@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.dao.request;
+package com.jj.stu.attendance.meta.request;
 
 import lombok.Data;
 
