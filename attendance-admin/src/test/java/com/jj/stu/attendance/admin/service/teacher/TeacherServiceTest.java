@@ -17,7 +17,7 @@ public class TeacherServiceTest extends BaseTest {
     @Test
     public void batchAddTeacher(){
         List<Teacher> teacherList = new ArrayList<>();
-        for (int i = 0; i < 1001; i++) {
+        for (int i = 10; i < 20; i++) {
             Teacher teacher = new Teacher();
             teacher.setId(i);
             teacher.setMobile("12321" +i);
@@ -26,6 +26,7 @@ public class TeacherServiceTest extends BaseTest {
             teacher.setUsername("测试教师" +i);
             teacher.setClazzId(i);
             teacher.setCreateDate(new Date());
+            teacher.setAdminId(i);
             teacherList.add(teacher);
         }
         teacherService.saveBatch(teacherList);

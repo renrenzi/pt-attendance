@@ -16,7 +16,7 @@ public class CourseServiceTest extends BaseTest {
     @Test
     public void batchAddCourse(){
         List<Course> courseList = new ArrayList<>();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 10; i++) {
             Course course = new Course();
             course.setId(i);
             course.setName("課程"+i);

@@ -17,13 +17,15 @@ public class AttendanceServiceTest extends BaseTest {
     @Test
     public void batchAddAttendanceTest(){
         List<Attendance> attendanceList = new ArrayList<>();
-        for (int i = 10000; i < 40000; i++) {
+        for (int i = 0; i < 10; i++) {
             Attendance attendance = new Attendance();
             attendance.setId(i);
             attendance.setDate(new Date());
             attendance.setCourseId(i);
             attendance.setStudentId(i);
-            attendance.setType("出席");
+            attendance.setType("attendance");
+            attendance.setCreateTime(new Date());
+            attendance.setCreateUserId(1);
             attendanceList.add(attendance);
         }
         attendanceService.saveBatch(attendanceList);

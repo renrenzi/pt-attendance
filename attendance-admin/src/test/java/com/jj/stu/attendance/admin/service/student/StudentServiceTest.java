@@ -16,7 +16,7 @@ public class StudentServiceTest extends BaseTest {
     @Test
     public void batchAddStudentTest(){
         List<Student> studentList = new ArrayList<>();
-        for (int i = 90000; i < 100000; i++) {
+        for (int i = 0; i < 10; i++) {
             Student student = new Student();
             student.setId(i);
             student.setClazzId(i);
@@ -28,6 +28,7 @@ public class StudentServiceTest extends BaseTest {
             student.setNickName("測試學生" + i);
             student.setAdminId(i);
             studentList.add(student);
+            studentMapper.insert(student);
         }
         //studentMapper.batchInsert(studentList);
     }

@@ -18,7 +18,7 @@ public class LeaveServiceTest extends BaseTest {
     @Test
     public void batchAddLeave() {
         List<Leave> leaveList = new ArrayList<>();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 10; i++) {
             Leave leave = new Leave();
             leave.setId(i);
             leave.setStudentId(i);
