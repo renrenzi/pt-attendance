@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.dao.response.leave;
+package com.jj.stu.attendance.dao.response;
 
 import com.jj.stu.attendance.dao.dto.LeaveVO;
 import com.jj.stu.attendance.dao.model.Leave;

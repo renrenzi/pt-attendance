@@ -4,10 +4,10 @@ package com.jj.stu.attendance.admin.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.dao.model.Attendance;
-import com.jj.stu.attendance.dao.request.attendance.ManageAttendanceRequest;
-import com.jj.stu.attendance.dao.request.attendance.PageAttendanceRequest;
-import com.jj.stu.attendance.dao.request.attendance.PunchTheClockRequest;
-import com.jj.stu.attendance.dao.response.attendance.PageAttendanceResponse;
+import com.jj.stu.attendance.dao.request.ManageAttendanceRequest;
+import com.jj.stu.attendance.dao.request.PageAttendanceRequest;
+import com.jj.stu.attendance.dao.request.PunchTheClockRequest;
+import com.jj.stu.attendance.dao.response.PageAttendanceResponse;
 
 import java.util.List;
 

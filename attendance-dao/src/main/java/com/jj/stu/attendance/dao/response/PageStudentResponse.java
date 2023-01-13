@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.dao.response.student;
+package com.jj.stu.attendance.dao.response;
 
 
 import com.jj.stu.attendance.dao.model.Student;

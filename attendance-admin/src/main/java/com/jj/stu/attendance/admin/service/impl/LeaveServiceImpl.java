@@ -11,11 +11,10 @@ import com.jj.stu.attendance.dao.dto.LeaveVO;
 import com.jj.stu.attendance.dao.mapper.LeaveMapper;
 import com.jj.stu.attendance.dao.mapper.StudentMapper;
 import com.jj.stu.attendance.dao.model.Leave;
-import com.jj.stu.attendance.dao.model.SelectedCourse;
 import com.jj.stu.attendance.dao.model.Student;
-import com.jj.stu.attendance.dao.request.leave.ManageLeaveRequest;
-import com.jj.stu.attendance.dao.request.leave.PageLeaveRequest;
-import com.jj.stu.attendance.dao.response.leave.PageLeaveResponse;
+import com.jj.stu.attendance.dao.request.ManageLeaveRequest;
+import com.jj.stu.attendance.dao.request.PageLeaveRequest;
+import com.jj.stu.attendance.dao.response.PageLeaveResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -25,8 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import static org.springframework.data.util.Pair.toMap;
 
 /**
  * 离开服务impl

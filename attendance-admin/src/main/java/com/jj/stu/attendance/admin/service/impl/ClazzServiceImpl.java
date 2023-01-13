@@ -8,14 +8,12 @@ import com.jj.stu.attendance.admin.service.ClazzService;
 import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.dao.mapper.ClazzMapper;
 import com.jj.stu.attendance.dao.model.Clazz;
-import com.jj.stu.attendance.dao.model.Course;
-import com.jj.stu.attendance.dao.request.clazz.ManageClazzRequest;
-import com.jj.stu.attendance.dao.request.clazz.PageClazzRequest;
-import com.jj.stu.attendance.dao.response.clazz.PageClazzResponse;
+import com.jj.stu.attendance.dao.request.ManageClazzRequest;
+import com.jj.stu.attendance.dao.request.PageClazzRequest;
+import com.jj.stu.attendance.dao.response.PageClazzResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
 
 /**

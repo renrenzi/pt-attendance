@@ -1,7 +1,6 @@
 package com.jj.stu.attendance.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jj.stu.attendance.admin.basic.PageCondition;
 import com.jj.stu.attendance.admin.basic.PageResult;
 import com.jj.stu.attendance.admin.service.UserResourceService;
@@ -13,7 +12,7 @@ import com.jj.stu.attendance.base.constants.HttpStatusEnum;
 import com.jj.stu.attendance.base.util.DateUtils;
 import com.jj.stu.attendance.dao.model.UserRole;
 import com.jj.stu.attendance.dao.model.UserRoleResourceRelation;
-import com.jj.stu.attendance.dao.request.user.UserRoleRequestDto;
+import com.jj.stu.attendance.dao.request.UserRoleRequestDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.transaction.annotation.Transactional;

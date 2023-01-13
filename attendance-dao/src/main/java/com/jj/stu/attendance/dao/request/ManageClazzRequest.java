@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.dao.request.clazz;
+package com.jj.stu.attendance.dao.request;
 
 import com.jj.stu.attendance.dao.model.Clazz;
 import lombok.Data;

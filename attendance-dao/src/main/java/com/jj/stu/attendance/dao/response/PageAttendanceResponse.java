@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.dao.response.attendance;
+package com.jj.stu.attendance.dao.response;
 
 import com.jj.stu.attendance.dao.model.Attendance;
 import lombok.Data;

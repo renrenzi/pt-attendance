@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.dao.request.student;
+package com.jj.stu.attendance.dao.request;
 
 import com.jj.stu.attendance.dao.mapper.StudentMapper;
 import com.jj.stu.attendance.dao.model.Student;

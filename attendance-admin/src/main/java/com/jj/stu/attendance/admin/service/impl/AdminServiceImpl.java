@@ -13,6 +13,7 @@ import com.jj.stu.attendance.base.service.RedisService;
 import com.jj.stu.attendance.dao.mapper.AdminMapper;
 import com.jj.stu.attendance.dao.model.Admin;
 import com.jj.stu.attendance.dao.request.MiniLoginRequest;
+import com.jj.stu.attendance.dao.request.PageAdminListRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,5 +35,10 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         String token = StpUtil.getTokenValue();
         
         return ResultGenerator.getResultByOk(token);
+    }
+
+    @Override
+    public Result pageAdminInfoList(PageAdminListRequest request) {
+        return null;
     }
 }

@@ -14,9 +14,9 @@ import com.jj.stu.attendance.dao.mapper.StudentMapper;
 import com.jj.stu.attendance.dao.model.Course;
 import com.jj.stu.attendance.dao.model.SelectedCourse;
 import com.jj.stu.attendance.dao.model.Student;
-import com.jj.stu.attendance.dao.request.selectedCourse.ManageSelectedCourseRequest;
-import com.jj.stu.attendance.dao.request.selectedCourse.PageSelectedCourseRequest;
-import com.jj.stu.attendance.dao.response.selectedCourse.PageSelectedCourseResponse;
+import com.jj.stu.attendance.dao.request.ManageSelectedCourseRequest;
+import com.jj.stu.attendance.dao.request.PageSelectedCourseRequest;
+import com.jj.stu.attendance.dao.response.PageSelectedCourseResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 

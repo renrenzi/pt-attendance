@@ -15,4 +15,6 @@ public interface CourseMapper extends BaseMapper<Course> {
     int updateByPrimaryKeySelective(Course record);
 
     int updateByPrimaryKey(Course record);
+
+    List<Course> selectByList(@Param("courseIds") List<Integer> courseIds);
 }

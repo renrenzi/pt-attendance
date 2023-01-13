@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.dao.response.course;
+package com.jj.stu.attendance.dao.response;
 
 import com.jj.stu.attendance.dao.dto.PageCourseDto;
 import lombok.Data;

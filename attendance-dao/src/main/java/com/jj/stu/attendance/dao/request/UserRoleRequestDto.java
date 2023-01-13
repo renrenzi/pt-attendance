@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.dao.request.user;
+package com.jj.stu.attendance.dao.request;
 
 import com.jj.stu.attendance.dao.model.UserRole;
 import lombok.Getter;

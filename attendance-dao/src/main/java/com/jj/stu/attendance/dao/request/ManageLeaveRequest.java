@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.dao.request.leave;
+package com.jj.stu.attendance.dao.request;
 
 import com.jj.stu.attendance.dao.model.Leave;
 import lombok.Data;

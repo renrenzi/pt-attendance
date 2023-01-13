@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.dao.response.selectedCourse;
+package com.jj.stu.attendance.dao.response;
 
 import com.jj.stu.attendance.dao.dto.SelectedCourseDTO;
 import com.jj.stu.attendance.dao.model.Clazz;

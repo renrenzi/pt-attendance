@@ -10,10 +10,10 @@ import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.dao.mapper.*;
 import com.jj.stu.attendance.dao.model.*;
-import com.jj.stu.attendance.dao.request.attendance.ManageAttendanceRequest;
-import com.jj.stu.attendance.dao.request.attendance.PageAttendanceRequest;
-import com.jj.stu.attendance.dao.request.attendance.PunchTheClockRequest;
-import com.jj.stu.attendance.dao.response.attendance.PageAttendanceResponse;
+import com.jj.stu.attendance.dao.request.ManageAttendanceRequest;
+import com.jj.stu.attendance.dao.request.PageAttendanceRequest;
+import com.jj.stu.attendance.dao.request.PunchTheClockRequest;
+import com.jj.stu.attendance.dao.response.PageAttendanceResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
