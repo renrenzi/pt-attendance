@@ -2,9 +2,9 @@ package com.jj.stu.attendance.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jj.stu.attendance.dao.model.Clazz;
-import com.jj.stu.attendance.dao.request.ManageClazzRequest;
-import com.jj.stu.attendance.dao.request.PageClazzRequest;
-import com.jj.stu.attendance.dao.response.PageClazzResponse;
+import com.jj.stu.attendance.meta.request.ManageClazzRequest;
+import com.jj.stu.attendance.meta.request.PageClazzRequest;
+import com.jj.stu.attendance.meta.response.PageClazzResponse;
 
 import java.util.List;
 

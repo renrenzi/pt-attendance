@@ -3,7 +3,6 @@ package com.jj.stu.attendance.admin.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.CourseService;
@@ -13,9 +12,9 @@ import com.jj.stu.attendance.dao.mapper.CourseMapper;
 import com.jj.stu.attendance.dao.mapper.TeacherMapper;
 import com.jj.stu.attendance.dao.model.Course;
 import com.jj.stu.attendance.dao.model.Teacher;
-import com.jj.stu.attendance.dao.request.EditCourseRequest;
-import com.jj.stu.attendance.dao.request.PageCourseListRequest;
-import com.jj.stu.attendance.dao.response.PageCourseListResponse;
+import com.jj.stu.attendance.meta.request.EditCourseRequest;
+import com.jj.stu.attendance.meta.request.PageCourseListRequest;
+import com.jj.stu.attendance.meta.response.PageCourseListResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,6 +22,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+;
 
 
 /**

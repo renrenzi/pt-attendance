@@ -1,11 +1,10 @@
 package com.jj.stu.attendance.admin.controller;
 
-import cn.dev33.satoken.stp.StpUtil;
 import com.jj.stu.attendance.admin.service.AdminService;
 import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.util.ValidateUtil;
-import com.jj.stu.attendance.dao.request.MiniLoginRequest;
-import com.jj.stu.attendance.dao.request.PageAdminListRequest;
+import com.jj.stu.attendance.meta.request.MiniLoginRequest;
+import com.jj.stu.attendance.meta.request.PageAdminListRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
