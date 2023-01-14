@@ -143,4 +143,19 @@
       </if>
     </where>
   </select>
+
+  <select id="selectByAdminId" resultMap="BaseResultMap">
+    SELECT
+      <include refid="Base_Column_List">
+      </include>
+    FROM s_teacher
+    <where>
+      <if test="adminIds != null and adminIds.size() != 0">
+        AND admin_id in
+        <foreach collection="adminIds" item="adminId" separator="," open="(" close=")">
+            #{adminId}
+        </foreach>
+      </if>
+    </where>
+  </select>
 </mapper>

@@ -12,7 +12,7 @@ import com.jj.stu.attendance.base.constants.HttpStatusEnum;
 import com.jj.stu.attendance.base.util.DateUtils;
 import com.jj.stu.attendance.dao.model.UserRole;
 import com.jj.stu.attendance.dao.model.UserRoleResourceRelation;
-import com.jj.stu.attendance.dao.request.UserRoleRequestDto;
+import com.jj.stu.attendance.meta.request.UserRoleRequestDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.transaction.annotation.Transactional;

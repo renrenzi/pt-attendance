@@ -6,6 +6,12 @@ import com.jj.stu.attendance.dao.model.Admin;
 import com.jj.stu.attendance.meta.request.MiniLoginRequest;
 import com.jj.stu.attendance.meta.request.PageAdminListRequest;
 
+/**
+ * 管理服务
+ *
+ * @author 张俊杰
+ * @date 2023/01/14
+ */
 public interface AdminService extends IService<Admin> {
     /**
      * 前台登录
