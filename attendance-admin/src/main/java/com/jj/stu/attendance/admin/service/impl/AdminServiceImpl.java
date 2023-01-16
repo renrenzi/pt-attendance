@@ -1,6 +1,7 @@
 package com.jj.stu.attendance.admin.service.impl;
 
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
@@ -14,12 +15,17 @@ import com.jj.stu.attendance.dao.mapper.AdminMapper;
 import com.jj.stu.attendance.dao.mapper.StudentMapper;
 import com.jj.stu.attendance.dao.mapper.TeacherMapper;
 import com.jj.stu.attendance.dao.model.Admin;
+import com.jj.stu.attendance.dao.model.Student;
+import com.jj.stu.attendance.dao.model.Teacher;
 import com.jj.stu.attendance.meta.request.MiniLoginRequest;
 import com.jj.stu.attendance.meta.request.PageAdminListRequest;
+import com.jj.stu.attendance.meta.response.PageAdminInfoResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
+import java.util.stream.Collectors;
 import javax.annotation.Resource;
-import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,19 +52,37 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     }
 
     @Override
-    public Result pageAdminInfoList(PageAdminListRequest request) {
+    public Result<List<PageAdminInfoResponse>> pageAdminInfoList(PageAdminListRequest request) {
         PageHelper.startPage(request.getPageNum(), request.getPageSize());
         List<Admin> adminList = adminMapper.selectListByCondition(request.getUserName(), request.getCreateTime());
         List<Integer> adminIds = adminList.stream().map(Admin::getId).distinct().collect(Collectors.toList());
         Integer roleId = request.getRoleId();
+
+        Map<Integer, Teacher> adminIdToTeacherMap = new HashMap<>();
+        Map<Integer, Student> adminIdToStudentMap = new HashMap<>();
         if (roleId != null){
             if (RoleNameEnum.STUDENT.getRoleId().equals(roleId)){
-                teacherMapper.selectByAdminId(adminIds);
+                adminIdToStudentMap = studentMapper.selectByAdminId(adminIds).stream().collect(Collectors.toMap(Student::getAdminId, Function.identity(), (v2, v1) -> v1));
             }
             if (RoleNameEnum.TEACHER.getRoleId().equals(roleId)){
-                studentMapper.selectByAdminId(adminIds);
+                adminIdToTeacherMap = teacherMapper.selectByAdminId(adminIds).stream().collect(Collectors.toMap(Teacher::getAdminId, Function.identity(), (v2, v1) -> v1));
             }
         }
-        return null;
+        List<PageAdminInfoResponse> result = new ArrayList<>();
+        for (Admin admin : adminList) {
+            PageAdminInfoResponse pageAdminInfoResponse = new PageAdminInfoResponse();
+            BeanUtil.copyProperties(admin, pageAdminInfoResponse);
+            if (roleId != null){
+                if (RoleNameEnum.STUDENT.getRoleId().equals(roleId)){
+                    pageAdminInfoResponse.setInfo(adminIdToStudentMap.get(admin.getId()));
+                }
+                if (RoleNameEnum.TEACHER.getRoleId().equals(roleId)){
+                    pageAdminInfoResponse.setInfo(adminIdToTeacherMap.get(admin.getId()));
+                }
+            }
+            pageAdminInfoResponse.setRoleId(roleId);
+            result.add(pageAdminInfoResponse);
+        }
+        return ResultGenerator.getResultByOk(result);
     }
 }

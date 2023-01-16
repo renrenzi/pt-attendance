@@ -142,11 +142,14 @@
     SELECT
     <include refid="Base_Column_List"/>
     FROM s_admin
-    WHERE user_name like #{userName,jdbcType=VARCHAR}
-    AND
-    <if test="createTime != null ">
-      create_time >= #{createTime,jdbcType=TIMESTAMP}
-    </if>
+    <where>
+      <if test="userName != null">
+        AND user_name like #{userName,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null ">
+        AND create_time >= #{createTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
   </select>
 
 </mapper>

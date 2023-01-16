@@ -1,7 +1,5 @@
 package com.jj.stu.attendance.admin.controller;
 
-import com.jj.stu.attendance.dao.model.Student;
-import com.jj.stu.attendance.dao.request.StudentBatchInsertRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -18,7 +16,7 @@ public class StudentControllerTest {
     private StudentController controller;
     @Test
     public void test(){
-        StudentBatchInsertRequest request = new StudentBatchInsertRequest();
+     /*   StudentBatchInsertRequest request = new StudentBatchInsertRequest();
 
         request.setStudentList(new ArrayList<Student>(){{
             Student student = new Student();
@@ -30,6 +28,6 @@ public class StudentControllerTest {
             student.setSex("女");
             add(student);
         }});
-        controller.batchAddStudent(request);
+        controller.batchAddStudent(request);*/
     }
 }

@@ -5,6 +5,9 @@ import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.dao.model.Admin;
 import com.jj.stu.attendance.meta.request.MiniLoginRequest;
 import com.jj.stu.attendance.meta.request.PageAdminListRequest;
+import com.jj.stu.attendance.meta.response.PageAdminInfoResponse;
+
+import java.util.List;
 
 /**
  * 管理服务
@@ -26,5 +29,5 @@ public interface AdminService extends IService<Admin> {
      * @param request 请求
      * @return {@link Result}
      */
-    Result pageAdminInfoList(PageAdminListRequest request);
+    Result<List<PageAdminInfoResponse>> pageAdminInfoList(PageAdminListRequest request);
 }
