@@ -39,6 +39,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     private TeacherMapper teacherMapper;
     @Resource
     private RedisService redisService;
+
     @Override
     public Result miniLoginInfo(MiniLoginRequest request) {
         request.setPassword(DigestUtil.md5Hex(request.getPassword()));
@@ -48,7 +49,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         }
         StpUtil.login(admin.getId());
         String token = StpUtil.getTokenValue();
-        
+
         return ResultGenerator.getResultByOk(token);
     }
 
@@ -61,11 +62,11 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
 
         Map<Integer, Teacher> adminIdToTeacherMap = new HashMap<>();
         Map<Integer, Student> adminIdToStudentMap = new HashMap<>();
-        if (roleId != null){
-            if (RoleNameEnum.STUDENT.getRoleId().equals(roleId)){
+        if (roleId != null) {
+            if (RoleNameEnum.STUDENT.getRoleId().equals(roleId)) {
                 adminIdToStudentMap = studentMapper.selectByAdminId(adminIds).stream().collect(Collectors.toMap(Student::getAdminId, Function.identity(), (v2, v1) -> v1));
             }
-            if (RoleNameEnum.TEACHER.getRoleId().equals(roleId)){
+            if (RoleNameEnum.TEACHER.getRoleId().equals(roleId)) {
                 adminIdToTeacherMap = teacherMapper.selectByAdminId(adminIds).stream().collect(Collectors.toMap(Teacher::getAdminId, Function.identity(), (v2, v1) -> v1));
             }
         }
@@ -73,18 +74,18 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         for (Admin admin : adminList) {
             PageAdminInfoResponse pageAdminInfoResponse = new PageAdminInfoResponse();
             BeanUtil.copyProperties(admin, pageAdminInfoResponse);
-            if (roleId != null){
-                if (RoleNameEnum.STUDENT.getRoleId().equals(roleId)){
+            if (roleId != null) {
+                if (RoleNameEnum.STUDENT.getRoleId().equals(roleId)) {
                     pageAdminInfoResponse.setInfo(adminIdToStudentMap.get(admin.getId()));
                 }
-                if (RoleNameEnum.TEACHER.getRoleId().equals(roleId)){
+                if (RoleNameEnum.TEACHER.getRoleId().equals(roleId)) {
                     pageAdminInfoResponse.setInfo(adminIdToTeacherMap.get(admin.getId()));
                 }
             }
             pageAdminInfoResponse.setRoleId(roleId);
             result.add(pageAdminInfoResponse);
         }
-        PageResult pageResult = new PageResult();
+        PageResult<PageAdminInfoResponse> pageResult = new PageResult<>();
         pageResult.setData(result);
         return ResultGenerator.getResultByOk(pageResult);
     }
