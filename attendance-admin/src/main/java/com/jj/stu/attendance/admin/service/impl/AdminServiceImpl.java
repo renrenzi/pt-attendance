@@ -5,6 +5,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
+import com.jj.stu.attendance.admin.basic.PageResult;
 import com.jj.stu.attendance.admin.constants.RoleNameEnum;
 import com.jj.stu.attendance.admin.service.AdminService;
 import com.jj.stu.attendance.base.basic.Result;
@@ -52,7 +53,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     }
 
     @Override
-    public Result<List<PageAdminInfoResponse>> pageAdminInfoList(PageAdminListRequest request) {
+    public Result<PageResult> pageAdminInfoList(PageAdminListRequest request) {
         PageHelper.startPage(request.getPageNum(), request.getPageSize());
         List<Admin> adminList = adminMapper.selectListByCondition(request.getUserName(), request.getCreateTime());
         List<Integer> adminIds = adminList.stream().map(Admin::getId).distinct().collect(Collectors.toList());
@@ -83,6 +84,8 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
             pageAdminInfoResponse.setRoleId(roleId);
             result.add(pageAdminInfoResponse);
         }
-        return ResultGenerator.getResultByOk(result);
+        PageResult pageResult = new PageResult();
+        pageResult.setData(result);
+        return ResultGenerator.getResultByOk(pageResult);
     }
 }

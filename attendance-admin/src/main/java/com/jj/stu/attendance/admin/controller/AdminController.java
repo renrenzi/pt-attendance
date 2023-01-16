@@ -1,5 +1,6 @@
 package com.jj.stu.attendance.admin.controller;
 
+import com.jj.stu.attendance.admin.basic.PageResult;
 import com.jj.stu.attendance.admin.service.AdminService;
 import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.util.ValidateUtil;
@@ -32,10 +33,9 @@ public class AdminController {
         ValidateUtil.validate(request);
         return adminService.miniLoginInfo(request);
     }
-
     @ApiOperation("分页查询用户列表")
     @PostMapping("/page/admin/info/list")
-    public Result<List<PageAdminInfoResponse>> pageAdminInfoList(@RequestBody PageAdminListRequest request){
+    public Result<PageResult> pageAdminInfoList(@RequestBody PageAdminListRequest request){
         ValidateUtil.validate(request);
         return adminService.pageAdminInfoList(request);
     }
