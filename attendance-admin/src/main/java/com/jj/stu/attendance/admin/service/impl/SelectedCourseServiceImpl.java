@@ -18,6 +18,7 @@ import com.jj.stu.attendance.meta.request.ManageSelectedCourseRequest;
 import com.jj.stu.attendance.meta.request.PageSelectedCourseRequest;
 import com.jj.stu.attendance.meta.response.PageSelectedCourseResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
@@ -43,15 +44,38 @@ public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper,
     @Resource
     private CourseMapper courseMapper;
     @Override
+    @Transactional(rollbackFor = {Exception.class})
     public void updateSelectedCourse(ManageSelectedCourseRequest request) {
-        SelectedCourse selectedCourse = request.getSelectedCourse();
+        SelectedCourse selectedCourse = SelectedCourse.builder()
+                .courseId(request.getCourseId())
+                .studentId(request.getStudentId())
+                .id(request.getId())
+                .build();
+        Map<Integer, Course> courseIdToInfoMap = courseMapper.selectList(new QueryWrapper<>()).stream().collect(Collectors.toMap(Course::getId, Function.identity(), (v2, v1) -> v1));
+        // 当前选课数 + 1
+        judgeNumberOfCoursesSelected(courseIdToInfoMap, request.getCourseId());
         if(selectedCourseMapper.selectById(selectedCourse.getId()) == null){
             selectedCourseMapper.insertSelective(selectedCourse);
         }else {
+            // 之前选课数 - 1
+            Course oldCourse = courseIdToInfoMap.get(request.getOldCourseId());
+            oldCourse.setSelectedNum(oldCourse.getSelectedNum() - 1);
+            courseMapper.updateByPrimaryKeySelective(oldCourse);
             selectedCourseMapper.updateByPrimaryKeySelective(selectedCourse);
         }
     }
 
+    /**
+     * 判断所选课程数量
+     */
+    private void judgeNumberOfCoursesSelected(Map<Integer, Course> courseIdToInfoMap, Integer courseId){
+        Course currentCourse = courseIdToInfoMap.get(courseId);
+        if (currentCourse.getSelectedNum() + 1 > currentCourse.getMaxNum()){
+            throw new ApiException("课程:" +currentCourse.getName() + "的选课数量已到最大值");
+        }
+        currentCourse.setSelectedNum(currentCourse.getSelectedNum() + 1);
+        courseMapper.updateByPrimaryKeySelective(currentCourse);
+    }
     @Override
     public void batchDeleteSelectedCourseList(List<Integer> selectedCourseIds) {
         int res = selectedCourseMapper.deleteBatchIds(selectedCourseIds);
@@ -81,7 +105,12 @@ public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper,
         for(SelectedCourse selectedCourse: selectedCourseList){
             SelectedCourseDTO selectedCourseDTO = new SelectedCourseDTO();
             BeanUtil.copyProperties(selectedCourse, selectedCourseDTO);
-            selectedCourseDTO.setCourseName(courseIdToNameMap.getOrDefault(selectedCourse.getCourseId(), new Course()).getName());
+            Course course = courseIdToNameMap.get(selectedCourse.getCourseId());
+            if (course != null){
+                selectedCourseDTO.setCourseName(course.getName());
+                selectedCourseDTO.setSelectedNum(course.getSelectedNum());
+                selectedCourseDTO.setMaxNum(course.getMaxNum());
+            }
             Student student = studentIdToNameMap.get(selectedCourse.getStudentId());
             if (student != null){
                 selectedCourseDTO.setUserName(student.getUsername());

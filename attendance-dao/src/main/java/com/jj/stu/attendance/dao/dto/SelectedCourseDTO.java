@@ -25,4 +25,14 @@ public class SelectedCourseDTO {
      * 课程名称
      */
     private String courseName;
+
+    /**
+     * 选课人数
+     */
+    private Integer selectedNum;
+
+    /**
+     * 最大人数
+     */
+    private Integer maxNum;
 }
