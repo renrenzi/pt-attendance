@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 
 /**
- * 当然服务impl
+ * 课程服务实现类
  *
  * @author 张俊杰
  * @date 2022/11/19
@@ -42,21 +42,33 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
     @Override
     public void addCourse(EditCourseRequest request) {
-        int res = courseMapper.insertSelective(request.getCourse());
-        if(res != 1){
+        int res = courseMapper.insertSelective(covertToCourse(request));
+        if (res != 1) {
             throw new ApiException("添加課程失敗");
         }
     }
 
     @Override
     public void editCourseDetail(EditCourseRequest request) {
-        Course course = request.getCourse();
-        if(courseMapper.selectById(course.getId()) == null){
+        Course course = covertToCourse(request);
+        if (courseMapper.selectById(course.getId()) == null) {
             course.setCourseDate(new Date());
             courseMapper.insertSelective(course);
-        }else {
+        } else {
             courseMapper.updateByPrimaryKeySelective(course);
         }
+    }
+
+    private Course covertToCourse(EditCourseRequest request) {
+        return Course.builder()
+                .id(request.getId())
+                .name(request.getName())
+                .teacherId(request.getTeacherId())
+                .courseDate(request.getCourseDate())
+                .selectedNum(request.getSelectedNum())
+                .maxNum(request.getMaxNum())
+                .info(request.getInfo())
+                .build();
     }
 
     @Override
