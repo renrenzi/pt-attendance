@@ -56,3 +56,11 @@ sa-token:
   token-style: random-128
   # 是否输出操作日志
   is-log: false
+
+aliyun:
+  oss:
+    file:
+      endpoint: oss-cn-fuzhou.aliyuncs.com
+      keyid: LTAI5tCDF4A9GUZ3tn3DkV85
+      keysecret: aofxbzMzJMl20jotEF99Ud55RyOFtk
+      bucketname: haise
