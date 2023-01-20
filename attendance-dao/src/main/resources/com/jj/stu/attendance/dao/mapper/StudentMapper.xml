@@ -5,7 +5,7 @@
     <!--@mbg.generated-->
     <!--@Table s_student-->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <id column="username" jdbcType="INTEGER" property="username" />
+    <id column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     <result column="clazz_id" jdbcType="INTEGER" property="clazzId" />
@@ -24,20 +24,20 @@
     <include refid="Base_Column_List" />
     from s_student
     where id = #{id,jdbcType=INTEGER}
-      and username = #{username,jdbcType=INTEGER}
+      and username = #{username,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="map">
     <!--@mbg.generated-->
     delete from s_student
     where id = #{id,jdbcType=INTEGER}
-      and username = #{username,jdbcType=INTEGER}
+      and username = #{username,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.jj.stu.attendance.dao.model.Student" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into s_student (username, `password`, nick_name, 
       clazz_id, sex, mobile, 
       create_date, admin_id)
-    values (#{username,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR},
       #{clazzId,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP}, #{adminId,jdbcType=INTEGER})
   </insert>
@@ -72,7 +72,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="username != null">
-        #{username,jdbcType=INTEGER},
+        #{username,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
@@ -124,7 +124,7 @@
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
-      and username = #{username,jdbcType=INTEGER}
+      and username = #{username,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jj.stu.attendance.dao.model.Student">
     <!--@mbg.generated-->
@@ -137,7 +137,7 @@
       create_date = #{createDate,jdbcType=TIMESTAMP},
       admin_id = #{adminId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
-      and username = #{username,jdbcType=INTEGER}
+      and username = #{username,jdbcType=VARCHAR}
   </update>
 
   <select id="selectByAdminId" resultMap="BaseResultMap">

@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.dao.dto;
+package com.jj.stu.attendance.meta.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -13,7 +13,7 @@ public class SelectedCourseDTO {
     /**
      * 学号
      */
-    private Integer userName;
+    private String userName;
     /**
      * 昵称
      */

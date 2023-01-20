@@ -20,7 +20,7 @@ public class Student {
     /**
      * 学号
      */
-    private Integer username;
+    private String username;
 
     /**
      * 姓名

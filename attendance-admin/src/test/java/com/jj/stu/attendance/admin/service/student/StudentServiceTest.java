@@ -24,7 +24,7 @@ public class StudentServiceTest extends BaseTest {
             student.setPassword("12345"+i);
             student.setSex(i % 2 == 0 ? "男": "女");
             student.setCreateDate(new Date());
-            student.setUsername(203 + i);
+            student.setUsername("203" + i);
             student.setNickName("測試學生" + i);
             student.setAdminId(i);
             studentList.add(student);

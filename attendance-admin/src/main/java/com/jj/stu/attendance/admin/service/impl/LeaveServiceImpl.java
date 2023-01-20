@@ -7,7 +7,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.LeaveService;
 import com.jj.stu.attendance.base.exception.ApiException;
-import com.jj.stu.attendance.dao.dto.LeaveVO;
+import com.jj.stu.attendance.meta.dto.LeaveDTO;
 import com.jj.stu.attendance.dao.mapper.LeaveMapper;
 import com.jj.stu.attendance.dao.mapper.StudentMapper;
 import com.jj.stu.attendance.dao.model.Leave;
@@ -62,13 +62,13 @@ public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, Leave> implements
         Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
         List<Leave> leaveList = leaveMapper.selectList(new QueryWrapper<>());
         List<Integer> studentIds = leaveList.stream().map(Leave::getStudentId).distinct().collect(Collectors.toList());
-        Map<Integer, Integer> map = new HashMap<>(studentIds.size());
+        Map<Integer, String> map = new HashMap<>(studentIds.size());
         if (!CollectionUtils.isEmpty(studentIds)){
             map = studentMapper.selectBatchIds(studentIds).stream().collect(Collectors.toMap(Student::getId, Student::getUsername, (v2, v1) -> v1));
         }
-        List<LeaveVO> responseList = new ArrayList<>();
+        List<LeaveDTO> responseList = new ArrayList<>();
         for(Leave leave : leaveList) {
-            LeaveVO leaveVO = new LeaveVO();
+            LeaveDTO leaveVO = new LeaveDTO();
             BeanUtil.copyProperties(leave, leaveVO);
             leaveVO.setUserName(map.get(leave.getStudentId()));
             responseList.add(leaveVO);

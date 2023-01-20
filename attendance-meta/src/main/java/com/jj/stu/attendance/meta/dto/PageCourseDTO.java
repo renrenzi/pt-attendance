@@ -1,12 +1,11 @@
-package com.jj.stu.attendance.dao.dto;
+package com.jj.stu.attendance.meta.dto;
 
-import com.jj.stu.attendance.dao.model.Course;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class PageCourseDto {
+public class PageCourseDTO {
 
     private Integer id;
 

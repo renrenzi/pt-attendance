@@ -7,7 +7,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.SelectedCourseService;
 import com.jj.stu.attendance.base.exception.ApiException;
-import com.jj.stu.attendance.dao.dto.SelectedCourseDTO;
+import com.jj.stu.attendance.meta.dto.SelectedCourseDTO;
 import com.jj.stu.attendance.dao.mapper.CourseMapper;
 import com.jj.stu.attendance.dao.mapper.SelectedCourseMapper;
 import com.jj.stu.attendance.dao.mapper.StudentMapper;
