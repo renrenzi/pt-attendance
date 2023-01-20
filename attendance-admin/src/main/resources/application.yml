@@ -60,7 +60,7 @@ sa-token:
 aliyun:
   oss:
     file:
-      endpoint: oss-cn-fuzhou.aliyuncs.com
-      keyid: LTAI5tCDF4A9GUZ3tn3DkV85
-      keysecret: aofxbzMzJMl20jotEF99Ud55RyOFtk
-      bucketname: haise
+      endpoint:
+      keyid:
+      keysecret:
+      bucketname:
