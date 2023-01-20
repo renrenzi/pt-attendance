@@ -1,7 +1,7 @@
 package com.jj.stu.attendance.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.jj.stu.attendance.dao.model.Attendance;import com.jj.stu.attendance.dao.model.AttendanceExample;import org.apache.ibatis.annotations.Param;import java.util.List;
+import com.jj.stu.attendance.dao.model.Attendance;
 
 public interface AttendanceMapper extends BaseMapper<Attendance> {
     int deleteByPrimaryKey(Integer id);

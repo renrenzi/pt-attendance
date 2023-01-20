@@ -55,6 +55,12 @@ public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper,
         // 当前选课数 + 1
         judgeNumberOfCoursesSelected(courseIdToInfoMap, request.getCourseId());
         if(selectedCourseMapper.selectById(selectedCourse.getId()) == null){
+            // 添加之前查询是否已选
+            SelectedCourse existSelectedCourse = selectedCourseMapper.selectOne(new QueryWrapper<SelectedCourse>().lambda().eq(SelectedCourse::getCourseId, request.getCourseId())
+                    .eq(SelectedCourse::getStudentId, request.getStudentId()));
+            if (existSelectedCourse != null){
+                throw new ApiException("学生已选改课程");
+            }
             selectedCourseMapper.insertSelective(selectedCourse);
         }else {
             // 之前选课数 - 1
@@ -78,6 +84,13 @@ public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper,
     }
     @Override
     public void batchDeleteSelectedCourseList(List<Integer> selectedCourseIds) {
+        List<Integer> courseIds = selectedCourseMapper.selectBatchIds(selectedCourseIds).stream().map(SelectedCourse::getCourseId).distinct().collect(Collectors.toList());
+        Map<Integer, Course> courseIdToItemMap = courseMapper.selectBatchIds(courseIds).stream().collect(Collectors.toMap(Course::getId, Function.identity(), (v2, v1) -> v1));
+        for (Integer courseId : courseIds) {
+            Course course = courseIdToItemMap.get(courseId);
+            course.setSelectedNum(course.getSelectedNum() - 1);
+            courseMapper.updateByPrimaryKey(course);
+        }
         int res = selectedCourseMapper.deleteBatchIds(selectedCourseIds);
         if( res != 1){
             throw new ApiException("批量刪除選課列表失敗");
@@ -87,6 +100,16 @@ public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper,
     @Override
     public PageSelectedCourseResponse pageSelectedCourseList(PageSelectedCourseRequest request) {
         QueryWrapper<SelectedCourse> selectedCourseQueryWrapper = new QueryWrapper<>();
+        if (request.getSelectedCourse() != null) {
+            SelectedCourse selectedCourse = request.getSelectedCourse();
+            if (selectedCourse.getStudentId() != null){
+                selectedCourseQueryWrapper.lambda().eq(SelectedCourse::getStudentId, selectedCourse.getStudentId());
+            }
+            if (selectedCourse.getCourseId() != null){
+                selectedCourseQueryWrapper.lambda().eq(SelectedCourse::getCourseId, selectedCourse.getCourseId());
+            }
+        }
+        selectedCourseQueryWrapper.lambda().orderByDesc(SelectedCourse::getId);
         Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
         List<SelectedCourse> selectedCourseList = selectedCourseMapper.selectList(selectedCourseQueryWrapper);
         List<Integer> courseIds = selectedCourseList.stream().map(SelectedCourse::getCourseId).distinct().collect(Collectors.toList());
