@@ -26,4 +26,8 @@ public class LeaveDTO {
      * 学号
      */
     private String userName;
+    /**
+     * 姓名
+     */
+    private String nickname;
 }

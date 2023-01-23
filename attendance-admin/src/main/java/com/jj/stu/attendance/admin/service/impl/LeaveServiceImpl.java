@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -62,15 +63,17 @@ public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, Leave> implements
         Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
         List<Leave> leaveList = leaveMapper.selectList(new QueryWrapper<>());
         List<Integer> studentIds = leaveList.stream().map(Leave::getStudentId).distinct().collect(Collectors.toList());
-        Map<Integer, String> map = new HashMap<>(studentIds.size());
+        Map<Integer, Student> map = new HashMap<>(studentIds.size());
         if (!CollectionUtils.isEmpty(studentIds)){
-            map = studentMapper.selectBatchIds(studentIds).stream().collect(Collectors.toMap(Student::getId, Student::getUsername, (v2, v1) -> v1));
+            map = studentMapper.selectBatchIds(studentIds).stream().collect(Collectors.toMap(Student::getId, Function.identity(), (v2, v1) -> v1));
         }
         List<LeaveDTO> responseList = new ArrayList<>();
         for(Leave leave : leaveList) {
             LeaveDTO leaveVO = new LeaveDTO();
             BeanUtil.copyProperties(leave, leaveVO);
-            leaveVO.setUserName(map.get(leave.getStudentId()));
+            Student student = map.get(leave.getStudentId());
+            leaveVO.setUserName(student.getUsername());
+            leaveVO.setNickname(student.getNickName());
             responseList.add(leaveVO);
         }
         return new PageLeaveResponse()
