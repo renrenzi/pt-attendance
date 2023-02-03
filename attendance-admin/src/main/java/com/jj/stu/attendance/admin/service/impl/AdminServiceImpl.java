@@ -83,6 +83,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
                 }
             }
             pageAdminInfoResponse.setRoleId(roleId);
+            pageAdminInfoResponse.setRoleName(Objects.requireNonNull(RoleNameEnum.getRole(roleId)).getRoleName());
             result.add(pageAdminInfoResponse);
         }
         PageResult<PageAdminInfoResponse> pageResult = new PageResult<>();

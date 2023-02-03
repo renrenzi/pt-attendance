@@ -46,4 +46,9 @@ public class PageAdminInfoResponse<T> {
      * 角色id
      */
     private Integer roleId;
+
+    /**
+     * 角色名称
+     */
+    private String roleName;
 }
