@@ -1,5 +1,6 @@
 package com.jj.stu.attendance.meta.request;
 
+import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.dao.model.Course;
 import lombok.Builder;
 import lombok.Data;
@@ -21,13 +22,13 @@ public class EditCourseRequest{
     /**
      * 课程名字
      */
-    @NotNull
+    @NotNull(message = "课程名称不能为空")
     private String name;
 
     /**
      * 教师Id
      */
-    @NotNull
+    @NotNull(message = "教师Id不能为空")
     private Integer teacherId;
 
     /**
@@ -38,14 +39,20 @@ public class EditCourseRequest{
     /**
      * 选课人数
      */
-    @NotNull
+    @NotNull(message = "选课人数不能为空")
     private Integer selectedNum;
 
     /**
      * 最大人数
      */
-    @NotNull
+    @NotNull(message = "最大人数不能为空")
     private Integer maxNum;
 
     private String info;
+
+    public void checkSelectedNumToMaxNum(){
+        if(selectedNum.compareTo(maxNum) == 0){
+            throw  new ApiException("选课人数不能大于最大人数");
+        }
+    }
 }
