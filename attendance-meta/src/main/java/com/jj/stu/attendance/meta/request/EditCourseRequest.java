@@ -51,8 +51,8 @@ public class EditCourseRequest{
     private String info;
 
     public void checkSelectedNumToMaxNum(){
-        if(selectedNum.compareTo(maxNum) == 0){
-            throw  new ApiException("选课人数不能大于最大人数");
+        if(selectedNum > maxNum){
+            throw new ApiException("选课人数不能大于最大人数");
         }
     }
 }

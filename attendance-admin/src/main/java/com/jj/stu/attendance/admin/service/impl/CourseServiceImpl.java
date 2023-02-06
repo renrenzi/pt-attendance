@@ -42,6 +42,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
     @Override
     public void addCourse(EditCourseRequest request) {
+        request.checkSelectedNumToMaxNum();
         int res = courseMapper.insertSelective(covertToCourse(request));
         if (res != 1) {
             throw new ApiException("添加課程失敗");
@@ -50,6 +51,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
     @Override
     public void editCourseDetail(EditCourseRequest request) {
+        request.checkSelectedNumToMaxNum();
         Course course = covertToCourse(request);
         if (courseMapper.selectById(course.getId()) == null) {
             course.setCourseDate(new Date());
