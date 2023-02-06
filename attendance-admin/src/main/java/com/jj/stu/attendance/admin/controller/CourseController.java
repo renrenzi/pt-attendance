@@ -34,9 +34,9 @@ public class CourseController {
     @Resource
     private CourseService courseService;
 
-    @LogRecord(fail = "创建订单失败，失败原因：「{{#_errorMsg}}」",
+    @LogRecord(fail = "创建课程失败，失败原因：「{{#_errorMsg}}」",
             operator = "{{#currentUser}}",
-            success = "{{#request.name}}下了一个订单,购买商品「{{#request.name}}」,下单结果:{{#_ret}}",
+            success = "{{#request.name}}创建课程「{{#request.name}}」,创建课程结果:{{#_ret}}",
             bizNo = "{{#request.id}}", type = "MANAGE")
     @ApiOperation("添加課程")
     @PostMapping("/add/course")
