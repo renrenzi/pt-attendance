@@ -54,7 +54,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     }
 
     @Override
-    public Result<PageResult> pageAdminInfoList(PageAdminListRequest request) {
+    public Result<PageResult<PageAdminInfoResponse>> pageAdminInfoList(PageAdminListRequest request) {
         PageHelper.startPage(request.getPageNum(), request.getPageSize());
         List<Admin> adminList = adminMapper.selectListByCondition(request.getUserName(), request.getCreateTime());
         List<Integer> adminIds = adminList.stream().map(Admin::getId).distinct().collect(Collectors.toList());
@@ -72,7 +72,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         }
         List<PageAdminInfoResponse> result = new ArrayList<>();
         for (Admin admin : adminList) {
-            PageAdminInfoResponse pageAdminInfoResponse = new PageAdminInfoResponse();
+            PageAdminInfoResponse pageAdminInfoResponse = new PageAdminInfoResponse<>();
             BeanUtil.copyProperties(admin, pageAdminInfoResponse);
             if (roleId != null) {
                 if (RoleNameEnum.STUDENT.getRoleId().equals(roleId)) {

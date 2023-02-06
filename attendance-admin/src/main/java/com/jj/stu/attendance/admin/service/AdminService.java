@@ -30,5 +30,5 @@ public interface AdminService extends IService<Admin> {
      * @param request 请求
      * @return {@link Result}
      */
-    Result<PageResult>  pageAdminInfoList(PageAdminListRequest request);
+    Result<PageResult<PageAdminInfoResponse>>  pageAdminInfoList(PageAdminListRequest request);
 }

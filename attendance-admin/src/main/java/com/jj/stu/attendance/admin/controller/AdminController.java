@@ -35,7 +35,7 @@ public class AdminController {
     }
     @ApiOperation("分页查询用户列表")
     @PostMapping("/page/admin/info/list")
-    public Result<PageResult> pageAdminInfoList(@RequestBody PageAdminListRequest request){
+    public Result<PageResult<PageAdminInfoResponse>> pageAdminInfoList(@RequestBody PageAdminListRequest request){
         ValidateUtil.validate(request);
         return adminService.pageAdminInfoList(request);
     }

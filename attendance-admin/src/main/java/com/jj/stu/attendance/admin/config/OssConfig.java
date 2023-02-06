@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * @author LENOVO
  * @date 2023/01/20
  */
-@Configuration
+//@Configuration
 public class OssConfig implements InitializingBean {
 
     //读取配置文件的内容

@@ -35,12 +35,12 @@ public class StringConstants {
     /**
      * 评论队列
      */
-    public static final String BLOG_COMMEENT_QUEUE = "blogCommentQueue";
+    public static final String BLOG_COMMENT_QUEUE = "blogCommentQueue";
 
     /**
      * 默认头像URL
      */
     public static final String DEFAULT_IMG_URL = "https://renrenzi.top/imgs/group1/M00/00/01/rB8AYWJ5Gl6AAL_yAABQ85I4EiA99.jpeg";
 
-    public static final String RESOURCE_ROLE_MAP_KEY = "blog:resourceRoleMap";
+    public static final String RESOURCE_ROLE_MAP_KEY = "attendance:resourceRoleMap";
 }

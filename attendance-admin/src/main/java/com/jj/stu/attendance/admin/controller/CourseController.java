@@ -8,6 +8,7 @@ import com.jj.stu.attendance.base.util.ValidateUtil;
 import com.jj.stu.attendance.meta.request.EditCourseRequest;
 import com.jj.stu.attendance.meta.request.PageCourseListRequest;
 import com.jj.stu.attendance.meta.response.PageCourseListResponse;
+import com.mzt.logapi.starter.annotation.LogRecord;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.util.CollectionUtils;
@@ -33,6 +34,10 @@ public class CourseController {
     @Resource
     private CourseService courseService;
 
+    @LogRecord(fail = "创建订单失败，失败原因：「{{#_errorMsg}}」",
+            operator = "{{#currentUser}}",
+            success = "{{#request.name}}下了一个订单,购买商品「{{#request.name}}」,下单结果:{{#_ret}}",
+            bizNo = "{{#request.id}}", type = "MANAGE")
     @ApiOperation("添加課程")
     @PostMapping("/add/course")
     public Result<String> addCourse(@RequestBody EditCourseRequest request){
