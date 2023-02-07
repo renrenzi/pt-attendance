@@ -1,6 +1,5 @@
 /*/target/
 !.mvn/wrapper/maven-wrapper.jar
-
 ### mybatis-gen.xml
 mybatis-gen.xml
 
@@ -30,5 +29,6 @@ httpRequests/
 /log/
 
 /*/src/main/resources/rebel.xml
+/*/src/main/resources/application.yml
 # 暂时忽略 logback的配置文件
 

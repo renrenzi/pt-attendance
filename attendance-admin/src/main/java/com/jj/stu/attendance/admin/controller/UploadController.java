@@ -11,12 +11,12 @@ import javax.annotation.Resource;
 @RestController
 public class UploadController {
 
-  /*  @Resource
+    @Resource
     private UploadUtil uploadUtil;
 
     @PostMapping("/upload")
     public StringValue upload(MultipartFile file){
         return uploadUtil.uploadFile(file);
-    }*/
+    }
 
 }

@@ -9,8 +9,13 @@ import com.jj.stu.attendance.admin.constants.AttendanceTypeEnum;
 import com.jj.stu.attendance.admin.service.AttendanceService;
 import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.exception.ApiException;
-import com.jj.stu.attendance.dao.mapper.*;
-import com.jj.stu.attendance.dao.model.*;
+import com.jj.stu.attendance.dao.mapper.AttendanceMapper;
+import com.jj.stu.attendance.dao.mapper.CourseMapper;
+import com.jj.stu.attendance.dao.mapper.SelectedCourseMapper;
+import com.jj.stu.attendance.dao.mapper.StudentMapper;
+import com.jj.stu.attendance.dao.model.Attendance;
+import com.jj.stu.attendance.dao.model.Course;
+import com.jj.stu.attendance.dao.model.Student;
 import com.jj.stu.attendance.meta.dto.AttendanceDTO;
 import com.jj.stu.attendance.meta.request.ManageAttendanceRequest;
 import com.jj.stu.attendance.meta.request.PageAttendanceRequest;
@@ -18,11 +23,10 @@ import com.jj.stu.attendance.meta.request.PunchTheClockRequest;
 import com.jj.stu.attendance.meta.response.PageAttendanceResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -85,14 +89,26 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
     @Transactional(rollbackFor = {Exception.class})
     public void updateAttendanceInfo(ManageAttendanceRequest request) {
         int result;
-        if (attendanceMapper.selectById(request.getAttendance().getId()) == null) {
-            result = attendanceMapper.insert(request.getAttendance());
+        Attendance attendance = covertToEntity(request);
+        if (attendanceMapper.selectById(attendance.getId()) == null) {
+            attendance.setCreateTime(new Date());
+            attendance.setCreateUserId(0);
+            result = attendanceMapper.insert(attendance);
         } else {
-            result = attendanceMapper.updateByPrimaryKeySelective(request.getAttendance());
+            attendance.setUpdateTime(new Date());
+            attendance.setUpdateUserId(0);
+            result = attendanceMapper.updateByPrimaryKeySelective(attendance);
         }
         if (result != 1) {
             throw new ApiException("修改考勤信息失败");
         }
+    }
+
+    private Attendance covertToEntity(ManageAttendanceRequest request) {
+        return new Attendance().setId(request.getId())
+                .setCourseId(request.getCourseId())
+                .setStudentId(request.getStudentId())
+                .setType(request.getType());
     }
 
     @Override

@@ -17,7 +17,7 @@ import java.io.InputStream;
  * @author LENOVO
  * @date 2023/01/20
  */
-//@Component
+@Component
 public class UploadUtil {
 
     private static final String ENDPOINT = OssConfig.END_POINT;

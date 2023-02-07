@@ -3,12 +3,14 @@ package com.jj.stu.attendance.admin.controller;
 import com.jj.stu.attendance.admin.service.AttendanceService;
 import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.basic.ResultGenerator;
+import com.jj.stu.attendance.base.constants.LogRecordType;
 import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.base.util.ValidateUtil;
 import com.jj.stu.attendance.meta.request.ManageAttendanceRequest;
 import com.jj.stu.attendance.meta.request.PageAttendanceRequest;
 import com.jj.stu.attendance.meta.request.PunchTheClockRequest;
 import com.jj.stu.attendance.meta.response.PageAttendanceResponse;
+import com.mzt.logapi.starter.annotation.LogRecord;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.util.CollectionUtils;
@@ -34,6 +36,7 @@ public class AttendanceController {
     @Resource
     private AttendanceService attendanceService;
 
+
     @ApiOperation("打卡")
     @PostMapping("/punch/the/clock")
     public Result punchTheClock(@RequestBody PunchTheClockRequest request){
@@ -41,6 +44,11 @@ public class AttendanceController {
         return attendanceService.punchTheClock(request);
     }
 
+    @LogRecord(
+            fail = "修改考勤信息，失败原因：「{{#_errorMsg}}」",
+            subType = "MANAGER_VIEW",
+            success = "{{#request.studentId}}修改考勤信息「{{#request.studentId}}」,修改结果:{{#_ret}}",
+            operator = "{{#currentUser}}", type = LogRecordType.ATTENDANCE, bizNo = "{{#request.id}}")
     @ApiOperation("修改考勤信息")
     @PostMapping("/update/attendance/info")
     public Result<String> updateAttendanceInfo(@RequestBody ManageAttendanceRequest request){
