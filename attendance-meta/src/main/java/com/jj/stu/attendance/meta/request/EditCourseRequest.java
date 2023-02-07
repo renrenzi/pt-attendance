@@ -1,8 +1,7 @@
 package com.jj.stu.attendance.meta.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jj.stu.attendance.base.exception.ApiException;
-import com.jj.stu.attendance.dao.model.Course;
-import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -34,6 +33,7 @@ public class EditCourseRequest{
     /**
      * 课程时间
      */
+    @JsonFormat(pattern = "yyyy-mm-dd hh:mm:ss")
     private Date courseDate;
 
     /**

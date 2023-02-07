@@ -91,12 +91,10 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
         int result;
         Attendance attendance = covertToEntity(request);
         if (attendanceMapper.selectById(attendance.getId()) == null) {
-            attendance.setCreateTime(new Date());
-            attendance.setCreateUserId(0);
+            attendance.setCreateTime(new Date()).setCreateUserId(request.getUserId());
             result = attendanceMapper.insert(attendance);
         } else {
-            attendance.setUpdateTime(new Date());
-            attendance.setUpdateUserId(0);
+            attendance.setUpdateTime(new Date()).setUpdateUserId(request.getUserId());
             result = attendanceMapper.updateByPrimaryKeySelective(attendance);
         }
         if (result != 1) {
@@ -108,6 +106,7 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
         return new Attendance().setId(request.getId())
                 .setCourseId(request.getCourseId())
                 .setStudentId(request.getStudentId())
+                .setDate(request.getDate())
                 .setType(request.getType());
     }
 

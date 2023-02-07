@@ -19,10 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -41,7 +38,7 @@ public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, Leave> implements
     private StudentMapper studentMapper;
     @Override
     public void updateLeaveInfo(ManageLeaveRequest request) {
-        Leave leave = request.getLeave();
+        Leave leave = coverToEntity(request);
         int result;
         if(leaveMapper.selectById(leave.getId()) == null){
             result = leaveMapper.insertSelective(leave);
@@ -52,7 +49,14 @@ public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, Leave> implements
             throw new ApiException("修改请假信息失败");
         }
     }
-
+    private Leave coverToEntity(ManageLeaveRequest request){
+        return new Leave().setId(request.getId())
+                .setInfo(request.getInfo())
+                .setStatus(request.getStatus())
+                .setRemark(request.getRemark())
+                .setStudentId(request.getStudentId())
+                .setCreateDate(new Date());
+    }
     @Override
     public void batchDeleteLeaveList(List<Integer> leaveIds) {
         leaveMapper.deleteBatchIds(leaveIds);

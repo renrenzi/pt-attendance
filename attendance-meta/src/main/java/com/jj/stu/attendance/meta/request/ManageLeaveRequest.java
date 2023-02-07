@@ -1,13 +1,32 @@
 package com.jj.stu.attendance.meta.request;
 
-import com.jj.stu.attendance.dao.model.Leave;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * 請假 request
+ *
+ * @author 张俊杰
+ * @date 2023/02/07
+ */
 @Data
 public class ManageLeaveRequest {
 
+    private Integer id;
+
+    /**
+     * 学生Id
+     */
     @NotNull
-    private Leave leave;
+    private Integer studentId;
+
+    private String info;
+
+    /**
+     * 请假状态
+     */
+    private Boolean status;
+
+    private String remark;
 }

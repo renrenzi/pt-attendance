@@ -46,6 +46,8 @@ public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper,
     @Override
     @Transactional(rollbackFor = {Exception.class})
     public void updateSelectedCourse(ManageSelectedCourseRequest request) {
+        // 检查参数是否有效
+        checkRequestParamsValid(request);
         SelectedCourse selectedCourse = SelectedCourse.builder()
                 .courseId(request.getCourseId())
                 .studentId(request.getStudentId())
@@ -59,7 +61,7 @@ public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper,
             SelectedCourse existSelectedCourse = selectedCourseMapper.selectOne(new QueryWrapper<SelectedCourse>().lambda().eq(SelectedCourse::getCourseId, request.getCourseId())
                     .eq(SelectedCourse::getStudentId, request.getStudentId()));
             if (existSelectedCourse != null){
-                throw new ApiException("学生已选改课程");
+                throw new ApiException("学生已选该课程");
             }
             selectedCourseMapper.insertSelective(selectedCourse);
         }else {
@@ -70,7 +72,20 @@ public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper,
             selectedCourseMapper.updateByPrimaryKeySelective(selectedCourse);
         }
     }
-
+    private void checkRequestParamsValid(ManageSelectedCourseRequest request){
+        Student student = studentMapper.selectOne(new QueryWrapper<Student>().lambda().eq(Student::getId, request.getStudentId()));
+        if (student == null) {
+            throw new ApiException("当前学生无效, 选课操作失败");
+        }
+        List<Integer> courseIds = new ArrayList<Integer>(){{
+            add(request.getCourseId());
+            add(request.getOldCourseId());
+        }};
+        List<Course> courseList = courseMapper.selectByList(courseIds);
+        if (courseList == null || courseIds.size() != courseList.size()) {
+            throw new ApiException("所选课程无效, 选课操作失败");
+        }
+    }
     /**
      * 判断所选课程数量
      */
@@ -85,6 +100,9 @@ public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper,
     @Override
     public void batchDeleteSelectedCourseList(List<Integer> selectedCourseIds) {
         List<Integer> courseIds = selectedCourseMapper.selectBatchIds(selectedCourseIds).stream().map(SelectedCourse::getCourseId).distinct().collect(Collectors.toList());
+        if (CollectionUtils.isEmpty(courseIds)) {
+            return;
+        }
         Map<Integer, Course> courseIdToItemMap = courseMapper.selectBatchIds(courseIds).stream().collect(Collectors.toMap(Course::getId, Function.identity(), (v2, v1) -> v1));
         for (Integer courseId : courseIds) {
             Course course = courseIdToItemMap.get(courseId);
