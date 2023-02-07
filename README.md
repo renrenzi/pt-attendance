@@ -3,8 +3,7 @@
 
 >系统后台模块： 在后台中包含八个子模块。后台管理模块包括的学生管理、教师管理、专业、课程管理、选课管理、考勤管理、请假管理和系统管理等，其中系统管理模块是对用户、角色、菜单信息进行管理，数据库使用 RBAC 的设计模式进行设计，主要通过对角色进行菜单授权从而完成对用户进行权限控制，数据可视化模块对系统的相关数据进行可视化操作。
 
-- 后端搭建
-
+## 后端架构
 | 后台架构         | maven_version | explain                              | link                                      |
 |--------------|---------------|--------------------------------------|-------------------------------------------|
 | SpringBoot   | 2.3.7.RELEASE | 简化 Spring 应用的初始搭建                    | https://spring.io/projects/spring-boot    |
@@ -17,9 +16,20 @@
 | 阿里云oss       | 2.8.3         | 用于文件存储                               | https://www.aliyun.com/product/oss        |
 | knife4j      | 2.0.4         | 增强版 API 文档                           | https://doc.xiaominfo.com/                |
 | bizlog       | 3.0.3         | 通用操作日志组件                             | https://github.com/mouzt/mzt-biz-log      |
-
+## 项目包结构
 * pt-attendance
     * attendance-admin 业务模块
     * attendance-base 基础模块
     * attendance-dao  数据层模块
     * attendance-meta 元数据模块
+## 分支结构
+- master 主分支, 不在此分支开发
+- test   测试分支
+- dev    本地开发分支
+
+## 开发目标
+| 目标   | 情况            |
+|------|---------------|
+| 前台模块 | **开发中······** |
+| 后台模块 | **开发中······** |
+
