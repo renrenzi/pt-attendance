@@ -43,6 +43,8 @@
         <hibernate.validator.version>6.2.5.Final</hibernate.validator.version>
         <screw.core.version>1.0.5</screw.core.version>
         <easyexcel.version>3.1.5</easyexcel.version>
+        <aliyun-sdk-oss.version>2.8.3</aliyun-sdk-oss.version>
+        <bizlog.sdk.version>3.0.3</bizlog.sdk.version>
 
         <attendance.base.version>1.0-SNAPSHOT</attendance.base.version>
         <attendance.dao.version>1.0-SNAPSHOT</attendance.dao.version>
@@ -52,8 +54,19 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>io.github.mouzt</groupId>
+                <artifactId>bizlog-sdk</artifactId>
+                <version>${bizlog.sdk.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${aliyun-sdk-oss.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>easyexcel</artifactId>
+                <version>${easyexcel.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.smallbun.screw</groupId>

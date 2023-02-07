@@ -117,4 +117,19 @@
       info = #{info,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByList" resultMap="BaseResultMap">
+    SELECT
+      <include refid="Base_Column_List"/>
+    FROM
+        s_course
+    <where>
+      <if test="courseIds != null and courseIds.size() != 0">
+        AND id in
+        <foreach collection="courseIds" item="id" separator="," open="(" close=")">
+          #{id}
+        </foreach>
+      </if>
+    </where>
+  </select>
 </mapper>

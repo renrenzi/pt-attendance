@@ -1,11 +1,21 @@
 package com.jj.stu.attendance.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.jj.stu.attendance.admin.basic.PageResult;
 import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.dao.model.Admin;
 import com.jj.stu.attendance.meta.request.MiniLoginRequest;
 import com.jj.stu.attendance.meta.request.PageAdminListRequest;
+import com.jj.stu.attendance.meta.response.PageAdminInfoResponse;
 
+import java.util.List;
+
+/**
+ * 管理服务
+ *
+ * @author 张俊杰
+ * @date 2023/01/14
+ */
 public interface AdminService extends IService<Admin> {
     /**
      * 前台登录
@@ -20,5 +30,5 @@ public interface AdminService extends IService<Admin> {
      * @param request 请求
      * @return {@link Result}
      */
-    Result pageAdminInfoList(PageAdminListRequest request);
+    Result<PageResult<PageAdminInfoResponse>>  pageAdminInfoList(PageAdminListRequest request);
 }

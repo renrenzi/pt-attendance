@@ -7,11 +7,11 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.CourseService;
 import com.jj.stu.attendance.base.exception.ApiException;
-import com.jj.stu.attendance.dao.dto.PageCourseDto;
 import com.jj.stu.attendance.dao.mapper.CourseMapper;
 import com.jj.stu.attendance.dao.mapper.TeacherMapper;
 import com.jj.stu.attendance.dao.model.Course;
 import com.jj.stu.attendance.dao.model.Teacher;
+import com.jj.stu.attendance.meta.dto.PageCourseDTO;
 import com.jj.stu.attendance.meta.request.EditCourseRequest;
 import com.jj.stu.attendance.meta.request.PageCourseListRequest;
 import com.jj.stu.attendance.meta.response.PageCourseListResponse;
@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 
 /**
- * 当然服务impl
+ * 课程服务实现类
  *
  * @author 张俊杰
  * @date 2022/11/19
@@ -42,21 +42,35 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
     @Override
     public void addCourse(EditCourseRequest request) {
-        int res = courseMapper.insertSelective(request.getCourse());
-        if(res != 1){
+        request.checkSelectedNumToMaxNum();
+        int res = courseMapper.insertSelective(covertToCourse(request));
+        if (res != 1) {
             throw new ApiException("添加課程失敗");
         }
     }
 
     @Override
     public void editCourseDetail(EditCourseRequest request) {
-        Course course = request.getCourse();
-        if(courseMapper.selectById(course.getId()) == null){
+        request.checkSelectedNumToMaxNum();
+        Course course = covertToCourse(request);
+        if (courseMapper.selectById(course.getId()) == null) {
             course.setCourseDate(new Date());
             courseMapper.insertSelective(course);
-        }else {
+        } else {
             courseMapper.updateByPrimaryKeySelective(course);
         }
+    }
+
+    private Course covertToCourse(EditCourseRequest request) {
+        return Course.builder()
+                .id(request.getId())
+                .name(request.getName())
+                .teacherId(request.getTeacherId())
+                .courseDate(request.getCourseDate())
+                .selectedNum(request.getSelectedNum())
+                .maxNum(request.getMaxNum())
+                .info(request.getInfo())
+                .build();
     }
 
     @Override
@@ -76,7 +90,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
         List<Course> courseList = courseMapper.selectList(wrapper);
 
-        List<PageCourseDto> pageCourseDtoList = BeanUtil.copyToList(courseList, PageCourseDto.class);
+        List<PageCourseDTO> pageCourseDtoList = BeanUtil.copyToList(courseList, PageCourseDTO.class);
         List<Integer> teacherIds = courseList.stream().map(Course::getTeacherId).collect(Collectors.toList());
         Map<Integer, String> teacherIdToUserNameMap = teacherMapper.selectTeacherListByIds(teacherIds).stream()
                 .collect(Collectors.toMap(Teacher::getId, Teacher::getUsername));

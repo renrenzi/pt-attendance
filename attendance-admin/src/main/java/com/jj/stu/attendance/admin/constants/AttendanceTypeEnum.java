@@ -36,4 +36,14 @@ public enum AttendanceTypeEnum {
     public String getMessage() {
         return message;
     }
+
+    public static String getAttendanceMessage(String type) {
+        AttendanceTypeEnum[] attendanceTypeEnums = AttendanceTypeEnum.values();
+        for (AttendanceTypeEnum attribute : attendanceTypeEnums){
+            if (attribute.getType().equals(type)){
+                return attribute.getMessage();
+            }
+        }
+        return null;
+    }
 }

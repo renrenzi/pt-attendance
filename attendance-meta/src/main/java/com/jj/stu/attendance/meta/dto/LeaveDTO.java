@@ -1,4 +1,4 @@
-package com.jj.stu.attendance.dao.dto;
+package com.jj.stu.attendance.meta.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class LeaveVO {
+public class LeaveDTO {
 
     private Integer id;
 
@@ -22,6 +22,12 @@ public class LeaveVO {
 
     @ApiModelProperty(value = "创建时间")
     private Date createDate;
-
-    private Integer userName;
+    /**
+     * 学号
+     */
+    private String userName;
+    /**
+     * 姓名
+     */
+    private String nickname;
 }

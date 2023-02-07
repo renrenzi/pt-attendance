@@ -1,36 +1,35 @@
-package com.jj.stu.attendance.dao.model;
+package com.jj.stu.attendance.meta.dto;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.util.Date;
 
-/**
- * 考勤表
- */
 @Data
-@TableName("s_attendance")
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
-public class Attendance {
-    private static final long serialVersionUID = 1L;
-    @TableId(type = IdType.AUTO)
+@Accessors(chain = false)
+public class AttendanceDTO {
     private Integer id;
 
     /**
      * 课程Id
      */
     private Integer courseId;
-
+    /**
+     * 课程名称
+     */
+    private String courseName;
     /**
      * 学生Id
      */
     private Integer studentId;
-
+    /**
+     * 学号
+     */
+    private String username;
+    /**
+     * 姓名
+     */
+    private String nickname;
     /**
      * 考勤状态
      */

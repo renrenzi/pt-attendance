@@ -7,7 +7,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.LeaveService;
 import com.jj.stu.attendance.base.exception.ApiException;
-import com.jj.stu.attendance.dao.dto.LeaveVO;
+import com.jj.stu.attendance.meta.dto.LeaveDTO;
 import com.jj.stu.attendance.dao.mapper.LeaveMapper;
 import com.jj.stu.attendance.dao.mapper.StudentMapper;
 import com.jj.stu.attendance.dao.model.Leave;
@@ -19,10 +19,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -40,7 +38,7 @@ public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, Leave> implements
     private StudentMapper studentMapper;
     @Override
     public void updateLeaveInfo(ManageLeaveRequest request) {
-        Leave leave = request.getLeave();
+        Leave leave = coverToEntity(request);
         int result;
         if(leaveMapper.selectById(leave.getId()) == null){
             result = leaveMapper.insertSelective(leave);
@@ -51,7 +49,14 @@ public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, Leave> implements
             throw new ApiException("修改请假信息失败");
         }
     }
-
+    private Leave coverToEntity(ManageLeaveRequest request){
+        return new Leave().setId(request.getId())
+                .setInfo(request.getInfo())
+                .setStatus(request.getStatus())
+                .setRemark(request.getRemark())
+                .setStudentId(request.getStudentId())
+                .setCreateDate(new Date());
+    }
     @Override
     public void batchDeleteLeaveList(List<Integer> leaveIds) {
         leaveMapper.deleteBatchIds(leaveIds);
@@ -62,15 +67,17 @@ public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, Leave> implements
         Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
         List<Leave> leaveList = leaveMapper.selectList(new QueryWrapper<>());
         List<Integer> studentIds = leaveList.stream().map(Leave::getStudentId).distinct().collect(Collectors.toList());
-        Map<Integer, Integer> map = new HashMap<>(studentIds.size());
+        Map<Integer, Student> map = new HashMap<>(studentIds.size());
         if (!CollectionUtils.isEmpty(studentIds)){
-            map = studentMapper.selectBatchIds(studentIds).stream().collect(Collectors.toMap(Student::getId, Student::getUsername, (v2, v1) -> v1));
+            map = studentMapper.selectBatchIds(studentIds).stream().collect(Collectors.toMap(Student::getId, Function.identity(), (v2, v1) -> v1));
         }
-        List<LeaveVO> responseList = new ArrayList<>();
+        List<LeaveDTO> responseList = new ArrayList<>();
         for(Leave leave : leaveList) {
-            LeaveVO leaveVO = new LeaveVO();
+            LeaveDTO leaveVO = new LeaveDTO();
             BeanUtil.copyProperties(leave, leaveVO);
-            leaveVO.setUserName(map.get(leave.getStudentId()));
+            Student student = map.get(leave.getStudentId());
+            leaveVO.setUserName(student.getUsername());
+            leaveVO.setNickname(student.getNickName());
             responseList.add(leaveVO);
         }
         return new PageLeaveResponse()

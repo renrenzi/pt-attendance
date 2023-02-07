@@ -1,15 +1,18 @@
 package com.jj.stu.attendance.admin.controller;
 
+import com.jj.stu.attendance.admin.basic.PageResult;
 import com.jj.stu.attendance.admin.service.AdminService;
 import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.util.ValidateUtil;
 import com.jj.stu.attendance.meta.request.MiniLoginRequest;
 import com.jj.stu.attendance.meta.request.PageAdminListRequest;
+import com.jj.stu.attendance.meta.response.PageAdminInfoResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 管理员控制器
@@ -30,10 +33,9 @@ public class AdminController {
         ValidateUtil.validate(request);
         return adminService.miniLoginInfo(request);
     }
-
     @ApiOperation("分页查询用户列表")
     @PostMapping("/page/admin/info/list")
-    public Result pageAdminInfoList(@RequestBody PageAdminListRequest request){
+    public Result<PageResult<PageAdminInfoResponse>> pageAdminInfoList(@RequestBody PageAdminListRequest request){
         ValidateUtil.validate(request);
         return adminService.pageAdminInfoList(request);
     }

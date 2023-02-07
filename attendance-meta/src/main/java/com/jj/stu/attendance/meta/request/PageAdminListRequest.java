@@ -32,11 +32,6 @@ public class PageAdminListRequest {
     private Date createTime;
 
     /**
-     * 是否有效
-     */
-    private Integer state;
-
-    /**
      * 角色id
      */
     private Integer roleId;

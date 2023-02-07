@@ -138,4 +138,18 @@
          AND pass_word = #{password,jdbcType=VARCHAR}
          AND state = 1
   </select>
+  <select id="selectListByCondition" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM s_admin
+    <where>
+      <if test="userName != null">
+        AND user_name like #{userName,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null ">
+        AND create_time >= #{createTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
+
 </mapper>

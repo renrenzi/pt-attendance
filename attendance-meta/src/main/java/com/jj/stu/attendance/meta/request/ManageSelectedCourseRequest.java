@@ -13,9 +13,22 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 public class ManageSelectedCourseRequest {
+
+    private Integer id;
     /**
-     * 所选课程
+     * 学生Id
      */
     @NotNull
-    private SelectedCourse selectedCourse;
+    private Integer studentId;
+
+    /**
+     * 课程Id
+     */
+    @NotNull
+    private Integer courseId;
+
+    /**
+     * 旧课程id
+     */
+    private Integer oldCourseId;
 }

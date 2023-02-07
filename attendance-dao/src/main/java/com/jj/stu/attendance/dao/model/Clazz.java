@@ -2,19 +2,28 @@ package com.jj.stu.attendance.dao.model;
 
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 专业表
  */
 @Data
 @TableName("s_clazz")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Clazz {
     private static final long serialVersionUID = 1L;
     /**
      * 主键id
      */
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**

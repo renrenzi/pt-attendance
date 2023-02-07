@@ -14,6 +14,7 @@ import com.jj.stu.attendance.meta.response.PageClazzResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,10 +31,19 @@ public class ClazzServiceImpl extends ServiceImpl<ClazzMapper, Clazz> implements
 
     @Override
     public void editClazzDetail(ManageClazzRequest request) {
-        Clazz clazz = request.getClazz();
+        Clazz clazz = Clazz.builder()
+                .id(request.getId())
+                .name(request.getName())
+                .info(request.getInfo())
+                .state(request.getState())
+                .build();
         if(clazzMapper.selectById(clazz.getId()) == null){
+            clazz.setCreateTime(new Date());
+            clazz.setCreateUserId(1);
             clazzMapper.insertSelective(clazz);
         }else {
+            clazz.setUpdateTime(new Date());
+            clazz.setUpdateUserId(1);
             clazzMapper.updateByPrimaryKeySelective(clazz);
         }
     }

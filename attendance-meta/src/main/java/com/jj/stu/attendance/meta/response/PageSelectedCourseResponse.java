@@ -1,8 +1,6 @@
 package com.jj.stu.attendance.meta.response;
 
-import com.jj.stu.attendance.dao.dto.SelectedCourseDTO;
-import com.jj.stu.attendance.dao.model.Clazz;
-import com.jj.stu.attendance.dao.model.SelectedCourse;
+import com.jj.stu.attendance.meta.dto.SelectedCourseDTO;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

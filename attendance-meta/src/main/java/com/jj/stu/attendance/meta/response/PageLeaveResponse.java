@@ -1,7 +1,6 @@
 package com.jj.stu.attendance.meta.response;
 
-import com.jj.stu.attendance.dao.dto.LeaveVO;
-import com.jj.stu.attendance.dao.model.Leave;
+import com.jj.stu.attendance.meta.dto.LeaveDTO;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -25,5 +24,5 @@ public class PageLeaveResponse {
     /**
      * 请假列表
      */
-    private List<LeaveVO> leaveList;
+    private List<LeaveDTO> leaveList;
 }

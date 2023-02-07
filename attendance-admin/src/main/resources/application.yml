@@ -56,3 +56,11 @@ sa-token:
   token-style: random-128
   # 是否输出操作日志
   is-log: false
+
+aliyun:
+  oss:
+    file:
+      endpoint:
+      keyid:
+      keysecret:
+      bucketname:
