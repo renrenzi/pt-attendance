@@ -14,7 +14,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * 统一认证路由拦截器
@@ -22,7 +21,7 @@ import java.util.stream.Collectors;
  * @author 任人子
  * @date 2022/3/26  - {TIME}
  */
-//@Configuration
+@Configuration
 public class RouterInterceptor implements WebMvcConfigurer {
     @Resource
     private RedisService redisService;
@@ -40,8 +39,9 @@ public class RouterInterceptor implements WebMvcConfigurer {
                 }
             }
         })).addPathPatterns("/**")
+                .excludePathPatterns("/**")
                 .excludePathPatterns("/front/view/**")
-                .excludePathPatterns("/admin/login");
+                .excludePathPatterns("/admin/mini/login/info");
     }
 
     @Override
