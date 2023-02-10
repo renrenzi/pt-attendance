@@ -1,8 +1,9 @@
 package com.jj.stu.attendance.meta.request;
 
 import com.jj.stu.attendance.dao.model.SelectedCourse;
-import com.sun.istack.internal.NotNull;
 import lombok.Data;
+
+import javax.validation.constraints.NotNull;
 
 @Data
 public class PageSelectedCourseRequest {
