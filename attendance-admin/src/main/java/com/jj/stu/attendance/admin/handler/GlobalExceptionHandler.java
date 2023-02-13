@@ -1,9 +1,10 @@
-package com.jj.stu.attendance.base.exception;
+package com.jj.stu.attendance.admin.handler;
 
 import cn.dev33.satoken.exception.*;
 import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.basic.ResultGenerator;
 import com.jj.stu.attendance.base.constants.HttpStatusEnum;
+import com.jj.stu.attendance.base.exception.ApiException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.HttpMessageNotReadableException;

@@ -2,7 +2,6 @@ package com.jj.stu.attendance.admin.service.teacher;
 
 import com.jj.stu.attendance.admin.BaseTest;
 import com.jj.stu.attendance.admin.service.TeacherService;
-import com.jj.stu.attendance.admin.service.impl.TeacherServiceImpl;
 import com.jj.stu.attendance.dao.model.Teacher;
 import org.junit.Test;
 
@@ -17,7 +16,7 @@ public class TeacherServiceTest extends BaseTest {
     @Test
     public void batchAddTeacher(){
         List<Teacher> teacherList = new ArrayList<>();
-        for (int i = 10; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             Teacher teacher = new Teacher();
             teacher.setId(i);
             teacher.setMobile("12321" +i);

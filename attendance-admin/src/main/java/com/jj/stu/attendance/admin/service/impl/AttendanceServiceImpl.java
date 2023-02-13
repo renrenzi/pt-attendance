@@ -23,12 +23,10 @@ import com.jj.stu.attendance.meta.request.PunchTheClockRequest;
 import com.jj.stu.attendance.meta.response.PageAttendanceResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -55,10 +53,18 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
         List<Attendance> attendanceList = attendanceMapper.selectList(new QueryWrapper<>());
         List<Integer> studentIds = attendanceList.stream().map(Attendance::getStudentId).distinct().collect(Collectors.toList());
         List<Integer> courseIds = attendanceList.stream().map(Attendance::getCourseId).distinct().collect(Collectors.toList());
-        Map<Integer, Course> courseIdToNameMap = courseMapper.selectList(new QueryWrapper<Course>().lambda().in(Course::getId, courseIds))
-                .stream().collect(Collectors.toMap(Course::getId, Function.identity(), (v2, v1) -> v1));
-        Map<Integer, Student> studentIdToNameMap = studentMapper.selectList(new QueryWrapper<Student>().lambda().in(Student::getId, studentIds))
-                .stream().collect(Collectors.toMap(Student::getId, Function.identity(), (v2, v1) -> v1));
+
+        Map<Integer, Course> courseIdToNameMap = new HashMap<>();
+        Map<Integer, Student> studentIdToNameMap = new HashMap<>();
+
+        if (!CollectionUtils.isEmpty(courseIds)) {
+            courseIdToNameMap = courseMapper.selectList(new QueryWrapper<Course>().lambda().in(Course::getId, courseIds))
+                    .stream().collect(Collectors.toMap(Course::getId, Function.identity(), (v2, v1) -> v1));
+        }
+        if (!CollectionUtils.isEmpty(studentIds)) {
+            studentIdToNameMap = studentMapper.selectList(new QueryWrapper<Student>().lambda().in(Student::getId, studentIds))
+                    .stream().collect(Collectors.toMap(Student::getId, Function.identity(), (v2, v1) -> v1));
+        }
         List<AttendanceDTO> result = new ArrayList<>(attendanceList.size());
         for (Attendance attendance: attendanceList) {
             AttendanceDTO attendanceDTO = new AttendanceDTO();
