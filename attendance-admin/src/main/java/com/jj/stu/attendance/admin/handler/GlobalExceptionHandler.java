@@ -30,6 +30,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = {NotLoginException.class})
     public Result handlerNoLoginException(NotLoginException e){
+        LOGGER.info(String.format("当前用户未登录, 错误信息：%s",e.getMessage()));
         return ResultGenerator.getResultByHttp(HttpStatusEnum.UN_LOGIN, e.getMessage());
     }
 
@@ -40,6 +41,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = {NotRoleException.class})
     public Result handlerNotRoleException(NotRoleException e){
+        LOGGER.info(String.format("当前用户未分配该角色, 错误信息：%s",e.getMessage()));
         return ResultGenerator.getResultByHttp(HttpStatusEnum.FORBIDDEN, e.getMessage());
     }
 
@@ -50,6 +52,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = {NotPermissionException.class})
     public Result handlerNotPermissionException(NotPermissionException e){
+        LOGGER.info(String.format("当前用户没有该权限, 错误信息：%s",e.getMessage()));
         return ResultGenerator.getResultByHttp(HttpStatusEnum.FORBIDDEN, e.getMessage());
     }
 
