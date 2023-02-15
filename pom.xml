@@ -20,6 +20,7 @@
         <module>attendance-base</module>
         <module>attendance-dao</module>
         <module>attendance-meta</module>
+        <module>attendance-task</module>
     </modules>
 
     <!-- 统一管理jar包版本 -->
