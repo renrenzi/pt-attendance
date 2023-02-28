@@ -1,8 +1,7 @@
-package com.jj.stu.attendance.base.util;
+package com.jj.stu.attendance.admin.util;
 
 import com.jj.stu.attendance.base.exception.ApiException;
 import org.hibernate.validator.HibernateValidator;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;

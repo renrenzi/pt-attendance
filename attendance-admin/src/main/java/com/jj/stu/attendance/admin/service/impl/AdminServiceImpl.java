@@ -20,12 +20,13 @@ import com.jj.stu.attendance.dao.model.Student;
 import com.jj.stu.attendance.dao.model.Teacher;
 import com.jj.stu.attendance.meta.request.MiniLoginRequest;
 import com.jj.stu.attendance.meta.request.PageAdminListRequest;
+import com.jj.stu.attendance.meta.request.UserLoginRequest;
 import com.jj.stu.attendance.meta.response.PageAdminInfoResponse;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.stream.Collectors;
 import javax.annotation.Resource;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -39,6 +40,20 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     private TeacherMapper teacherMapper;
     @Resource
     private RedisService redisService;
+    @Resource
+    private ApplicationContext context;
+
+    @Override
+    public Result userLoginInfo(UserLoginRequest request) {
+        request.setPassword(DigestUtil.md5Hex(request.getPassword()));
+        Admin admin = adminMapper.findAdminByCondition(request.getUserName(), request.getPassword());
+        if (admin == null) {
+            throw new ApiException("账号或密码错误");
+        }
+        StpUtil.login(admin.getId());
+        String token = StpUtil.getTokenValue();
+        return ResultGenerator.getResultByOk(token);
+    }
 
     @Override
     public Result miniLoginInfo(MiniLoginRequest request) {
@@ -81,13 +96,14 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
                 if (RoleNameEnum.TEACHER.getRoleId().equals(roleId)) {
                     pageAdminInfoResponse.setInfo(adminIdToTeacherMap.get(admin.getId()));
                 }
+                pageAdminInfoResponse.setRoleName(Objects.requireNonNull(RoleNameEnum.getRole(roleId)).getRoleName());
             }
             pageAdminInfoResponse.setRoleId(roleId);
-            pageAdminInfoResponse.setRoleName(Objects.requireNonNull(RoleNameEnum.getRole(roleId)).getRoleName());
             result.add(pageAdminInfoResponse);
         }
         PageResult<PageAdminInfoResponse> pageResult = new PageResult<>();
         pageResult.setData(result);
+
         return ResultGenerator.getResultByOk(pageResult);
     }
 }

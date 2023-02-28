@@ -1,7 +1,6 @@
 package com.jj.stu.attendance.base.util;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  * 时间工具类

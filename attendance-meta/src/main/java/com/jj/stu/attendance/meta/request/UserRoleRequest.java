@@ -11,7 +11,7 @@ import java.util.List;
  * @author 任人子
  * @date 2022/5/12  - {TIME}
  */
-public class UserRoleRequestDto extends UserRole {
+public class UserRoleRequest extends UserRole {
 
     /**
      * 资源Ids

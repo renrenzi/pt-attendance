@@ -12,7 +12,7 @@ import com.jj.stu.attendance.base.constants.HttpStatusEnum;
 import com.jj.stu.attendance.base.util.DateUtils;
 import com.jj.stu.attendance.dao.model.UserRole;
 import com.jj.stu.attendance.dao.model.UserRoleResourceRelation;
-import com.jj.stu.attendance.meta.request.UserRoleRequestDto;
+import com.jj.stu.attendance.meta.request.UserRoleRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,13 +55,13 @@ public class UserRoleController {
 
     @ApiOperation("添加角色")
     @PostMapping("/addRole")
-    public Result addRole(UserRoleRequestDto userRoleRequestDto) {
-        if (userRoleRequestDto == null) {
+    public Result addRole(UserRoleRequest userRoleRequest) {
+        if (userRoleRequest == null) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
-        userRoleRequestDto.setCreateTime(DateUtils.getLocalCurrentTime())
+        userRoleRequest.setCreateTime(DateUtils.getLocalCurrentTime())
                 .setRoleStatus(1);
-        userRoleService.save(userRoleRequestDto);
+        userRoleService.save(userRoleRequest);
         userResourceService.initRoleResourceMap();
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK);
     }
@@ -69,44 +69,44 @@ public class UserRoleController {
     @ApiOperation("添加角色并赋予对应资源")
     @PostMapping("/addRoleAndResource")
     @Transactional(rollbackFor = {Exception.class})
-    public Result addRoleAndResource(UserRoleRequestDto userRoleRequestDto) {
-        if (userRoleRequestDto == null || CollectionUtils.isEmpty(userRoleRequestDto.getResourceIds())) {
+    public Result addRoleAndResource(UserRoleRequest userRoleRequest) {
+        if (userRoleRequest == null || CollectionUtils.isEmpty(userRoleRequest.getResourceIds())) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
-        userRoleRequestDto.setCreateTime(DateUtils.getLocalCurrentTime())
+        userRoleRequest.setCreateTime(DateUtils.getLocalCurrentTime())
                 .setRoleStatus(1);
 
-        if (!userRoleService.save(userRoleRequestDto)) {
+        if (!userRoleService.save(userRoleRequest)) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_GATEWAY);
         }
-        saveRoleResourceRelationList(userRoleRequestDto);
+        saveRoleResourceRelationList(userRoleRequest);
         userResourceService.initRoleResourceMap();
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK);
     }
 
     /**
      * 保存角色资源关系List
-     * @param userRoleRequestDto
+     * @param userRoleRequest
      * @return
      */
-    private void saveRoleResourceRelationList(UserRoleRequestDto userRoleRequestDto){
-        List<UserRoleResourceRelation> roleResourceRelationList = userRoleRequestDto.getResourceIds().stream()
+    private void saveRoleResourceRelationList(UserRoleRequest userRoleRequest){
+        List<UserRoleResourceRelation> roleResourceRelationList = userRoleRequest.getResourceIds().stream()
                 .map(id -> new UserRoleResourceRelation().setResourceId(id)
-                        .setRoleId(userRoleRequestDto.getRoleId())).collect(Collectors.toList());
+                        .setRoleId(userRoleRequest.getRoleId())).collect(Collectors.toList());
         roleResourceRelationService.deleteByList(roleResourceRelationList);
         roleResourceRelationService.saveBatch(roleResourceRelationList);
     }
     @ApiOperation("修改角色权限")
     @PostMapping("/editRole")
     @Transactional(rollbackFor = {Exception.class})
-    public Result editRole(UserRoleRequestDto userRoleRequestDto) {
-        if (userRoleRequestDto == null || userRoleRequestDto.getRoleId() == null) {
+    public Result editRole(UserRoleRequest userRoleRequest) {
+        if (userRoleRequest == null || userRoleRequest.getRoleId() == null) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
-        userRoleRequestDto.setCreateTime(DateUtils.getLocalCurrentTime());
-        boolean save = userRoleService.updateById(userRoleRequestDto);
-        if(!CollectionUtils.isEmpty(userRoleRequestDto.getResourceIds())){
-            saveRoleResourceRelationList(userRoleRequestDto);
+        userRoleRequest.setCreateTime(DateUtils.getLocalCurrentTime());
+        boolean save = userRoleService.updateById(userRoleRequest);
+        if(!CollectionUtils.isEmpty(userRoleRequest.getResourceIds())){
+            saveRoleResourceRelationList(userRoleRequest);
         }
         if(!save){
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_GATEWAY);

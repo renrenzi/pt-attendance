@@ -1,5 +1,7 @@
 package com.jj.stu.attendance.admin.constants;
 
+import com.jj.stu.attendance.base.exception.ApiException;
+
 /**
  * 角色名称枚举
  * @author renrenzi
@@ -33,6 +35,6 @@ public enum RoleNameEnum {
                 return item;
             }
         }
-        return null;
+        throw new ApiException("该角色不存在" + roleId);
     }
 }
