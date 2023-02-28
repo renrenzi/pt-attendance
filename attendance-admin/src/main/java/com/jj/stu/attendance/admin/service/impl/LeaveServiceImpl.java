@@ -75,7 +75,7 @@ public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, Leave> implements
         for(Leave leave : leaveList) {
             LeaveDTO leaveVO = new LeaveDTO();
             BeanUtil.copyProperties(leave, leaveVO);
-            Student student = map.get(leave.getStudentId());
+            Student student = map.getOrDefault(leave.getStudentId(), new Student());
             leaveVO.setUserName(student.getUsername());
             leaveVO.setNickname(student.getNickName());
             responseList.add(leaveVO);

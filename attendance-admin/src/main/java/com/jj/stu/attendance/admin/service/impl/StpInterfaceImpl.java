@@ -79,7 +79,9 @@ public class StpInterfaceImpl implements StpInterface {
                 .stream()
                 .map(UserRoleRelation::getRoleId)
                 .collect(Collectors.toList());
-
+        if (CollectionUtils.isEmpty(roleIds)) {
+            return new ArrayList<>();
+        }
         return userRoleMapper.selectBatchIds(roleIds)
                 .stream()
                 .map(UserRole::getRoleName)

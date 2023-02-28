@@ -6,7 +6,7 @@ import com.jj.stu.attendance.base.basic.ResultGenerator;
 import com.jj.stu.attendance.base.basic.StpUserDetail;
 import com.jj.stu.attendance.base.constants.LogRecordType;
 import com.jj.stu.attendance.base.exception.ApiException;
-import com.jj.stu.attendance.base.util.ValidateUtil;
+import com.jj.stu.attendance.admin.util.ValidateUtil;
 import com.jj.stu.attendance.meta.request.ManageLeaveRequest;
 import com.jj.stu.attendance.meta.request.PageLeaveRequest;
 import com.jj.stu.attendance.meta.response.PageLeaveResponse;

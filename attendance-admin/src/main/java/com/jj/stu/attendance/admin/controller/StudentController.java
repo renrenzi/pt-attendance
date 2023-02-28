@@ -3,7 +3,7 @@ package com.jj.stu.attendance.admin.controller;
 import com.jj.stu.attendance.admin.service.StudentService;
 import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.basic.ResultGenerator;
-import com.jj.stu.attendance.base.util.ValidateUtil;
+import com.jj.stu.attendance.admin.util.ValidateUtil;
 import com.jj.stu.attendance.meta.request.PageStudentRequest;
 import com.jj.stu.attendance.meta.request.StudentBatchInsertRequest;
 import com.jj.stu.attendance.meta.response.PageStudentResponse;
