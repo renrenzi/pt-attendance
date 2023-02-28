@@ -10,7 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2022/11/2  - {TIME}
  */
 
-@SpringBootApplication(scanBasePackages = {"com.jj.stu.attendance"})
+@SpringBootApplication(scanBasePackages = {"com.jj.stu.attendance.admin", "com.jj.stu.attendance.base",
+        "com.jj.stu.attendance.dao", "com.jj.stu.attendance.meta",  "com.jj.stu.attendance.task"})
 @EnableLogRecord(tenant = "com.jj.stu.attendance.admin")
 public class StuAttendanceAdminApplication {
 

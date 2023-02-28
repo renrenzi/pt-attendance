@@ -62,6 +62,7 @@ public class GlobalExceptionHandler {
         if(e.getErrorCode() != null){
             return ResultGenerator.getResultByErrorCode(e.getErrorCode());
         }
+        LOGGER.info(String.format("自定义异常, 异常信息：%s",e.getMessage()));
         return ResultGenerator.getResultByMessage(e.getMessage());
     }
 

@@ -22,6 +22,7 @@ import com.jj.stu.attendance.meta.request.MiniLoginRequest;
 import com.jj.stu.attendance.meta.request.PageAdminListRequest;
 import com.jj.stu.attendance.meta.request.UserLoginRequest;
 import com.jj.stu.attendance.meta.response.PageAdminInfoResponse;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -39,6 +40,8 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     private TeacherMapper teacherMapper;
     @Resource
     private RedisService redisService;
+    @Resource
+    private ApplicationContext context;
 
     @Override
     public Result userLoginInfo(UserLoginRequest request) {
@@ -49,7 +52,6 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         }
         StpUtil.login(admin.getId());
         String token = StpUtil.getTokenValue();
-
         return ResultGenerator.getResultByOk(token);
     }
 
@@ -101,6 +103,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         }
         PageResult<PageAdminInfoResponse> pageResult = new PageResult<>();
         pageResult.setData(result);
+
         return ResultGenerator.getResultByOk(pageResult);
     }
 }

@@ -50,6 +50,7 @@
         <attendance.base.version>1.0-SNAPSHOT</attendance.base.version>
         <attendance.dao.version>1.0-SNAPSHOT</attendance.dao.version>
         <attendance.meta.version>1.0-SNAPSHOT</attendance.meta.version>
+        <attendance.task.version>1.0-SNAPSHOT</attendance.task.version>
     </properties>
 
     <dependencyManagement>
@@ -78,6 +79,11 @@
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate.validator.version}</version>
+            </dependency>
+            <dependency>
+                <artifactId>attendance-task</artifactId>
+                <groupId>com.renrenzi</groupId>
+                <version>${attendance.task.version}</version>
             </dependency>
             <dependency>
                 <artifactId>attendance-meta</artifactId>
