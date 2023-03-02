@@ -60,7 +60,7 @@ sa-token:
 aliyun:
   oss:
     file:
-      endpoint:
-      keyid:
-      keysecret:
-      bucketname:
+      endpoint: test
+      keyid: test
+      keysecret: test
+      bucketname: test

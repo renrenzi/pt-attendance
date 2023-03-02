@@ -14,5 +14,11 @@ public class ExportTaskListener {
     @EventListener
     public void onApplicationListener(ExportTaskEvent event) {
         System.out.println("export listener start ---");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("export listener end ---");
     }
 }
