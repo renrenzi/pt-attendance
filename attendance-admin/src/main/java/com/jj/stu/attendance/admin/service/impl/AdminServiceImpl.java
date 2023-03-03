@@ -60,7 +60,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         request.setPassword(DigestUtil.md5Hex(request.getPassword()));
         Admin admin = adminMapper.findAdminByCondition(request.getUserName(), request.getPassword());
         if (admin == null) {
-            throw new ApiException("账号或密码错误");
+            throw new ApiException(String.format("账号或密码错误 userName:%s, roleName:%s", request.getUserName(), request.getRoleName()));
         }
         StpUtil.login(admin.getId());
         String token = StpUtil.getTokenValue();
