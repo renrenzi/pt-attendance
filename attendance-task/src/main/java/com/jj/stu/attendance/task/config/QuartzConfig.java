@@ -77,7 +77,7 @@ public class QuartzConfig {
         // 设置定时任务启动时间
         trigger.setStartTime(new Date());
         // cron表达式
-        trigger.setCronExpression("*/7 * * * * ?");
+        trigger.setCronExpression("*/5 * * * * ?");
         return trigger;
     }
 

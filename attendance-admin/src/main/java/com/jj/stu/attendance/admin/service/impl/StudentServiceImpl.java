@@ -9,6 +9,7 @@ import com.jj.stu.attendance.dao.mapper.StudentMapper;
 import com.jj.stu.attendance.dao.model.Student;
 import com.jj.stu.attendance.meta.request.PageStudentRequest;
 import com.jj.stu.attendance.meta.request.StudentBatchInsertRequest;
+import com.jj.stu.attendance.meta.request.StudentUpdateRequest;
 import com.jj.stu.attendance.meta.response.PageStudentResponse;
 import org.springframework.stereotype.Service;
 
@@ -42,5 +43,10 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
             student.setCreateDate(new Date());
             studentMapper.insertSelective(student);
         }
+    }
+
+    @Override
+    public void updateStudentInfo(StudentUpdateRequest request) {
+
     }
 }
