@@ -80,4 +80,5 @@ public class AttendanceController {
         ValidateUtil.validate(request);
         return ResultGenerator.getResultByOk(attendanceService.pageAttendanceList(request));
     }
+
 }
