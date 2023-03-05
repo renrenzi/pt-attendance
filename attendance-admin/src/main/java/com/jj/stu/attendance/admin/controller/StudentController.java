@@ -6,6 +6,7 @@ import com.jj.stu.attendance.base.basic.ResultGenerator;
 import com.jj.stu.attendance.admin.util.ValidateUtil;
 import com.jj.stu.attendance.meta.request.PageStudentRequest;
 import com.jj.stu.attendance.meta.request.StudentBatchInsertRequest;
+import com.jj.stu.attendance.meta.request.StudentUpdateRequest;
 import com.jj.stu.attendance.meta.response.PageStudentResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -44,5 +45,12 @@ public class StudentController {
     public void batchAddStudent(@RequestBody StudentBatchInsertRequest request){
         ValidateUtil.validate(request);
         studentService.batchAddStudent(request);
+    }
+
+    @PostMapping("/update/student/info")
+    @ApiOperation("批量添加学生")
+    public void updateStudentInfo(@RequestBody StudentUpdateRequest request){
+        ValidateUtil.validate(request);
+        studentService.updateStudentInfo(request);
     }
 }

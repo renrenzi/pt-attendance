@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.jj.stu.attendance.dao.model.Student;
 import com.jj.stu.attendance.meta.request.PageStudentRequest;
 import com.jj.stu.attendance.meta.request.StudentBatchInsertRequest;
+import com.jj.stu.attendance.meta.request.StudentUpdateRequest;
 import com.jj.stu.attendance.meta.response.PageStudentResponse;
 
 /**
@@ -27,4 +28,12 @@ public interface StudentService extends IService<Student> {
      * @return {@link PageStudentResponse}
      */
     PageStudentResponse pageStudentList(PageStudentRequest request);
+
+
+    /**
+     * 更新学生信息
+     *
+     * @param request 请求
+     */
+    void updateStudentInfo(StudentUpdateRequest request);
 }
