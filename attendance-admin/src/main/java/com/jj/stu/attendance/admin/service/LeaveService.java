@@ -9,14 +9,14 @@ import com.jj.stu.attendance.meta.response.PageLeaveResponse;
 import java.util.List;
 
 /**
- * 离开服务
+ * 请假服务
  *
  * @author 张俊杰
  * @date 2022/11/20
  */
 public interface LeaveService extends IService<Leave> {
     /**
-     * 页面离开列表
+     * 页面请假列表
      *
      * @param request 请求
      * @return {@link PageLeaveResponse}

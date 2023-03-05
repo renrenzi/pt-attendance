@@ -1,6 +1,5 @@
 package com.jj.stu.attendance.meta.request;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -26,13 +25,14 @@ public class ManageAttendanceRequest {
     /**
      * 考勤状态
      */
+    @NotNull
     private String type;
 
     /**
      * 课程时间
      */
     @NotNull
-    @JsonFormat(pattern = "yyyy-mm-dd hh:mm:ss")
+    /*@JsonFormat(pattern = "yyyy-mm-dd hh:mm:ss")*/
     private Date date;
 
     /**
