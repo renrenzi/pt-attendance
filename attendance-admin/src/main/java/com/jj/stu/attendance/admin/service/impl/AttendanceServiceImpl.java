@@ -50,30 +50,32 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
     @Override
     public PageAttendanceResponse pageAttendanceList(PageAttendanceRequest request) {
         Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
-        List<Attendance> attendanceList = attendanceMapper.selectList(new QueryWrapper<>());
+        List<Attendance> attendanceList = attendanceMapper.selectList(buildAttendanceQueryWrapper(request));
+        // 1. 取返回的学生、课程 ID 列表
         List<Integer> studentIds = attendanceList.stream().map(Attendance::getStudentId).distinct().collect(Collectors.toList());
         List<Integer> courseIds = attendanceList.stream().map(Attendance::getCourseId).distinct().collect(Collectors.toList());
 
-        Map<Integer, Course> courseIdToNameMap = new HashMap<>();
-        Map<Integer, Student> studentIdToNameMap = new HashMap<>();
-
+        Map<Integer, Course> courseIdToInfoMap = new HashMap<>(studentIds.size());
+        Map<Integer, Student> studentIdToInfoMap = new HashMap<>(courseIds.size());
+        // 2. 封装 <Id, Info> Map
         if (!CollectionUtils.isEmpty(courseIds)) {
-            courseIdToNameMap = courseMapper.selectList(new QueryWrapper<Course>().lambda().in(Course::getId, courseIds))
+            courseIdToInfoMap = courseMapper.selectList(new QueryWrapper<Course>().lambda().in(Course::getId, courseIds))
                     .stream().collect(Collectors.toMap(Course::getId, Function.identity(), (v2, v1) -> v1));
         }
         if (!CollectionUtils.isEmpty(studentIds)) {
-            studentIdToNameMap = studentMapper.selectList(new QueryWrapper<Student>().lambda().in(Student::getId, studentIds))
+            studentIdToInfoMap = studentMapper.selectList(new QueryWrapper<Student>().lambda().in(Student::getId, studentIds))
                     .stream().collect(Collectors.toMap(Student::getId, Function.identity(), (v2, v1) -> v1));
         }
+        // 3. 根据 Map 构造返回实体列表
         List<AttendanceDTO> result = new ArrayList<>(attendanceList.size());
         for (Attendance attendance: attendanceList) {
             AttendanceDTO attendanceDTO = new AttendanceDTO();
             BeanUtil.copyProperties(attendance, attendanceDTO);
-            Course course = courseIdToNameMap.get(attendance.getCourseId());
+            Course course = courseIdToInfoMap.get(attendance.getCourseId());
             if (course != null) {
                 attendanceDTO.setCourseName(course.getName());
             }
-            Student student = studentIdToNameMap.get(attendance.getStudentId());
+            Student student = studentIdToInfoMap.get(attendance.getStudentId());
             if (student != null){
                 attendanceDTO.setNickname(student.getNickName());
                 attendanceDTO.setUsername(student.getUsername());
@@ -97,6 +99,12 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
         int result;
         Attendance attendance = covertToEntity(request);
         if (attendanceMapper.selectById(attendance.getId()) == null) {
+            // 校验该学生的考勤记录是否存在
+            Integer dbCount = attendanceMapper.selectCount(new QueryWrapper<Attendance>().lambda().eq(Attendance::getStudentId, request.getStudentId())
+                    .eq(Attendance::getCourseId, request.getCourseId()));
+            if (dbCount >= 1) {
+                throw new ApiException("添加考勤记录失败，该学生考勤记录已存在，请修改！");
+            }
             attendance.setCreateTime(new Date()).setCreateUserId(request.getUserId());
             result = attendanceMapper.insert(attendance);
         } else {
@@ -143,5 +151,24 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
         // 通过课程时间检查考勤状态
         attendance.setType(AttendanceTypeEnum.ATTENDANCE.getType());
 
+    }
+
+    /**
+     * 构建考勤查询包装器
+     *
+     * @param request 要求
+     * @return {@link QueryWrapper}<{@link Attendance}>
+     */
+    private QueryWrapper<Attendance> buildAttendanceQueryWrapper(PageAttendanceRequest request) {
+        QueryWrapper<Attendance> queryWrapper = new QueryWrapper<>();
+        Attendance attendance = request.getAttendance();
+        if (attendance != null) {
+            // 根据学生 ID 查询
+            if (attendance.getStudentId() != null) {
+                queryWrapper.lambda().eq(Attendance::getStudentId, attendance.getStudentId());
+            }
+        }
+        queryWrapper.lambda().orderByDesc(Attendance::getCreateTime);
+        return queryWrapper;
     }
 }
