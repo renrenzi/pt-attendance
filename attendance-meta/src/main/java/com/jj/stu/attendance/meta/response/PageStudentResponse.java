@@ -1,7 +1,7 @@
 package com.jj.stu.attendance.meta.response;
 
 
-import com.jj.stu.attendance.dao.model.Student;
+import com.jj.stu.attendance.meta.dto.StudentDTO;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -25,5 +25,5 @@ public class PageStudentResponse {
     /**
      * 学生列表
      */
-    private List<Student> studentList;
+    private List<StudentDTO> studentList;
 }

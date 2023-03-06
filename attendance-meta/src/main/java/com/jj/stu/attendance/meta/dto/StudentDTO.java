@@ -1,19 +1,15 @@
-package com.jj.stu.attendance.meta.request;
-
+package com.jj.stu.attendance.meta.dto;
 
 import lombok.Data;
 
 import java.util.Date;
 
 /**
- * 学生更新请求
- *
  * @author zhangjunjie
- * @date 2023/03/06
+ * @description
  */
 @Data
-public class StudentUpdateRequest {
-
+public class StudentDTO {
     private Integer id;
 
     /**
@@ -26,9 +22,6 @@ public class StudentUpdateRequest {
      */
     private String password;
 
-    /**
-     * 昵称
-     */
     private String nickName;
 
     /**
@@ -36,13 +29,8 @@ public class StudentUpdateRequest {
      */
     private Integer clazzId;
 
-    /**
-     * 性别
-     */
     private String sex;
-    /**
-     * 电话
-     */
+
     private String mobile;
 
     /**
@@ -54,4 +42,9 @@ public class StudentUpdateRequest {
      * 关联用户id
      */
     private Integer adminId;
+
+    /**
+     * ADMIN 消息封装
+     */
+    private AdminDTO adminDTO;
 }

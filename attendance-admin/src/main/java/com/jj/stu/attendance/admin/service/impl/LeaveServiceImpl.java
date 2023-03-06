@@ -65,7 +65,7 @@ public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, Leave> implements
     @Override
     public PageLeaveResponse pageLeaveList(PageLeaveRequest request) {
         Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
-        List<Leave> leaveList = leaveMapper.selectList(new QueryWrapper<>());
+        List<Leave> leaveList = leaveMapper.selectList(buildLeaveQueryWrapper(request));
         List<Integer> studentIds = leaveList.stream().map(Leave::getStudentId).distinct().collect(Collectors.toList());
         Map<Integer, Student> map = new HashMap<>(studentIds.size());
         if (!CollectionUtils.isEmpty(studentIds)){
@@ -83,5 +83,23 @@ public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, Leave> implements
         return new PageLeaveResponse()
                 .setLeaveList(responseList)
                 .setTotalSize(page.getTotal());
+    }
+
+    /**
+     * 构建请假查询包装
+     *
+     * @param request 请求
+     * @return {@link QueryWrapper}
+     */
+    private QueryWrapper buildLeaveQueryWrapper(PageLeaveRequest request) {
+        QueryWrapper<Leave> queryWrapper = new QueryWrapper<>();
+        Leave leave = request.getLeave();
+        if (leave != null) {
+            if (leave.getStudentId() != null) {
+                queryWrapper.lambda().eq(Leave::getStudentId, leave.getStudentId());
+            }
+        }
+        queryWrapper.lambda().orderByDesc(Leave::getCreateDate);
+        return queryWrapper;
     }
 }
