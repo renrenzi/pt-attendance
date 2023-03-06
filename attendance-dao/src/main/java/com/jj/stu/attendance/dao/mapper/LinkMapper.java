@@ -1,8 +1,9 @@
 package com.jj.stu.attendance.dao.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jj.stu.attendance.dao.model.Link;
 
-public interface LinkMapper {
+public interface LinkMapper extends BaseMapper<Link> {
     int deleteByPrimaryKey(Integer linkId);
 
     int insert(Link record);

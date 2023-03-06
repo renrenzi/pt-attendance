@@ -53,6 +53,11 @@ public class StudentController {
         studentService.batchAddStudent(request);
     }
 
+    @LogRecord(
+            fail = "修改学生信息失败，失败原因：「{{#_errorMsg}}」",
+            subType = "MANAGER_VIEW",
+            success = "{{#detail.userId}}修改学生信息「{{#studentIds}}」成功,修改结果:{{#_ret}}",
+            operator = "{{#detail.nickName}}", type = LogRecordType.STUDENT, bizNo = "{{#request.id}}")
     @PostMapping("/update/student/info")
     @ApiOperation("修改学生信息")
     public void updateStudentInfo(@RequestBody StudentUpdateRequest request){
@@ -64,7 +69,7 @@ public class StudentController {
             fail = "批量刪除学生列表失败，失败原因：「{{#_errorMsg}}」",
             subType = "MANAGER_VIEW",
             success = "{{#detail.userId}}批量刪除学生列表「{{#studentIds}}」成功,修改结果:{{#_ret}}",
-            operator = "{{#detail.nickName}}", type = LogRecordType.SELECTED_COURSE, bizNo = "{{#studentIds}}")
+            operator = "{{#detail.nickName}}", type = LogRecordType.STUDENT, bizNo = "{{#studentIds}}")
     @ApiOperation("批量刪除学生列表")
     @PostMapping("/batch/delete/selected/course/list")
     public Result<String> batchDeleteStudentList(@RequestBody List<Integer> studentIds, StpUserDetail detail){

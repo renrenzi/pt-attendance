@@ -3,6 +3,7 @@ package com.jj.stu.attendance.meta.request;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 /**
  * 請假 request
@@ -22,7 +23,7 @@ public class ManageLeaveRequest {
     private Integer studentId;
 
     private String info;
-
+    private Date createDate;
     /**
      * 请假状态
      */

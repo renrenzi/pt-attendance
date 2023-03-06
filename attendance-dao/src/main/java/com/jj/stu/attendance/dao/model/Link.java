@@ -1,9 +1,14 @@
 package com.jj.stu.attendance.dao.model;
 
-import java.util.Date;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
+import java.util.Date;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 public class Link {
     /**
     * 友链表主键id
@@ -13,7 +18,7 @@ public class Link {
     /**
     * 友链类别 0-友链 1-推荐 2-个人网站
     */
-    private Byte linkType;
+    private Integer linkType;
 
     /**
     * 网站名称
@@ -38,7 +43,7 @@ public class Link {
     /**
     * 是否删除 0-未删除 1-已删除
     */
-    private Byte isDeleted;
+    private Integer isDeleted;
 
     /**
     * 添加时间

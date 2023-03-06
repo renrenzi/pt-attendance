@@ -1,9 +1,14 @@
 package com.jj.stu.attendance.dao.model;
 
-import java.util.Date;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
+import java.util.Date;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 public class Config {
     /**
     * 字段名
