@@ -36,27 +36,31 @@ public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, Leave> implements
     private LeaveMapper leaveMapper;
     @Resource
     private StudentMapper studentMapper;
+
     @Override
     public void updateLeaveInfo(ManageLeaveRequest request) {
         Leave leave = coverToEntity(request);
         int result;
-        if(leaveMapper.selectById(leave.getId()) == null){
+        if (leaveMapper.selectById(leave.getId()) == null) {
+            leave.setCreateDate(new Date());
             result = leaveMapper.insertSelective(leave);
-        }else {
+        } else {
             result = leaveMapper.updateByPrimaryKeySelective(leave);
         }
         if (result != 1) {
             throw new ApiException("修改请假信息失败");
         }
     }
-    private Leave coverToEntity(ManageLeaveRequest request){
+
+    private Leave coverToEntity(ManageLeaveRequest request) {
         return new Leave().setId(request.getId())
                 .setInfo(request.getInfo())
                 .setStatus(request.getStatus())
                 .setRemark(request.getRemark())
                 .setStudentId(request.getStudentId())
-                .setCreateDate(new Date());
+                .setCreateDate(request.getCreateDate());
     }
+
     @Override
     public void batchDeleteLeaveList(List<Integer> leaveIds) {
         leaveMapper.deleteBatchIds(leaveIds);
@@ -65,14 +69,14 @@ public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, Leave> implements
     @Override
     public PageLeaveResponse pageLeaveList(PageLeaveRequest request) {
         Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
-        List<Leave> leaveList = leaveMapper.selectList(new QueryWrapper<>());
+        List<Leave> leaveList = leaveMapper.selectList(buildLeaveQueryWrapper(request));
         List<Integer> studentIds = leaveList.stream().map(Leave::getStudentId).distinct().collect(Collectors.toList());
         Map<Integer, Student> map = new HashMap<>(studentIds.size());
-        if (!CollectionUtils.isEmpty(studentIds)){
+        if (!CollectionUtils.isEmpty(studentIds)) {
             map = studentMapper.selectBatchIds(studentIds).stream().collect(Collectors.toMap(Student::getId, Function.identity(), (v2, v1) -> v1));
         }
         List<LeaveDTO> responseList = new ArrayList<>();
-        for(Leave leave : leaveList) {
+        for (Leave leave : leaveList) {
             LeaveDTO leaveVO = new LeaveDTO();
             BeanUtil.copyProperties(leave, leaveVO);
             Student student = map.getOrDefault(leave.getStudentId(), new Student());
@@ -83,5 +87,23 @@ public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, Leave> implements
         return new PageLeaveResponse()
                 .setLeaveList(responseList)
                 .setTotalSize(page.getTotal());
+    }
+
+    /**
+     * 构建请假查询包装
+     *
+     * @param request 请求
+     * @return {@link QueryWrapper}
+     */
+    private QueryWrapper buildLeaveQueryWrapper(PageLeaveRequest request) {
+        QueryWrapper<Leave> queryWrapper = new QueryWrapper<>();
+        Leave leave = request.getLeave();
+        if (leave != null) {
+            if (leave.getStudentId() != null) {
+                queryWrapper.lambda().eq(Leave::getStudentId, leave.getStudentId());
+            }
+        }
+        queryWrapper.lambda().orderByDesc(Leave::getCreateDate);
+        return queryWrapper;
     }
 }
