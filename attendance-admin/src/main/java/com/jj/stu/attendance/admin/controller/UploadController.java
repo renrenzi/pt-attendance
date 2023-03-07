@@ -15,7 +15,7 @@ public class UploadController {
     private UploadUtil uploadUtil;
 
     @PostMapping("/upload")
-    public StringValue upload(MultipartFile file){
+    public StringValue upload(MultipartFile file) {
         return uploadUtil.uploadFile(file);
     }
 

@@ -31,17 +31,17 @@ public class UploadUtil {
     private OSS ossClient;
 
     @Bean
-    void initOssBean(){
-         ossClient = new OSSClient(ENDPOINT, ACCESS_KEY_ID, ACCESS_KEY_SECRET);
+    void initOssBean() {
+        ossClient = new OSSClient(ENDPOINT, ACCESS_KEY_ID, ACCESS_KEY_SECRET);
     }
 
-    public StringValue uploadFile(MultipartFile file){
+    public StringValue uploadFile(MultipartFile file) {
         try {
             InputStream inputStream = file.getInputStream();
             String fileName = file.getOriginalFilename();
-            ossClient.putObject(BUCKET_NAME,fileName,inputStream);
+            ossClient.putObject(BUCKET_NAME, fileName, inputStream);
             ossClient.shutdown();
-            String url = "https://"+BUCKET_NAME+"."+ENDPOINT+"/"+fileName;
+            String url = "https://" + BUCKET_NAME + "." + ENDPOINT + "/" + fileName;
             return new StringValue(url);
         } catch (IOException e) {
             e.printStackTrace();

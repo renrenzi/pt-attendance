@@ -1,7 +1,7 @@
 package com.jj.stu.attendance.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.jj.stu.attendance.dao.model.Leave;import com.jj.stu.attendance.dao.model.LeaveExample;import org.apache.ibatis.annotations.Param;import java.util.List;
+import com.jj.stu.attendance.dao.model.Leave;
 
 public interface LeaveMapper extends BaseMapper<Leave> {
     int deleteByPrimaryKey(Integer id);

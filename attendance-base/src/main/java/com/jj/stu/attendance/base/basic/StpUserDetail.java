@@ -1,6 +1,7 @@
 package com.jj.stu.attendance.base.basic;
 
 import lombok.Data;
+import lombok.ToString;
 
 /**
  * 登录用户详细信息
@@ -9,6 +10,7 @@ import lombok.Data;
  * @date 2023/02/07
  */
 @Data
+@ToString
 public class StpUserDetail {
 
     /**

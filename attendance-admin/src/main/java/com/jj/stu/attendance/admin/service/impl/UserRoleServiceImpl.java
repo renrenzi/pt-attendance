@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * 用户角色ServiceImpl
+ *
  * @author 任人子
  * @date 2022/5/9  - {TIME}
  */
@@ -24,6 +25,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
 
     @Resource
     private UserRoleMapper userRoleMapper;
+
     @Override
     public PageResult<UserRole> pageRole(PageCondition condition, UserRole userRole) {
         QueryWrapper<UserRole> query = new QueryWrapper<>(userRole);

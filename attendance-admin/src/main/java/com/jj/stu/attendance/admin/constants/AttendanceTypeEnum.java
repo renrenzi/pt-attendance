@@ -2,6 +2,7 @@ package com.jj.stu.attendance.admin.constants;
 
 /**
  * 考勤状态枚举
+ *
  * @author renrenzi
  */
 public enum AttendanceTypeEnum {
@@ -39,8 +40,8 @@ public enum AttendanceTypeEnum {
 
     public static String getAttendanceMessage(String type) {
         AttendanceTypeEnum[] attendanceTypeEnums = AttendanceTypeEnum.values();
-        for (AttendanceTypeEnum attribute : attendanceTypeEnums){
-            if (attribute.getType().equals(type)){
+        for (AttendanceTypeEnum attribute : attendanceTypeEnums) {
+            if (attribute.getType().equals(type)) {
                 return attribute.getMessage();
             }
         }

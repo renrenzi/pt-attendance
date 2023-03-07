@@ -5,6 +5,7 @@ import com.jj.stu.attendance.dao.model.Config;
 
 /**
  * 系统配置Service
+ *
  * @author 任人子
  */
 public interface ConfigService extends IService<Config> {

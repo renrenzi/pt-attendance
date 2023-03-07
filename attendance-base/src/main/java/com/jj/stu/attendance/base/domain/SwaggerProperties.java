@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 
 /**
  * SwaggerProperties 属性封装
- *
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

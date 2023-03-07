@@ -40,10 +40,10 @@ public class CourseController {
             fail = "创建课程失败，失败原因：「{{#_errorMsg}}」",
             subType = "MANAGER_VIEW",
             success = "{{#detail.userId}}创建课程「{{#request.name}}」,创建课程结果:{{#_ret}}",
-            operator = "{{#detail.nickName}}",  type = LogRecordType.COURSE, bizNo = "{{#request.id}}")
+            operator = "{{#detail.nickName}}", type = LogRecordType.COURSE, bizNo = "{{#request.id}}")
     @ApiOperation("添加課程")
     @PostMapping("/add/course")
-    public Result<String> addCourse(@RequestBody EditCourseRequest request, StpUserDetail detail){
+    public Result<String> addCourse(@RequestBody EditCourseRequest request, StpUserDetail detail) {
         ValidateUtil.validate(request);
         courseService.addCourse(request);
         return ResultGenerator.getResultByOk("添加課程成功");
@@ -56,7 +56,7 @@ public class CourseController {
             operator = "{{#detail.nickName}}", type = LogRecordType.COURSE, bizNo = "{{#request.id}}")
     @ApiOperation("修改课程信息")
     @PostMapping("/edit/course/detail")
-    public Result<String> editCourseDetail(@RequestBody EditCourseRequest request, StpUserDetail detail){
+    public Result<String> editCourseDetail(@RequestBody EditCourseRequest request, StpUserDetail detail) {
         ValidateUtil.validate(request);
         courseService.editCourseDetail(request);
         return ResultGenerator.getResultByOk("成功修改课程信息");
@@ -69,8 +69,8 @@ public class CourseController {
             operator = "{{#detail.nickName}}", type = LogRecordType.COURSE, bizNo = "{{#courseIds}}")
     @ApiOperation("批量删除课程信息")
     @PostMapping("/batch/delete/course")
-    public Result<String> batchDeleteCourseByIds(@RequestBody List<Integer> courseIds, StpUserDetail detail){
-        if(CollectionUtils.isEmpty(courseIds)){
+    public Result<String> batchDeleteCourseByIds(@RequestBody List<Integer> courseIds, StpUserDetail detail) {
+        if (CollectionUtils.isEmpty(courseIds)) {
             throw new ApiException("courseIds 不能为空");
         }
         courseService.batchDeleteCourseByIds(courseIds);
@@ -79,7 +79,7 @@ public class CourseController {
 
     @ApiOperation("分页获取课程列表")
     @PostMapping("/page/course/list")
-    public Result<PageCourseListResponse> pageCourseList(@RequestBody PageCourseListRequest request){
+    public Result<PageCourseListResponse> pageCourseList(@RequestBody PageCourseListRequest request) {
         ValidateUtil.validate(request);
         return ResultGenerator.getResultByOk(courseService.pageCourseList(request));
     }

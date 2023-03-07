@@ -1,6 +1,7 @@
 package com.jj.stu.attendance.dao.model;
 
 import java.util.Date;
+
 import lombok.Data;
 
 @Data

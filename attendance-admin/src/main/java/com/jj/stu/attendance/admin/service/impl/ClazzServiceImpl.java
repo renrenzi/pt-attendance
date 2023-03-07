@@ -37,11 +37,11 @@ public class ClazzServiceImpl extends ServiceImpl<ClazzMapper, Clazz> implements
                 .info(request.getInfo())
                 .state(request.getState())
                 .build();
-        if(clazzMapper.selectById(clazz.getId()) == null){
+        if (clazzMapper.selectById(clazz.getId()) == null) {
             clazz.setCreateTime(new Date());
             clazz.setCreateUserId(1);
             clazzMapper.insertSelective(clazz);
-        }else {
+        } else {
             clazz.setUpdateTime(new Date());
             clazz.setUpdateUserId(1);
             clazzMapper.updateByPrimaryKeySelective(clazz);
@@ -51,7 +51,7 @@ public class ClazzServiceImpl extends ServiceImpl<ClazzMapper, Clazz> implements
     @Override
     public void batchDeleteClazzList(List<Integer> clazzIds) {
         int res = clazzMapper.deleteBatchIds(clazzIds);
-        if(res < 0){
+        if (res < 0) {
             throw new ApiException("批量删除专业列表失败");
         }
     }
@@ -60,7 +60,7 @@ public class ClazzServiceImpl extends ServiceImpl<ClazzMapper, Clazz> implements
     public PageClazzResponse pageClazzList(PageClazzRequest request) {
         Clazz clazz = request.getClazz();
         QueryWrapper<Clazz> wrapper = new QueryWrapper<>();
-        if(clazz != null && clazz.getName() != null){
+        if (clazz != null && clazz.getName() != null) {
             wrapper.lambda().like(Clazz::getName, clazz.getName());
         }
         Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());

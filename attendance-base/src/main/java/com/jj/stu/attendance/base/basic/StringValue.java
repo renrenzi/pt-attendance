@@ -5,6 +5,7 @@ import lombok.Data;
 
 /**
  * 字符串值
+ *
  * @author renrenzi
  * @date 2023/01/20
  */

@@ -22,5 +22,5 @@ public interface AdminMapper extends BaseMapper<Admin> {
 
     Admin findAdminByCondition(@Param("userName") String userName, @Param("password") String password);
 
-    List<Admin> selectListByCondition(@Param("userName") String userName,@Param("createTime") Date createTime);
+    List<Admin> selectListByCondition(@Param("userName") String userName, @Param("createTime") Date createTime);
 }

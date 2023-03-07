@@ -1,7 +1,5 @@
 package com.jj.stu.attendance.admin.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jj.stu.attendance.admin.basic.PageCondition;
 import com.jj.stu.attendance.admin.basic.PageResult;
 import com.jj.stu.attendance.admin.service.UserResourceCategoryService;
@@ -23,6 +21,7 @@ import java.util.List;
 
 /**
  * 用户资源分类管理Controller
+ *
  * @author 任人子
  * @date 2022/5/10  - {TIME}
  */
@@ -35,47 +34,50 @@ public class UserResourceCategoryController {
 
     @ApiOperation("分页获取资源分类列表")
     @PostMapping("/pageResourceCategory")
-    public Result<PageResult<UserResourceCategory>> pageResourceCategory(PageCondition condition, UserResourceCategory userResourceCategory){
-        if(condition == null || condition.getPageNum() == null || condition.getPageSize() == null){
+    public Result<PageResult<UserResourceCategory>> pageResourceCategory(PageCondition condition, UserResourceCategory userResourceCategory) {
+        if (condition == null || condition.getPageNum() == null || condition.getPageSize() == null) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
 
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, userResourceCategoryService.pageResourceCategory(condition, userResourceCategory));
     }
+
     @ApiOperation("添加资源分类")
     @PostMapping("/addResourceCategory")
-    public Result addResourceCategory(UserResourceCategory userResourceCategory){
-        if(userResourceCategory == null){
+    public Result addResourceCategory(UserResourceCategory userResourceCategory) {
+        if (userResourceCategory == null) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
         userResourceCategory.setCreateTime(DateUtils.getLocalCurrentTime())
-                            .setSort(0);
+                .setSort(0);
         boolean save = userResourceCategoryService.save(userResourceCategory);
-        if(!save){
+        if (!save) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_GATEWAY);
         }
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK);
     }
+
     @ApiOperation("修改资源分类")
     @PostMapping("/editResourceCategory")
-    public Result editResourceCategory(UserResourceCategory userResourceCategory){
-        if(userResourceCategory == null || userResourceCategory.getId() == null){
+    public Result editResourceCategory(UserResourceCategory userResourceCategory) {
+        if (userResourceCategory == null || userResourceCategory.getId() == null) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
         boolean save = userResourceCategoryService.updateById(userResourceCategory);
-        if(!save){
+        if (!save) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_GATEWAY);
         }
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK);
     }
+
     @ApiOperation("批量删除资源分类")
     @PostMapping("/deleteResourceCategory")
-    public Result deleteResourceCategory(@RequestParam List<Integer> ids){
-        if(CollectionUtils.isEmpty(ids)){
+    public Result deleteResourceCategory(@RequestParam List<Integer> ids) {
+        if (CollectionUtils.isEmpty(ids)) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
         boolean save = userResourceCategoryService.removeByIds(ids);
-        if(!save){
+        if (!save) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_GATEWAY);
         }
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK);

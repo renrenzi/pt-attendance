@@ -13,7 +13,7 @@ public class RoleResourceConstructor {
     private UserResourceService userResourceService;
 
     @PostConstruct
-    public void initRoleResourceMap(){
+    public void initRoleResourceMap() {
         userResourceService.initRoleResourceMap();
     }
 }

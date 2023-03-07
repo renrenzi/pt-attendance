@@ -6,10 +6,10 @@ import java.util.Date;
 
 /**
  * 导出事件
+ *
  * @author 张俊杰
  */
 public class ExportTaskEvent extends ApplicationEvent {
-
 
 
     /**

@@ -39,10 +39,10 @@ public class SelectedCourseController {
             fail = "修改选课内容失败，失败原因：「{{#_errorMsg}}」",
             subType = "MANAGER_VIEW",
             success = "{{#detail.userId}}修改选课内容「{{#request.studentId}}」,修改选课内容结果:{{#_ret}}",
-            operator = "{{#detail.nickName}}",  type = LogRecordType.SELECTED_COURSE, bizNo = "{{#request.id}}")
+            operator = "{{#detail.nickName}}", type = LogRecordType.SELECTED_COURSE, bizNo = "{{#request.id}}")
     @ApiOperation("修改选课内容")
     @PostMapping("/update/selected/course")
-    public Result<String> updateSelectedCourse(@RequestBody ManageSelectedCourseRequest request, StpUserDetail detail){
+    public Result<String> updateSelectedCourse(@RequestBody ManageSelectedCourseRequest request, StpUserDetail detail) {
         ValidateUtil.validate(request);
         selectedCourseService.updateSelectedCourse(request);
         return ResultGenerator.getResultByOk("修改选课内容成功");
@@ -55,17 +55,17 @@ public class SelectedCourseController {
             operator = "{{#detail.nickName}}", type = LogRecordType.SELECTED_COURSE, bizNo = "{{#selectedCourseIds}}")
     @ApiOperation("批量刪除選課列表")
     @PostMapping("/batch/delete/selected/course/list")
-    public Result<String> batchDeleteSelectedCourseList(@RequestBody List<Integer> selectedCourseIds, StpUserDetail detail){
-        if(CollectionUtils.isEmpty(selectedCourseIds)){
+    public Result<String> batchDeleteSelectedCourseList(@RequestBody List<Integer> selectedCourseIds, StpUserDetail detail) {
+        if (CollectionUtils.isEmpty(selectedCourseIds)) {
             throw new ApiException("選課列表爲空");
         }
         selectedCourseService.batchDeleteSelectedCourseList(selectedCourseIds);
-        return  ResultGenerator.getResultByOk("批量刪除選課列表成功");
+        return ResultGenerator.getResultByOk("批量刪除選課列表成功");
     }
 
     @ApiOperation("分页获取选课列表")
     @PostMapping("/page/selected/course/list")
-    public Result<PageSelectedCourseResponse> pageSelectedCourseList(@RequestBody PageSelectedCourseRequest request){
+    public Result<PageSelectedCourseResponse> pageSelectedCourseList(@RequestBody PageSelectedCourseRequest request) {
         ValidateUtil.validate(request);
         return ResultGenerator.getResultByOk(selectedCourseService.pageSelectedCourseList(request));
     }

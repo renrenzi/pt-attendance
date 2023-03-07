@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Result <T>{
+public class Result<T> {
 
     private int code;
     private String message;

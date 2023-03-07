@@ -21,6 +21,7 @@ import java.util.List;
 
 /**
  * 系统配置管理
+ *
  * @author 任人子
  */
 @Api(tags = "ConfigController", description = "系统配置管理")
@@ -37,7 +38,7 @@ public class ConfigController {
         if (CollectionUtils.isEmpty(ConfigList)) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.INTERNAL_SERVER_ERROR);
         }
-        return ResultGenerator.getResultByHttp(HttpStatusEnum.OK,ConfigList);
+        return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, ConfigList);
     }
 
     @ApiOperation("添加系统配置")
@@ -55,11 +56,12 @@ public class ConfigController {
 
     @ApiOperation("更新系统配置")
     @PostMapping("/updateConfig")
-    public Result<String> updateConfig(Config Config) {
-        if (ObjectUtils.isEmpty(Config)) {
+    public Result<String> updateConfig(Config config) {
+        if (ObjectUtils.isEmpty(config)) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
-        if (!configService.updateById(Config.setUpdateTime(DateUtils.getLocalCurrentTime()))) {
+        config.setUpdateTime(DateUtils.getLocalCurrentTime());
+        if (!configService.updateById(config)) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.INTERNAL_SERVER_ERROR);
         }
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK);
@@ -67,11 +69,11 @@ public class ConfigController {
 
     @ApiOperation("删除系统配置")
     @PostMapping("/deleteConfig")
-    public Result<String> deleteConfig(String configField){
-        if (StringUtils.isEmpty(configField)){
+    public Result<String> deleteConfig(String configField) {
+        if (StringUtils.isEmpty(configField)) {
             ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
-        if (!configService.removeById(configField)){
+        if (!configService.removeById(configField)) {
             ResultGenerator.getResultByHttp(HttpStatusEnum.INTERNAL_SERVER_ERROR);
         }
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK);

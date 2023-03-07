@@ -16,7 +16,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 public abstract class BaseSwaggerConfig {
 
     @Bean
-    public Docket createRestAPI(){
+    public Docket createRestAPI() {
         SwaggerProperties swaggerProperties = swaggerProperties();
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo(swaggerProperties))
@@ -27,7 +27,7 @@ public abstract class BaseSwaggerConfig {
         return docket;
     }
 
-    private ApiInfo apiInfo(SwaggerProperties swaggerProperties){
+    private ApiInfo apiInfo(SwaggerProperties swaggerProperties) {
         return new ApiInfoBuilder()
                 .title(swaggerProperties.getTitle())
                 .description(swaggerProperties.getDescription())
@@ -35,8 +35,10 @@ public abstract class BaseSwaggerConfig {
                 .contact(new Contact(swaggerProperties.getContactName(), swaggerProperties.getContactUrl(), swaggerProperties().getContactEmail()))
                 .build();
     }
+
     /**
      * 自定义Swagger配置
+     *
      * @return
      */
     public abstract SwaggerProperties swaggerProperties();

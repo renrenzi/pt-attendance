@@ -29,17 +29,17 @@ public class RouterInterceptor implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SaRouteInterceptor((req, res, handler) -> {
-            Map<Object, Object> roleResourceMap = redisService.hGetAll(StringConstants.RESOURCE_ROLE_MAP_KEY);
-            if (!CollectionUtils.isEmpty(roleResourceMap)) {
-                for (Map.Entry<Object, Object> entry : roleResourceMap.entrySet()) {
-                    String url = (String) entry.getKey();
-                    String[] roleList = ((List<String>) (entry.getValue())).stream().map(
-                            item -> item.split("_")[1]).toArray(String[]::new);
-                    SaRouter.match(url, r -> StpUtil.checkRoleOr(roleList));
-                }
-            }
-        })).addPathPatterns("/**")
-               // .excludePathPatterns("/**")
+                    Map<Object, Object> roleResourceMap = redisService.hGetAll(StringConstants.RESOURCE_ROLE_MAP_KEY);
+                    if (!CollectionUtils.isEmpty(roleResourceMap)) {
+                        for (Map.Entry<Object, Object> entry : roleResourceMap.entrySet()) {
+                            String url = (String) entry.getKey();
+                            String[] roleList = ((List<String>) (entry.getValue())).stream().map(
+                                    item -> item.split("_")[1]).toArray(String[]::new);
+                            SaRouter.match(url, r -> StpUtil.checkRoleOr(roleList));
+                        }
+                    }
+                })).addPathPatterns("/**")
+                // .excludePathPatterns("/**")
                 .excludePathPatterns("/front/view/**")
                 .excludePathPatterns("/admin/mini/login/info")
                 .excludePathPatterns("/admin/user/login/info");

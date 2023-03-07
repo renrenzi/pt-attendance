@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PageResult <T> {
+public class PageResult<T> {
 
     private Integer code;
 

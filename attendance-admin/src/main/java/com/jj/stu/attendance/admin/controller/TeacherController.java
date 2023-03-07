@@ -45,9 +45,10 @@ public class TeacherController {
         teacherService.updateTeacherInfo(request);
         return ResultGenerator.getResultByOk("修改成功");
     }
+
     @ApiOperation("分页获取教师列表")
     @PostMapping("/page/teacher/list")
-    public Result<PageTeacherResponse> pageTeacherList(@RequestBody PageTeacherRequest request){
+    public Result<PageTeacherResponse> pageTeacherList(@RequestBody PageTeacherRequest request) {
         ValidateUtil.validate(request);
         return ResultGenerator.getResultByOk(teacherService.pageTeacherList(request));
     }

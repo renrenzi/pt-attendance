@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * 资源角色关系ServiceImpl
+ *
  * @author 任人子
  * @date 2022/5/12  - {TIME}
  */
@@ -18,6 +19,7 @@ import java.util.List;
 public class UserRoleResourceRelationServiceImpl extends ServiceImpl<UserRoleResourceRelationMapper, UserRoleResourceRelation> implements UserRoleResourceRelationService {
     @Resource
     private UserRoleResourceRelationMapper relationMapper;
+
     @Override
     public int deleteByList(List<UserRoleResourceRelation> roleResourceRelationList) {
         return relationMapper.deleteByList(roleResourceRelationList);

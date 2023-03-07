@@ -4,13 +4,15 @@ import com.jj.stu.attendance.base.exception.ApiException;
 
 /**
  * 角色名称枚举
+ *
  * @author renrenzi
  */
 public enum RoleNameEnum {
 
     STUDENT(7, "student"),
     TEACHER(8, "teacher"),
-    MANAGER(9, "manager"),;
+    MANAGER(9, "manager"),
+    ;
 
     private final Integer roleId;
 

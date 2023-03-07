@@ -18,6 +18,7 @@ import java.util.List;
 
 /**
  * 用户资源分类管理ServiceImpl
+ *
  * @author 任人子
  * @date 2022/5/10  - {TIME}
  */
@@ -25,6 +26,7 @@ import java.util.List;
 public class UserResourceCategoryServiceImpl extends ServiceImpl<UserResourceCategoryMapper, UserResourceCategory> implements UserResourceCategoryService {
     @Resource
     private UserResourceCategoryMapper userResourceCategoryMapper;
+
     @Override
     public PageResult<UserResourceCategory> pageResourceCategory(PageCondition condition, UserResourceCategory userResourceCategory) {
         QueryWrapper<UserResourceCategory> query = new QueryWrapper<>(userResourceCategory);

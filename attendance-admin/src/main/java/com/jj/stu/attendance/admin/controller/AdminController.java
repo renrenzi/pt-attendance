@@ -40,14 +40,14 @@ public class AdminController {
 
     @ApiOperation("前台用户登录")
     @PostMapping("/mini/login/info")
-    public Result miniLoginInfo(@RequestBody MiniLoginRequest request){
+    public Result miniLoginInfo(@RequestBody MiniLoginRequest request) {
         ValidateUtil.validate(request);
         return adminService.miniLoginInfo(request);
     }
 
     @ApiOperation("分页查询用户列表")
     @PostMapping("/page/admin/info/list")
-    public Result<PageResult<PageAdminInfoResponse>> pageAdminInfoList(@RequestBody PageAdminListRequest request){
+    public Result<PageResult<PageAdminInfoResponse>> pageAdminInfoList(@RequestBody PageAdminListRequest request) {
         ValidateUtil.validate(request);
         return adminService.pageAdminInfoList(request);
     }

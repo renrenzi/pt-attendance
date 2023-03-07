@@ -1,7 +1,6 @@
 package com.jj.stu.attendance.admin.constants;
 
 
-
 /**
  * @author 任人子
  */

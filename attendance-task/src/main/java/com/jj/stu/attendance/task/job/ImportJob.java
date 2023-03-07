@@ -7,13 +7,14 @@ import org.springframework.stereotype.Component;
 
 /**
  * 导入 Job
+ *
  * @author zhangjunjie
  * @description
  */
 @Slf4j
 @Component
 @EnableScheduling
-public class ImportJob{
+public class ImportJob {
 
 
     public void executeInternal() throws JobExecutionException {

@@ -33,7 +33,7 @@ public class Generator {
 
         myBatisGenerator.generate(null);
 
-        for(String warning : warnings){
+        for (String warning : warnings) {
             System.out.println(warning);
         }
     }

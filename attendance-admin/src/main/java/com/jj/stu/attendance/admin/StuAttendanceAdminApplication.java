@@ -1,4 +1,5 @@
 package com.jj.stu.attendance.admin;
+
 import com.mzt.logapi.starter.annotation.EnableLogRecord;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 
 @SpringBootApplication(scanBasePackages = {"com.jj.stu.attendance.admin", "com.jj.stu.attendance.base",
-        "com.jj.stu.attendance.dao", "com.jj.stu.attendance.meta",  "com.jj.stu.attendance.task"})
+        "com.jj.stu.attendance.dao", "com.jj.stu.attendance.meta", "com.jj.stu.attendance.task"})
 @EnableLogRecord(tenant = "com.jj.stu.attendance.admin")
 public class StuAttendanceAdminApplication {
 

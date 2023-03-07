@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Redis操作实现类
+ *
  * @author 任人子
  * @date 2022/3/18  - {TIME}
  */
@@ -49,6 +50,7 @@ public class RedisServiceImpl implements RedisService {
     public Boolean expire(String key, long time) {
         return redisTemplate.expire(key, time, TimeUnit.SECONDS);
     }
+
     @Override
     public Object hGet(String key, String hashKey) {
         return redisTemplate.opsForHash().get(key, hashKey);
@@ -76,7 +78,7 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
-    public void hDel(String key, Object ... keys) {
+    public void hDel(String key, Object... keys) {
         redisTemplate.opsForHash().delete(key, keys);
     }
 
