@@ -31,7 +31,7 @@ public class PunchTheClockRequest {
      * 打卡时间
      */
     @NotNull
-    private Date  clockingTime;
+    private Date clockingTime;
 
     /**
      * 角色类型

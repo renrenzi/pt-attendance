@@ -2,7 +2,9 @@ package com.jj.stu.attendance.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jj.stu.attendance.dao.model.Course;
-import org.apache.ibatis.annotations.Param;import java.util.List;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface CourseMapper extends BaseMapper<Course> {
     int deleteByPrimaryKey(Integer id);

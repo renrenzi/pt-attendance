@@ -15,28 +15,28 @@ import java.util.Date;
 @Accessors(chain = true)
 public class Config {
     /**
-    * 字段名
-    */
+     * 字段名
+     */
     @TableId(type = IdType.INPUT)
     private String configField;
 
     /**
-    * 配置名
-    */
+     * 配置名
+     */
     private String configName;
 
     /**
-    * 配置项的值
-    */
+     * 配置项的值
+     */
     private String configValue;
 
     /**
-    * 创建时间
-    */
+     * 创建时间
+     */
     private Date createTime;
 
     /**
-    * 修改时间
-    */
+     * 修改时间
+     */
     private Date updateTime;
 }

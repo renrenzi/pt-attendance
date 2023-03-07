@@ -47,7 +47,7 @@ public class UserRoleRelationController {
                 .lambda().eq(UserRoleRelation::getAdminId, adminId));
         userRoleRelationService.saveBatch(roleIds.stream().map(item -> new UserRoleRelation().setAdminId(adminId)
                 .setRoleId(item)).collect(Collectors.toList()));
-        return  ResultGenerator.getResultByHttp(HttpStatusEnum.OK);
+        return ResultGenerator.getResultByHttp(HttpStatusEnum.OK);
     }
 
     @ApiOperation("获取该用户所有角色")
@@ -57,7 +57,7 @@ public class UserRoleRelationController {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
         List<Integer> roleIds = userRoleRelationService.list(new QueryWrapper<UserRoleRelation>().lambda()
-                .eq(UserRoleRelation::getAdminId, adminId))
+                        .eq(UserRoleRelation::getAdminId, adminId))
                 .stream()
                 .map(UserRoleRelation::getRoleId)
                 .collect(Collectors.toList());

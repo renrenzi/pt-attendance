@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+
 @TableName("s_user_role_relation")
 @Data
 @Accessors(chain = true)

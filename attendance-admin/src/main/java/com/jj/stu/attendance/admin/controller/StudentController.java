@@ -40,15 +40,15 @@ public class StudentController {
 
     @ApiOperation("分页获取学生列表")
     @PostMapping("/page/student/list")
-    public Result<PageStudentResponse> pageStudentList(@RequestBody PageStudentRequest request){
+    public Result<PageStudentResponse> pageStudentList(@RequestBody PageStudentRequest request) {
         ValidateUtil.validate(request);
         return ResultGenerator.getResultByOk(studentService.pageStudentList(request));
     }
-    
+
 
     @PostMapping("/batch/add/student")
     @ApiOperation("批量添加学生")
-    public void batchAddStudent(@RequestBody StudentBatchInsertRequest request){
+    public void batchAddStudent(@RequestBody StudentBatchInsertRequest request) {
         ValidateUtil.validate(request);
         studentService.batchAddStudent(request);
     }
@@ -60,7 +60,7 @@ public class StudentController {
             operator = "{{#detail.nickName}}", type = LogRecordType.STUDENT, bizNo = "{{#request.id}}")
     @PostMapping("/update/student/info")
     @ApiOperation("修改学生信息")
-    public void updateStudentInfo(@RequestBody StudentUpdateRequest request){
+    public void updateStudentInfo(@RequestBody StudentUpdateRequest request) {
         ValidateUtil.validate(request);
         studentService.updateStudentInfo(request);
     }
@@ -72,11 +72,11 @@ public class StudentController {
             operator = "{{#detail.nickName}}", type = LogRecordType.STUDENT, bizNo = "{{#studentIds}}")
     @ApiOperation("批量刪除学生列表")
     @PostMapping("/batch/delete/selected/course/list")
-    public Result<String> batchDeleteStudentList(@RequestBody List<Integer> studentIds, StpUserDetail detail){
-        if(CollectionUtils.isEmpty(studentIds)){
+    public Result<String> batchDeleteStudentList(@RequestBody List<Integer> studentIds, StpUserDetail detail) {
+        if (CollectionUtils.isEmpty(studentIds)) {
             throw new ApiException("学生列表爲空");
         }
         studentService.batchDeleteStudentList(studentIds);
-        return  ResultGenerator.getResultByOk("批量刪除学生列表成功");
+        return ResultGenerator.getResultByOk("批量刪除学生列表成功");
     }
 }

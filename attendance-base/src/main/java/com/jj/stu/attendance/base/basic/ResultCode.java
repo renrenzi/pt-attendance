@@ -3,7 +3,7 @@ package com.jj.stu.attendance.base.basic;
 /**
  * 错误码结果封
  */
-public class ResultCode implements IErrorCode{
+public class ResultCode implements IErrorCode {
 
     private final Result result;
 

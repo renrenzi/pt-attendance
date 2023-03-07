@@ -68,7 +68,7 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
         }
         // 3. 根据 Map 构造返回实体列表
         List<AttendanceDTO> result = new ArrayList<>(attendanceList.size());
-        for (Attendance attendance: attendanceList) {
+        for (Attendance attendance : attendanceList) {
             AttendanceDTO attendanceDTO = new AttendanceDTO();
             BeanUtil.copyProperties(attendance, attendanceDTO);
             Course course = courseIdToInfoMap.get(attendance.getCourseId());
@@ -76,7 +76,7 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
                 attendanceDTO.setCourseName(course.getName());
             }
             Student student = studentIdToInfoMap.get(attendance.getStudentId());
-            if (student != null){
+            if (student != null) {
                 attendanceDTO.setNickname(student.getNickName());
                 attendanceDTO.setUsername(student.getUsername());
                 attendanceDTO.setType(AttendanceTypeEnum.getAttendanceMessage(attendance.getType()));
@@ -147,7 +147,7 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
      *
      * @param attendance 出席
      */
-    private void checkAttendanceState(Attendance attendance, Course course){
+    private void checkAttendanceState(Attendance attendance, Course course) {
         // 通过课程时间检查考勤状态
         attendance.setType(AttendanceTypeEnum.ATTENDANCE.getType());
 

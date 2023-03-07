@@ -27,11 +27,11 @@ import java.util.List;
 public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> implements TeacherService {
 
     @Resource
-    private TeacherMapper  teacherMapper;
+    private TeacherMapper teacherMapper;
 
     @Override
     public void updateTeacherInfo(ManageTeacherRequest request) {
-        Teacher teacher  = convertToEntity(request);
+        Teacher teacher = convertToEntity(request);
         int result = 0;
         if (request.getId() == null) {
             teacher.setCreateDate(new Date());
@@ -43,6 +43,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
             throw new ApiException("修改或添加教师失败，请联系管理员");
         }
     }
+
     private Teacher convertToEntity(ManageTeacherRequest request) {
         return Teacher.builder()
                 .id(request.getId())
@@ -54,6 +55,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
                 .adminId(request.getAdminId())
                 .build();
     }
+
     @Override
     public PageTeacherResponse pageTeacherList(PageTeacherRequest request) {
         Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
@@ -63,6 +65,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
                 .setTeacherList(teacherList)
                 .setTotalSize(page.getTotal());
     }
+
     private QueryWrapper buildQueryWrapper(PageTeacherRequest request) {
         QueryWrapper<Teacher> queryWrapper = new QueryWrapper<>();
         Teacher teacher = request.getTeacher();

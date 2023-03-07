@@ -37,7 +37,7 @@ public class LinkController {
     @Resource
     private LinkService linkService;
 
-    @ApiOperation(value ="获取链接类型列表")
+    @ApiOperation(value = "获取链接类型列表")
     @GetMapping("/getLinkTypeList")
     public Result<List<Link>> getLinkTypeList() {
         List<Link> result = new ArrayList<Link>();
@@ -50,7 +50,7 @@ public class LinkController {
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, result);
     }
 
-    @ApiOperation(value ="分页查询链接列表")
+    @ApiOperation(value = "分页查询链接列表")
     @PostMapping("/pageLinkList")
     public Result<PageResult<Link>> pageLinkList(PageCondition<Link> condition, Link Link) {
         if (StringUtils.isEmpty(condition.getPageNum()) || StringUtils.isEmpty(condition.getPageSize())) {
@@ -59,7 +59,7 @@ public class LinkController {
         return linkService.pageLinkList(condition, Link);
     }
 
-    @ApiOperation(value ="添加链接")
+    @ApiOperation(value = "添加链接")
     @PostMapping("/addLink")
     public Result<String> addLink(Link Link) {
         if (ObjectUtils.isEmpty(Link)) {
@@ -73,7 +73,7 @@ public class LinkController {
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK);
     }
 
-    @ApiOperation(value ="修改删除状态")
+    @ApiOperation(value = "修改删除状态")
     @PostMapping("/isDel")
     public Result<String> isDel(Link Link) {
         if (ObjectUtils.isEmpty(Link)) {
@@ -85,7 +85,7 @@ public class LinkController {
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK);
     }
 
-    @ApiOperation(value ="清除链接信息")
+    @ApiOperation(value = "清除链接信息")
     @PostMapping("/clearLink")
     public Result<String> clearLink(Integer linkId) {
         if (StringUtils.isEmpty(linkId)) {
@@ -97,7 +97,7 @@ public class LinkController {
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK);
     }
 
-    @ApiOperation(value ="获取链接")
+    @ApiOperation(value = "获取链接")
     @PostMapping("/getLink")
     public Result<Link> getLink(Integer linkId) {
         if (StringUtils.isEmpty(linkId)) {
@@ -110,7 +110,7 @@ public class LinkController {
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, Link);
     }
 
-    @ApiOperation(value ="修改链接信息")
+    @ApiOperation(value = "修改链接信息")
     @PostMapping("/editLink")
     public Result<String> editLinkOrSave(Link Link) {
         if (ObjectUtils.isEmpty(Link)) {
@@ -119,7 +119,7 @@ public class LinkController {
         boolean flag;
         if (Link.getLinkId() == null) {
             flag = linkService.save(Link.setCreateTime(DateUtils.getLocalCurrentTime()));
-        }else {
+        } else {
             flag = linkService.updateById(Link);
         }
         if (!flag) {
@@ -127,5 +127,5 @@ public class LinkController {
         }
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK);
     }
-  
+
 }

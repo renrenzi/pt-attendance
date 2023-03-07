@@ -43,10 +43,10 @@ public class ClazzController {
             operator = "{{#detail.nickName}}", type = LogRecordType.CLAZZ, bizNo = "{{#request.id}}")
     @ApiOperation("修改专业详情")
     @PostMapping("/edit/clazz/detail")
-    public Result<String> editClazzDetail(@RequestBody ManageClazzRequest request, StpUserDetail detail){
+    public Result<String> editClazzDetail(@RequestBody ManageClazzRequest request, StpUserDetail detail) {
         ValidateUtil.validate(request);
         clazzService.editClazzDetail(request);
-        return  ResultGenerator.getResultByOk("修改专业详情");
+        return ResultGenerator.getResultByOk("修改专业详情");
     }
 
     @LogRecord(
@@ -56,8 +56,8 @@ public class ClazzController {
             operator = "{{#detail.nickName}}", type = LogRecordType.CLAZZ, bizNo = "{{#clazzIds}}")
     @ApiOperation("批量刪除专业列表")
     @PostMapping("/batch/delete/clazz/list")
-    public Result<String> batchDeleteClazzList(@RequestBody List<Integer> clazzIds, StpUserDetail detail){
-        if(CollectionUtils.isEmpty(clazzIds)){
+    public Result<String> batchDeleteClazzList(@RequestBody List<Integer> clazzIds, StpUserDetail detail) {
+        if (CollectionUtils.isEmpty(clazzIds)) {
             throw new ApiException("clazzIds 不能为空");
         }
         clazzService.batchDeleteClazzList(clazzIds);
@@ -66,7 +66,7 @@ public class ClazzController {
 
     @ApiOperation("分页获取专业列表")
     @PostMapping("/page/clazz/list")
-    public Result<PageClazzResponse> pageClazzList(@RequestBody PageClazzRequest request){
+    public Result<PageClazzResponse> pageClazzList(@RequestBody PageClazzRequest request) {
         ValidateUtil.validate(request);
         return ResultGenerator.getResultByOk(clazzService.pageClazzList(request));
     }

@@ -40,6 +40,7 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
     private StudentMapper studentMapper;
     @Resource
     private AdminMapper adminMapper;
+
     @Override
     public PageStudentResponse pageStudentList(PageStudentRequest request) {
         Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
@@ -50,7 +51,7 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
             adminIdToInfoMap = adminMapper.selectList(new QueryWrapper<Admin>().lambda().in(Admin::getId, adminIds)).stream().collect(Collectors.toMap(Admin::getId, Function.identity()));
         }
         List<StudentDTO> studentDTOList = Lists.newArrayList();
-        for (Student student: studentList) {
+        for (Student student : studentList) {
             StudentDTO studentDTO = new StudentDTO();
             BeanUtils.copyProperties(student, studentDTO);
 
@@ -67,7 +68,7 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
     @Override
     public void batchAddStudent(StudentBatchInsertRequest request) {
         // TODO 后续优化
-        for(Student student : request.getStudentList()){
+        for (Student student : request.getStudentList()) {
             student.setCreateDate(new Date());
             studentMapper.insertSelective(student);
         }

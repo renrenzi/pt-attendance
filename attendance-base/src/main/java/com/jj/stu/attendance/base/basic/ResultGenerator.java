@@ -10,16 +10,19 @@ public class ResultGenerator {
     public ResultGenerator() {
 
     }
+
     public static <T> Result<T> getResultByMessage(String message) {
         Result<T> result = new Result<T>();
         result.setMessage(message);
         return result;
     }
+
     public static <T> Result<T> getResultByErrorCode(IErrorCode errorCode) {
         Result<T> result = new Result<T>();
         result.setData((T) errorCode);
         return result;
     }
+
     public static <T> Result<T> getResultByHttp(HttpStatusEnum constants, String msg, T data) {
         Result<T> result = new Result<T>();
         result.setCode(constants.getCode());
@@ -79,6 +82,7 @@ public class ResultGenerator {
         result.setData(data);
         return result;
     }
+
     public static <T> Result<T> getResultByError(T data) {
         Result<T> result = new Result<T>();
         result.setCode(HttpStatusEnum.BAD_GATEWAY.getCode());

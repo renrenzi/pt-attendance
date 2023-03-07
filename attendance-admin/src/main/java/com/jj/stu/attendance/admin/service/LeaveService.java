@@ -25,12 +25,14 @@ public interface LeaveService extends IService<Leave> {
 
     /**
      * 批量删除请假列表
+     *
      * @param leaveIds
      */
     void batchDeleteLeaveList(List<Integer> leaveIds);
 
     /**
      * 修改请假信息
+     *
      * @param request
      */
     void updateLeaveInfo(ManageLeaveRequest request);

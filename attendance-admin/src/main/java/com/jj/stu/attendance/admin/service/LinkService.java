@@ -8,6 +8,7 @@ import com.jj.stu.attendance.dao.model.Link;
 
 /**
  * 友链Service
+ *
  * @author 任人子
  */
 public interface LinkService extends IService<Link> {

@@ -86,16 +86,18 @@ public class UserRoleController {
 
     /**
      * 保存角色资源关系List
+     *
      * @param userRoleRequest
      * @return
      */
-    private void saveRoleResourceRelationList(UserRoleRequest userRoleRequest){
+    private void saveRoleResourceRelationList(UserRoleRequest userRoleRequest) {
         List<UserRoleResourceRelation> roleResourceRelationList = userRoleRequest.getResourceIds().stream()
                 .map(id -> new UserRoleResourceRelation().setResourceId(id)
                         .setRoleId(userRoleRequest.getRoleId())).collect(Collectors.toList());
         roleResourceRelationService.deleteByList(roleResourceRelationList);
         roleResourceRelationService.saveBatch(roleResourceRelationList);
     }
+
     @ApiOperation("修改角色权限")
     @PostMapping("/editRole")
     @Transactional(rollbackFor = {Exception.class})
@@ -105,10 +107,10 @@ public class UserRoleController {
         }
         userRoleRequest.setCreateTime(DateUtils.getLocalCurrentTime());
         boolean save = userRoleService.updateById(userRoleRequest);
-        if(!CollectionUtils.isEmpty(userRoleRequest.getResourceIds())){
+        if (!CollectionUtils.isEmpty(userRoleRequest.getResourceIds())) {
             saveRoleResourceRelationList(userRoleRequest);
         }
-        if(!save){
+        if (!save) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_GATEWAY);
         }
         userResourceService.initRoleResourceMap();

@@ -44,12 +44,12 @@ public class StpInterfaceImpl implements StpInterface {
     public List<String> getPermissionList(Object adminUserId, String s) {
         Map<Object, Object> roleResourceMap = redisService.hGetAll(StringConstants.RESOURCE_ROLE_MAP_KEY);
         List<String> permissions = new ArrayList<>();
-        if(CollectionUtils.isEmpty(roleResourceMap)){
+        if (CollectionUtils.isEmpty(roleResourceMap)) {
             return permissions;
         }
         List<Integer> roleIds = userRoleRelationMapper.selectList(new QueryWrapper<UserRoleRelation>()
-                .lambda()
-                .eq(UserRoleRelation::getAdminId, adminUserId))
+                        .lambda()
+                        .eq(UserRoleRelation::getAdminId, adminUserId))
                 .stream()
                 .map(UserRoleRelation::getRoleId)
                 .collect(Collectors.toList());
@@ -74,8 +74,8 @@ public class StpInterfaceImpl implements StpInterface {
     @Override
     public List<String> getRoleList(Object adminUserId, String s) {
         List<Integer> roleIds = userRoleRelationMapper.selectList(new QueryWrapper<UserRoleRelation>()
-                .lambda()
-                .eq(UserRoleRelation::getAdminId, adminUserId))
+                        .lambda()
+                        .eq(UserRoleRelation::getAdminId, adminUserId))
                 .stream()
                 .map(UserRoleRelation::getRoleId)
                 .collect(Collectors.toList());

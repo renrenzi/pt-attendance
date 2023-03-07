@@ -26,19 +26,19 @@ import org.springframework.web.method.HandlerMethod;
 public class UserInformationIntoAop {
     @SneakyThrows
     @Around(value = "@within(org.springframework.web.bind.annotation.RestController)")
-    public Object around(ProceedingJoinPoint pjp){
+    public Object around(ProceedingJoinPoint pjp) {
 
-        MethodSignature methodSignature = (MethodSignature)pjp.getSignature();
+        MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
 
-        HandlerMethod handlerMethod = new HandlerMethod(pjp.getTarget(),methodSignature.getMethod());
+        HandlerMethod handlerMethod = new HandlerMethod(pjp.getTarget(), methodSignature.getMethod());
         MethodParameter[] methodParameters = handlerMethod.getMethodParameters();
 
-        if(ArrayUtil.isNotEmpty(methodParameters)){
+        if (ArrayUtil.isNotEmpty(methodParameters)) {
             for (MethodParameter methodParameter : methodParameters) {
                 if (methodParameter.getParameterType().isAssignableFrom(StpUserDetail.class)) {
                     Object obj = pjp.getArgs()[methodParameter.getParameterIndex()];
-                    if(obj instanceof StpUserDetail){
-                        StpUserDetail detail = (StpUserDetail)obj;
+                    if (obj instanceof StpUserDetail) {
+                        StpUserDetail detail = (StpUserDetail) obj;
                         if (StrUtil.isBlankIfStr(detail.getUserId())) {
                             ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
                             String tokenValue = servletRequestAttributes.getRequest().getHeader("Authorization");

@@ -5,7 +5,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *  Redis操作Service
+ * Redis操作Service
+ *
  * @author 任人子
  * @date 2022/3/18  - {TIME}
  */
@@ -13,12 +14,15 @@ public interface RedisService {
 
     /**
      * String结构保存属性
+     *
      * @param key
      * @param value
      */
     void set(String key, Object value);
+
     /**
      * String结构获取属性
+     *
      * @param key
      * @return
      */
@@ -26,11 +30,14 @@ public interface RedisService {
 
     /**
      * String结构删除key
+     *
      * @param key
      */
     void del(String key);
+
     /**
      * String结构设置过期时间
+     *
      * @param key
      * @param time
      * @return
@@ -39,6 +46,7 @@ public interface RedisService {
 
     /**
      * 获取Hash结构中的属性
+     *
      * @param key
      * @param hashKey
      * @return
@@ -47,6 +55,7 @@ public interface RedisService {
 
     /**
      * 向Hash结构中放入一个属性
+     *
      * @param key
      * @param hashKey
      * @param value
@@ -57,6 +66,7 @@ public interface RedisService {
 
     /**
      * 向Hash结构中放入一个属性
+     *
      * @param key
      * @param hashKey
      * @param value
@@ -65,6 +75,7 @@ public interface RedisService {
 
     /**
      * 向Hash放入整个Nap
+     *
      * @param key
      * @param map
      */
@@ -72,6 +83,7 @@ public interface RedisService {
 
     /**
      * 直接获取整个Hash结构
+     *
      * @param key
      * @return
      */
@@ -79,20 +91,23 @@ public interface RedisService {
 
     /**
      * 删除Hash结构里的多个Key
+     *
      * @param key
      * @param keys
      */
-    void hDel(String key, Object ... keys);
+    void hDel(String key, Object... keys);
 
     /**
-     *  往set 结构里面添加元素
+     * 往set 结构里面添加元素
+     *
      * @param key
      * @param values
      */
-    void setAdd(String key, Object ... values);
+    void setAdd(String key, Object... values);
 
     /**
      * 获取set结果
+     *
      * @param key
      * @return
      */
@@ -101,6 +116,7 @@ public interface RedisService {
 
     /**
      * 向List头插入数据
+     *
      * @param key
      * @param value
      */
@@ -109,6 +125,7 @@ public interface RedisService {
 
     /**
      * 向List头插入数据
+     *
      * @param key
      * @param value
      */
@@ -116,6 +133,7 @@ public interface RedisService {
 
     /**
      * 获取某一范围的List
+     *
      * @param key
      * @param start
      * @param end
@@ -125,6 +143,7 @@ public interface RedisService {
 
     /**
      * 向BitMap插入一条数据
+     *
      * @param key
      * @param value
      */

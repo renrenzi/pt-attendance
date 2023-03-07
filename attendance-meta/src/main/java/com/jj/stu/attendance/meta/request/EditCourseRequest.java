@@ -14,7 +14,7 @@ import java.util.Date;
  * @date 2022/11/22
  */
 @Data
-public class EditCourseRequest{
+public class EditCourseRequest {
 
     private Integer id;
 
@@ -50,8 +50,8 @@ public class EditCourseRequest{
 
     private String info;
 
-    public void checkSelectedNumToMaxNum(){
-        if(selectedNum > maxNum){
+    public void checkSelectedNumToMaxNum() {
+        if (selectedNum > maxNum) {
             throw new ApiException("选课人数不能大于最大人数");
         }
     }

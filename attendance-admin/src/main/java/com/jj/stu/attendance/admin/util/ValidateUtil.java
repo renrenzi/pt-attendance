@@ -14,9 +14,9 @@ public class ValidateUtil {
             .configure().failFast(true)
             .buildValidatorFactory().getValidator();
 
-    public static <T> void validate(T obj){
+    public static <T> void validate(T obj) {
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(obj);
-        if (constraintViolations.size() > 0){
+        if (constraintViolations.size() > 0) {
             ConstraintViolation<T> item = constraintViolations.iterator().next();
             throw new ApiException(String.format("参数校验失败：[%s] %s", item.getPropertyPath(), item.getMessage()));
         }

@@ -40,7 +40,7 @@ public class AttendanceController {
 
     @ApiOperation("打卡")
     @PostMapping("/punch/the/clock")
-    public Result punchTheClock(@RequestBody PunchTheClockRequest request){
+    public Result punchTheClock(@RequestBody PunchTheClockRequest request) {
         ValidateUtil.validate(request);
         return attendanceService.punchTheClock(request);
     }
@@ -52,7 +52,7 @@ public class AttendanceController {
             operator = "{{#detail.nickName}}", type = LogRecordType.ATTENDANCE, bizNo = "{{#request.id}}")
     @ApiOperation("修改考勤信息")
     @PostMapping("/update/attendance/info")
-    public Result<String> updateAttendanceInfo(@RequestBody ManageAttendanceRequest request, StpUserDetail detail){
+    public Result<String> updateAttendanceInfo(@RequestBody ManageAttendanceRequest request, StpUserDetail detail) {
         ValidateUtil.validate(request);
         request.setUserId(detail.getUserId());
         attendanceService.updateAttendanceInfo(request);
@@ -66,8 +66,8 @@ public class AttendanceController {
             operator = "{{#detail.nickName}}", type = LogRecordType.ATTENDANCE, bizNo = "{{#attendanceIds}}")
     @ApiOperation("批量删除考勤列表")
     @PostMapping("/batch/delete/attendance/list")
-    public Result<String> batchDeleteAttendanceList(@RequestBody List<Integer> attendanceIds, StpUserDetail detail){
-        if (CollectionUtils.isEmpty(attendanceIds)){
+    public Result<String> batchDeleteAttendanceList(@RequestBody List<Integer> attendanceIds, StpUserDetail detail) {
+        if (CollectionUtils.isEmpty(attendanceIds)) {
             throw new ApiException("考勤id列表不能为空");
         }
         attendanceService.batchDeleteAttendanceList(attendanceIds);
@@ -76,7 +76,7 @@ public class AttendanceController {
 
     @ApiOperation("分页获取考勤列表")
     @PostMapping("/page/attendance/list")
-    public Result<PageAttendanceResponse> pageAttendanceList(@RequestBody PageAttendanceRequest request){
+    public Result<PageAttendanceResponse> pageAttendanceList(@RequestBody PageAttendanceRequest request) {
         ValidateUtil.validate(request);
         return ResultGenerator.getResultByOk(attendanceService.pageAttendanceList(request));
     }

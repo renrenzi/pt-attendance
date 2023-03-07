@@ -36,7 +36,7 @@ public class QuartzConfig {
 
 
     /**
-     *  配置导出触发器
+     * 配置导出触发器
      */
     @Bean(name = "exportTrigger")
     public SimpleTriggerFactoryBean exportTrigger(JobDetail exportJobDetail) {
@@ -68,7 +68,7 @@ public class QuartzConfig {
 
 
     /**
-     *  配置导入触发器
+     * 配置导入触发器
      */
     @Bean(name = "importTrigger")
     public CronTriggerFactoryBean importTrigger(JobDetail importJobDetail) {

@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 
 /**
  * 用户资源管理Controller
+ *
  * @author 任人子
  * @date 2022/5/10  - {TIME}
  */
@@ -39,42 +40,45 @@ public class UserResourceController {
     private UserResourceService userResourceService;
     @Resource
     private UserRoleResourceRelationService roleResourceRelationService;
+
     @ApiOperation("获取角色对应资源")
     @PostMapping("/getResourceByRoleId")
     @Transactional(rollbackFor = {Exception.class})
-    public Result<List<UserResource>> getResourceByRoleId(Integer roleId){
-        if(roleId == null){
+    public Result<List<UserResource>> getResourceByRoleId(Integer roleId) {
+        if (roleId == null) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
         List<Integer> resourceIds = roleResourceRelationService.list(new QueryWrapper<UserRoleResourceRelation>()
-                .lambda()
-                .eq(UserRoleResourceRelation::getRoleId, roleId))
+                        .lambda()
+                        .eq(UserRoleResourceRelation::getRoleId, roleId))
                 .stream()
                 .map(UserRoleResourceRelation::getResourceId)
                 .collect(Collectors.toList());
-        if(CollectionUtils.isEmpty(resourceIds)){
+        if (CollectionUtils.isEmpty(resourceIds)) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.INTERNAL_SERVER_ERROR);
         }
         List<UserResource> resourceList = userResourceService.listByIds(resourceIds);
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, resourceList);
     }
+
     @ApiOperation("分页获取资源列表")
     @PostMapping("/pageResource")
-    public Result<PageResult<UserResource>> pageResource(PageCondition condition, UserResource userResource){
-        if(condition == null || condition.getPageNum() == null || condition.getPageSize() == null){
+    public Result<PageResult<UserResource>> pageResource(PageCondition condition, UserResource userResource) {
+        if (condition == null || condition.getPageNum() == null || condition.getPageSize() == null) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, userResourceService.pageResource(condition, userResource));
     }
+
     @ApiOperation("添加资源")
     @PostMapping("/addResource")
-    public Result addResource(UserResource userResource){
-        if(userResource == null){
+    public Result addResource(UserResource userResource) {
+        if (userResource == null) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
         userResource.setCreateTime(DateUtils.getLocalCurrentTime());
         boolean save = userResourceService.save(userResource);
-        if(!save){
+        if (!save) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_GATEWAY);
         }
         userResourceService.initRoleResourceMap();
@@ -87,27 +91,28 @@ public class UserResourceController {
      */
     @ApiOperation("修改资源")
     @PostMapping("/editResource")
-    public Result editResource(UserResource userResource){
-        if(userResource == null || userResource.getId() == null){
+    public Result editResource(UserResource userResource) {
+        if (userResource == null || userResource.getId() == null) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
         // 前端传参问题
         userResource.setCreateTime(null);
         boolean save = userResourceService.updateById(userResource);
-        if(!save){
+        if (!save) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_GATEWAY);
         }
         userResourceService.initRoleResourceMap();
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK);
     }
+
     @ApiOperation("批量删除资源")
     @PostMapping("/deleteResources")
-    public Result deleteResources(@RequestParam List<Integer> ids){
-        if(CollectionUtils.isEmpty(ids)){
+    public Result deleteResources(@RequestParam List<Integer> ids) {
+        if (CollectionUtils.isEmpty(ids)) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
         boolean save = userResourceService.removeByIds(ids);
-        if(!save){
+        if (!save) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_GATEWAY);
         }
         userResourceService.initRoleResourceMap();

@@ -18,6 +18,7 @@ import com.jj.stu.attendance.meta.response.PageAdminInfoResponse;
 public interface AdminService extends IService<Admin> {
     /**
      * 前台登录
+     *
      * @param request
      * @return
      */
@@ -29,10 +30,11 @@ public interface AdminService extends IService<Admin> {
      * @param request 请求
      * @return {@link Result}
      */
-    Result<PageResult<PageAdminInfoResponse>>  pageAdminInfoList(PageAdminListRequest request);
+    Result<PageResult<PageAdminInfoResponse>> pageAdminInfoList(PageAdminListRequest request);
 
     /**
      * 后台用户登录
+     *
      * @param request 请求
      * @return {@link Result}
      */
