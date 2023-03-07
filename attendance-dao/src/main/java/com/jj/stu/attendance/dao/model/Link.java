@@ -1,5 +1,8 @@
 package com.jj.stu.attendance.dao.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -7,12 +10,14 @@ import lombok.experimental.Accessors;
 import java.util.Date;
 
 @Data
+@TableName("s_link")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 public class Link {
     /**
     * 友链表主键id
     */
+    @TableId(type = IdType.AUTO)
     private Integer linkId;
 
     /**

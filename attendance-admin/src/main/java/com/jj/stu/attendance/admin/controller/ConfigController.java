@@ -55,11 +55,12 @@ public class ConfigController {
 
     @ApiOperation("更新系统配置")
     @PostMapping("/updateConfig")
-    public Result<String> updateConfig(Config Config) {
-        if (ObjectUtils.isEmpty(Config)) {
+    public Result<String> updateConfig(Config config) {
+        if (ObjectUtils.isEmpty(config)) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
-        if (!configService.updateById(Config.setUpdateTime(DateUtils.getLocalCurrentTime()))) {
+        config.setUpdateTime(DateUtils.getLocalCurrentTime());
+        if (!configService.updateById(config)) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.INTERNAL_SERVER_ERROR);
         }
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK);
