@@ -4,6 +4,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.jj.stu.attendance.base.basic.StpUserDetail;
+import com.jj.stu.attendance.base.exception.ApiException;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -27,38 +28,36 @@ public class UserInformationIntoAop {
     @SneakyThrows
     @Around(value = "@within(org.springframework.web.bind.annotation.RestController)")
     public Object around(ProceedingJoinPoint pjp) {
+        try{
+            MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
+            HandlerMethod handlerMethod = new HandlerMethod(pjp.getTarget(), methodSignature.getMethod());
+            MethodParameter[] methodParameters = handlerMethod.getMethodParameters();
 
-        MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
-
-        HandlerMethod handlerMethod = new HandlerMethod(pjp.getTarget(), methodSignature.getMethod());
-        MethodParameter[] methodParameters = handlerMethod.getMethodParameters();
-
-        if (ArrayUtil.isNotEmpty(methodParameters)) {
-            for (MethodParameter methodParameter : methodParameters) {
-                if (methodParameter.getParameterType().isAssignableFrom(StpUserDetail.class)) {
-                    Object obj = pjp.getArgs()[methodParameter.getParameterIndex()];
-                    if (obj instanceof StpUserDetail) {
-                        StpUserDetail detail = (StpUserDetail) obj;
-                        if (StrUtil.isBlankIfStr(detail.getUserId())) {
-                            ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-                            String tokenValue = servletRequestAttributes.getRequest().getHeader("Authorization");
-                            Integer loginId = Integer.valueOf((String) StpUtil.getLoginIdByToken(tokenValue));
-                            detail.setUserId(1);
-                            detail.setUsername("test");
-                            detail.setNickName("test");
-                            // todo 用户信息从redis中取
-                            log.info("detail -> {}", obj.toString());
+            if (ArrayUtil.isNotEmpty(methodParameters)) {
+                for (MethodParameter methodParameter : methodParameters) {
+                    if (methodParameter.getParameterType().isAssignableFrom(StpUserDetail.class)) {
+                        Object obj = pjp.getArgs()[methodParameter.getParameterIndex()];
+                        if (obj instanceof StpUserDetail) {
+                            StpUserDetail detail = (StpUserDetail) obj;
+                            if (StrUtil.isBlankIfStr(detail.getUserId())) {
+                                ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+                                String tokenValue = servletRequestAttributes.getRequest().getHeader("Authorization");
+                                Integer loginId = Integer.valueOf((String) StpUtil.getLoginIdByToken(tokenValue));
+                                detail.setUserId(1);
+                                detail.setUsername("test");
+                                detail.setNickName("test");
+                                // todo 用户信息从redis中取
+                                log.info("detail -> {}", obj.toString());
+                            }
                         }
-
                     }
-
-
                 }
             }
+        }catch (Exception e) {
+            throw new ApiException("用户未登录或 token 失效！");
         }
 
         Object result = pjp.proceed();
-
         return result;
 
     }

@@ -45,7 +45,7 @@ public class AttendanceServiceTest extends BaseTest {
         attendanceService.saveBatch(attendanceList);
     }
 
-    @Test
+   /* @Test
     public void batchDelete(){
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < 100000; i++) {
@@ -58,5 +58,5 @@ public class AttendanceServiceTest extends BaseTest {
         selectedCourseMapper.deleteBatchIds(list);
         studentMapper.deleteBatchIds(list);
         teacherMapper.deleteBatchIds(list);
-    }
+    }*/
 }

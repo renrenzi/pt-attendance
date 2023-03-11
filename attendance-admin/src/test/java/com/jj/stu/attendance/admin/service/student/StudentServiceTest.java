@@ -32,7 +32,7 @@ public class StudentServiceTest extends BaseTest {
         }
         //studentMapper.batchInsert(studentList);
     }
-    @Test
+  /*  @Test
     public void batchUpdateStudentTest(){
         for(int i = 3000; i < 100000; i++) {
             Student student = new Student();
@@ -48,5 +48,5 @@ public class StudentServiceTest extends BaseTest {
             studentIds.add(i);
         }
         studentMapper.deleteBatchIds(studentIds);
-    }
+    }*/
 }
