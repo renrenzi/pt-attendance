@@ -33,6 +33,11 @@ public class TeacherController {
     @Resource
     private TeacherService teacherService;
 
+    @PostMapping("/batch/delete/user")
+    public Result batchDeleteUser() {
+        return null;
+    }
+
     @LogRecord(
             fail = "修改学生信息失败，失败原因：「{{#_errorMsg}}」",
             subType = "MANAGER_VIEW",
