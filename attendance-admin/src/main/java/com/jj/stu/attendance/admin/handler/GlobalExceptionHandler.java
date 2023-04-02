@@ -1,17 +1,14 @@
 package com.jj.stu.attendance.admin.handler;
 
-import cn.dev33.satoken.exception.*;
+import cn.dev33.satoken.exception.NotLoginException;
+import cn.dev33.satoken.exception.NotPermissionException;
+import cn.dev33.satoken.exception.NotRoleException;
 import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.basic.ResultGenerator;
 import com.jj.stu.attendance.base.constants.HttpStatusEnum;
 import com.jj.stu.attendance.base.exception.ApiException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.validation.BindException;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -70,34 +67,4 @@ public class GlobalExceptionHandler {
         return ResultGenerator.getResultByMessage(e.getMessage());
     }
 
-    @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public Result handleValidException(MethodArgumentNotValidException e) {
-        BindingResult bindingResult = e.getBindingResult();
-        String message = null;
-        if (bindingResult.hasErrors()) {
-            FieldError fieldError = bindingResult.getFieldError();
-            if (fieldError != null) {
-                message = fieldError.getField() + fieldError.getDefaultMessage();
-            }
-        }
-        return ResultGenerator.getResultByHttp(HttpStatusEnum.VALIDATION_ARGUMENT, message);
-    }
-
-    @ExceptionHandler(value = BindException.class)
-    public Result handleValidException(BindException e) {
-        BindingResult bindingResult = e.getBindingResult();
-        String message = null;
-        if (bindingResult.hasErrors()) {
-            FieldError fieldError = bindingResult.getFieldError();
-            if (fieldError != null) {
-                message = fieldError.getField() + fieldError.getDefaultMessage();
-            }
-        }
-        return ResultGenerator.getResultByHttp(HttpStatusEnum.VALIDATION_ARGUMENT, message);
-    }
-
-    @ExceptionHandler({HttpMessageNotReadableException.class})
-    public Result messageExceptionHandler(HttpMessageNotReadableException e) {
-        return ResultGenerator.getResultByMessage(e.getMessage());
-    }
 }

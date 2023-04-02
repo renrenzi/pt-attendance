@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.service.TeacherService;
+import com.jj.stu.attendance.base.basic.Result;
+import com.jj.stu.attendance.base.basic.ResultGenerator;
 import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.dao.mapper.TeacherMapper;
 import com.jj.stu.attendance.dao.model.Teacher;
@@ -28,6 +30,15 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
 
     @Resource
     private TeacherMapper teacherMapper;
+
+    @Override
+    public Result batchDeleteUser(List<Integer> teacherIds) {
+        int result = teacherMapper.deleteBatchIds(teacherIds);
+        if (result < 0) {
+            return ResultGenerator.getResultByError("批量删除教师信息失败");
+        }
+        return ResultGenerator.getResultByOk(result);
+    }
 
     @Override
     public void updateTeacherInfo(ManageTeacherRequest request) {
