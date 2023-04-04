@@ -30,4 +30,11 @@ public interface ClazzService extends IService<Clazz> {
      * @param request 请求
      */
     void editClazzDetail(ManageClazzRequest request);
+
+    /**
+     * 获取所有专业列表
+     *
+     * @return {@link Object}
+     */
+    List<Clazz> getAllClazzList();
 }

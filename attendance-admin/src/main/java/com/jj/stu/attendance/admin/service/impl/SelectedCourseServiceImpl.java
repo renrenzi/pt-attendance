@@ -22,10 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -82,7 +79,7 @@ public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper,
         List<Integer> courseIds = new ArrayList<Integer>() {{
             add(request.getCourseId());
             add(request.getOldCourseId());
-        }};
+        }}.stream().filter(Objects::nonNull).distinct().collect(Collectors.toList());
         List<Course> courseList = courseMapper.selectByList(courseIds);
         if (courseList == null || courseIds.size() != courseList.size()) {
             throw new ApiException("所选课程无效, 选课操作失败");
@@ -110,8 +107,11 @@ public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper,
         Map<Integer, Course> courseIdToItemMap = courseMapper.selectBatchIds(courseIds).stream().collect(Collectors.toMap(Course::getId, Function.identity(), (v2, v1) -> v1));
         for (Integer courseId : courseIds) {
             Course course = courseIdToItemMap.get(courseId);
-            course.setSelectedNum(course.getSelectedNum() - 1);
-            courseMapper.updateByPrimaryKey(course);
+            if (Objects.nonNull(course)) {
+                course.setSelectedNum(Math.max(course.getSelectedNum() - 1, 0));
+                // 将课程的选课数减一
+                courseMapper.updateByPrimaryKey(course);
+            }
         }
         int res = selectedCourseMapper.deleteBatchIds(selectedCourseIds);
         if (res != 1) {

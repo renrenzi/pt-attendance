@@ -6,12 +6,16 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * 管理员表
  */
 @Data
 @TableName("s_admin")
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 public class Admin {
     private static final long serialVersionUID = 1L;
     @TableId(type = IdType.AUTO)

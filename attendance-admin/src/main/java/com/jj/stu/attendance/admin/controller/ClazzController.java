@@ -2,12 +2,13 @@ package com.jj.stu.attendance.admin.controller;
 
 
 import com.jj.stu.attendance.admin.service.ClazzService;
+import com.jj.stu.attendance.admin.util.ValidateUtil;
 import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.basic.ResultGenerator;
 import com.jj.stu.attendance.base.basic.StpUserDetail;
 import com.jj.stu.attendance.base.constants.LogRecordType;
 import com.jj.stu.attendance.base.exception.ApiException;
-import com.jj.stu.attendance.admin.util.ValidateUtil;
+import com.jj.stu.attendance.dao.model.Clazz;
 import com.jj.stu.attendance.meta.request.ManageClazzRequest;
 import com.jj.stu.attendance.meta.request.PageClazzRequest;
 import com.jj.stu.attendance.meta.response.PageClazzResponse;
@@ -15,10 +16,7 @@ import com.mzt.logapi.starter.annotation.LogRecord;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -71,4 +69,9 @@ public class ClazzController {
         return ResultGenerator.getResultByOk(clazzService.pageClazzList(request));
     }
 
+    @ApiOperation("获取所有专业信息")
+    @GetMapping("/get/all/clazz/list")
+    public Result<List<Clazz>> getAllClazzList() {
+        return ResultGenerator.getResultByOk(clazzService.getAllClazzList());
+    }
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.jj.stu.attendance.admin.constants.CommonStatusEnum;
 import com.jj.stu.attendance.admin.service.ClazzService;
 import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.dao.mapper.ClazzMapper;
@@ -69,4 +70,10 @@ public class ClazzServiceImpl extends ServiceImpl<ClazzMapper, Clazz> implements
                 .setClazzList(clazzList)
                 .setTotalSize(page.getTotal());
     }
+
+    @Override
+    public List<Clazz> getAllClazzList() {
+        return clazzMapper.selectList(new QueryWrapper<Clazz>().lambda().eq(Clazz::getState, CommonStatusEnum.ENABLE.getCode()));
+    }
+
 }
