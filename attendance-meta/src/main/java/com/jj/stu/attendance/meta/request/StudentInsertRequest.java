@@ -1,33 +1,24 @@
 package com.jj.stu.attendance.meta.request;
 
-
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
-/**
- * 学生更新请求
- *
- * @author zhangjunjie
- * @date 2023/03/06
- */
 @Data
-public class StudentUpdateRequest {
-
-    @NotNull
-    private Integer id;
+public class StudentInsertRequest {
 
     /**
      * 学号
      */
-    @NotBlank
+    @NotNull
+    @Length(max = 9)
     private String username;
 
     /**
-     * 姓名
+     * 密码
      */
+    @NotNull
     private String password;
 
     /**
@@ -38,26 +29,18 @@ public class StudentUpdateRequest {
     /**
      * 专业Id
      */
+    @NotNull
     private Integer clazzId;
 
     /**
      * 性别
      */
     private String sex;
+
     /**
-     * 电话
+     * 联系方式
      */
     private String mobile;
-
-    /**
-     * 创建时间
-     */
-    private Date createDate;
-
-    /**
-     * 关联用户id
-     */
-    private Integer adminId;
 
     /**
      * 创建用户名

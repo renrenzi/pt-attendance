@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.jj.stu.attendance.dao.model.Student;
 import com.jj.stu.attendance.meta.request.PageStudentRequest;
 import com.jj.stu.attendance.meta.request.StudentBatchInsertRequest;
+import com.jj.stu.attendance.meta.request.StudentInsertRequest;
 import com.jj.stu.attendance.meta.request.StudentUpdateRequest;
 import com.jj.stu.attendance.meta.response.PageStudentResponse;
 
@@ -46,4 +47,12 @@ public interface StudentService extends IService<Student> {
      * @param studentIds 学生id
      */
     void batchDeleteStudentList(List<Integer> studentIds);
+
+    /**
+     * 添加学生
+     *
+     * @param request 要求
+     * @return {@link Integer}
+     */
+    Integer addStudent(StudentInsertRequest request);
 }

@@ -33,6 +33,9 @@ public class Student {
      */
     private String password;
 
+    /**
+     * 昵称
+     */
     private String nickName;
 
     /**
@@ -40,8 +43,14 @@ public class Student {
      */
     private Integer clazzId;
 
+    /**
+     * 性别
+     */
     private String sex;
 
+    /**
+     * 联系方式
+     */
     private String mobile;
 
     /**

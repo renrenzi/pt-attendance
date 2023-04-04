@@ -22,6 +22,9 @@ public class StudentDTO {
      */
     private String password;
 
+    /**
+     * 昵称
+     */
     private String nickName;
 
     /**
@@ -29,8 +32,14 @@ public class StudentDTO {
      */
     private Integer clazzId;
 
+    /**
+     * 性别
+     */
     private String sex;
 
+    /**
+     * 联系方式
+     */
     private String mobile;
 
     /**
@@ -47,4 +56,9 @@ public class StudentDTO {
      * ADMIN 消息封装
      */
     private AdminDTO adminDTO;
+
+    /**
+     * 专业名称
+     */
+    private String clazzName;
 }
