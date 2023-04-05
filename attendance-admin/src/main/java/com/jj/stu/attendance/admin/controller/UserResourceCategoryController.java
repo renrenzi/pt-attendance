@@ -23,9 +23,8 @@ import java.util.List;
  * 用户资源分类管理Controller
  *
  * @author 任人子
- * @date 2022/5/10  - {TIME}
  */
-@Api(tags = "userResourceCategoryController", description = "用户资源分类管理")
+@Api(tags = "用户资源分类管理")
 @RequestMapping("/user/resource/category")
 @RestController
 public class UserResourceCategoryController {

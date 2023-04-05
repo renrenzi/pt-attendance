@@ -115,7 +115,7 @@ public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper,
         }
         int res = selectedCourseMapper.deleteBatchIds(selectedCourseIds);
         if (res != 1) {
-            throw new ApiException("批量刪除選課列表失敗");
+            throw new ApiException("批量刪除选課列表失敗");
         }
     }
 

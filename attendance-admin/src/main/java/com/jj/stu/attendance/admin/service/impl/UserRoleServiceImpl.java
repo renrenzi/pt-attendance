@@ -6,7 +6,10 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.basic.PageCondition;
 import com.jj.stu.attendance.admin.basic.PageResult;
+import com.jj.stu.attendance.admin.constants.CommonStatusEnum;
 import com.jj.stu.attendance.admin.service.UserRoleService;
+import com.jj.stu.attendance.base.basic.Result;
+import com.jj.stu.attendance.base.basic.ResultGenerator;
 import com.jj.stu.attendance.dao.mapper.UserRoleMapper;
 import com.jj.stu.attendance.dao.model.UserRole;
 import org.springframework.stereotype.Service;
@@ -37,4 +40,11 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
         pageResult.setData(userRoleList);
         return pageResult;
     }
+
+    @Override
+    public Result<List<UserRole>> getAllEnableRole() {
+        return ResultGenerator.getResultByOk(userRoleMapper.selectList(new QueryWrapper<UserRole>()
+                .lambda().eq(UserRole::getRoleStatus, CommonStatusEnum.ENABLE.getCode())));
+    }
+
 }

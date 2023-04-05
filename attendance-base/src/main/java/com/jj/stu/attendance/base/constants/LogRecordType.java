@@ -14,6 +14,36 @@ public class LogRecordType {
     public final static String ADMIN_USER = "admin_user";
 
     /**
+     * 用户资源
+     */
+    public final static String USER_RESOURCE = "user_resource";
+
+    /**
+     * 用户资源分类
+     */
+    public final static String USER_RESOURCE_CATEGORY = "user_resource_category";
+
+    /**
+     * 用户角色
+     */
+    public final static String USER_ROLE = "user_role";
+
+    /**
+     * 用户角色关系
+     */
+    public final static String USER_ROLE_RELATION = "user_role_relation";
+
+    /**
+     * 系统配置
+     */
+    public final static String CONFIG = "config";
+
+    /**
+     * 链接
+     */
+    public final static String LINK = "link";
+
+    /**
      * 考勤
      */
     public final static String ATTENDANCE = "attendance";
