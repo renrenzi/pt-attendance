@@ -17,10 +17,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -30,9 +27,8 @@ import java.util.stream.Collectors;
  * 用户角色管理Controller
  *
  * @author 任人子
- * @date 2022/5/10  - {TIME}
  */
-@Api(tags = "userRoleController", description = "用户角色管理")
+@Api(tags = "用户角色管理")
 @RequestMapping("/user/role")
 @RestController
 public class UserRoleController {
@@ -132,4 +128,9 @@ public class UserRoleController {
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK);
     }
 
+    @ApiOperation("获取所有有效的角色")
+    @GetMapping("/all/enable/role")
+    public Result<List<UserRole>> getAllEnableRole() {
+        return userRoleService.getAllEnableRole();
+    }
 }

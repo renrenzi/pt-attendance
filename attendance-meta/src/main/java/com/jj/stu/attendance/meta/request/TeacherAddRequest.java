@@ -2,15 +2,8 @@ package com.jj.stu.attendance.meta.request;
 
 import lombok.Data;
 
-/**
- * 管理教师请求
- *
- * @author 张俊杰
- * @date 2023/03/06
- */
 @Data
-public class ManageTeacherRequest {
-    private Integer id;
+public class TeacherAddRequest {
 
     /**
      * 账号
@@ -38,9 +31,12 @@ public class ManageTeacherRequest {
     private String mobile;
 
     /**
-     * 更新用户id
+     * 创建用户id
      */
-    private Integer updateUserId;
+    private Integer createUserId;
 
-    private String updateUserName;
+    /**
+     * 创建用户名
+     */
+    private String createUserName;
 }

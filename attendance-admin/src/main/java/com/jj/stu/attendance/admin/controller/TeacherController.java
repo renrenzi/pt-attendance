@@ -11,6 +11,7 @@ import com.jj.stu.attendance.base.constants.LogRecordType;
 import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.meta.request.ManageTeacherRequest;
 import com.jj.stu.attendance.meta.request.PageTeacherRequest;
+import com.jj.stu.attendance.meta.request.TeacherAddRequest;
 import com.jj.stu.attendance.meta.response.PageTeacherResponse;
 import com.mzt.logapi.starter.annotation.LogRecord;
 import io.swagger.annotations.Api;
@@ -38,13 +39,27 @@ public class TeacherController {
     private TeacherService teacherService;
 
     @LogRecord(
-            fail = "删除学生信息失败，失败原因：「{{#_errorMsg}}」",
+            fail = "添加教师信息失败，失败原因：「{{#_errorMsg}}」",
             subType = "MANAGER_VIEW",
-            success = "{{#detail.userId}}删除学生信息「{{#studentIds}}」成功,修改结果:{{#_ret}}",
-            operator = "{{#detail.nickName}}", type = LogRecordType.TEACHER, bizNo = "{{#teacherIds}}")
+            success = "{{#detail.userId}}添加教师信息「{{#request.username}}」成功,修改结果:{{#_ret}}",
+            operator = "{{#detail.nickName}}", type = LogRecordType.TEACHER, bizNo = "{{#request.username}}")
+    @ApiOperation("添加教师")
+    @PostMapping("/add/teacher")
+    public Result addTeacher(@RequestBody TeacherAddRequest request, StpUserDetail detail) {
+        request.setCreateUserId(detail.getUserId());
+        request.setCreateUserName(detail.getNickName());
+        ValidateUtil.validate(request);
+        return ResultGenerator.getResultByOk(teacherService.addTeacher(request));
+    }
+
+    @LogRecord(
+            fail = "批量删除教师信息失败，失败原因：「{{#_errorMsg}}」",
+            subType = "MANAGER_VIEW",
+            success = "{{#detail.userId}}批量删除教师信息「{{#teacherIds}}」成功,修改结果:{{#_ret}}",
+            operator = "{{#detail.nickName}}", type = LogRecordType.TEACHER, bizNo = "batch_delete_teacher")
     @ApiOperation("批量删除教师")
-    @PostMapping("/batch/delete/user")
-    public Result batchDeleteUser(List<Integer> teacherIds) {
+    @PostMapping("/batch/delete/teacher")
+    public Result batchDeleteUser(@RequestBody List<Integer> teacherIds, StpUserDetail detail) {
         if (CollectionUtil.isEmpty(teacherIds)) {
             throw new ApiException("教师ID列表不能为空");
         }
@@ -54,11 +69,13 @@ public class TeacherController {
     @LogRecord(
             fail = "修改教师信息失败，失败原因：「{{#_errorMsg}}」",
             subType = "MANAGER_VIEW",
-            success = "{{#detail.userId}}修改教师信息「{{#studentIds}}」成功,修改结果:{{#_ret}}",
-            operator = "{{#detail.nickName}}", type = LogRecordType.TEACHER, bizNo = "{{#request.id}}")
+            success = "{{#detail.userId}}修改教师信息「{{#request.username}}」成功,修改结果:{{#_ret}}",
+            operator = "{{#detail.nickName}}", type = LogRecordType.TEACHER, bizNo = "{{#request.username}}")
     @ApiOperation("修改教师详情")
     @PostMapping("/update/teacher/info")
-    public Result updateTeacherInfo(ManageTeacherRequest request, StpUserDetail detail) {
+    public Result updateTeacherInfo(@RequestBody ManageTeacherRequest request, StpUserDetail detail) {
+        request.setUpdateUserId(detail.getUserId());
+        request.setUpdateUserName(detail.getUsername());
         ValidateUtil.validate(request);
         teacherService.updateTeacherInfo(request);
         return ResultGenerator.getResultByOk("修改成功");

@@ -18,6 +18,7 @@ public enum RoleNameEnum {
 
     private final String roleName;
 
+
     RoleNameEnum(Integer roleId, String roleName) {
         this.roleId = roleId;
         this.roleName = roleName;

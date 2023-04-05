@@ -5,6 +5,7 @@ import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.dao.model.Teacher;
 import com.jj.stu.attendance.meta.request.ManageTeacherRequest;
 import com.jj.stu.attendance.meta.request.PageTeacherRequest;
+import com.jj.stu.attendance.meta.request.TeacherAddRequest;
 import com.jj.stu.attendance.meta.response.PageTeacherResponse;
 
 import java.util.List;
@@ -33,4 +34,12 @@ public interface TeacherService extends IService<Teacher> {
      * @return {@link Result}
      */
     Result batchDeleteUser(List<Integer> teacherIds);
+
+    /**
+     * 添加教师
+     *
+     * @param request 要求
+     * @return {@link Object}
+     */
+    Integer addTeacher(TeacherAddRequest request);
 }

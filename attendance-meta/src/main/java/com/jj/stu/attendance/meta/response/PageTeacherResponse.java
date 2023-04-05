@@ -1,7 +1,9 @@
 package com.jj.stu.attendance.meta.response;
 
-import com.jj.stu.attendance.dao.model.Teacher;
+import com.jj.stu.attendance.meta.dto.TeacherDTO;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.List;
@@ -13,6 +15,8 @@ import java.util.List;
  * @date 2022/11/20
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Accessors(chain = true)
 public class PageTeacherResponse {
 
@@ -21,5 +25,5 @@ public class PageTeacherResponse {
      */
     private Long totalSize;
 
-    private List<Teacher> teacherList;
+    private List<TeacherDTO> teacherList;
 }

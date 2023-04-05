@@ -1,7 +1,6 @@
 package com.jj.stu.attendance.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jj.stu.attendance.admin.basic.PageCondition;
 import com.jj.stu.attendance.admin.basic.PageResult;
 import com.jj.stu.attendance.admin.service.UserResourceService;
@@ -29,9 +28,8 @@ import java.util.stream.Collectors;
  * 用户资源管理Controller
  *
  * @author 任人子
- * @date 2022/5/10  - {TIME}
  */
-@Api(tags = "userResourceController", description = "用户资源管理")
+@Api(tags = "用户资源管理")
 @RequestMapping("/user/resource")
 @RestController
 public class UserResourceController {

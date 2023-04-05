@@ -1,6 +1,7 @@
 package com.jj.stu.attendance.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.jj.stu.attendance.admin.constants.CommonStatusEnum;
 import com.jj.stu.attendance.admin.service.UserRoleRelationService;
 import com.jj.stu.attendance.admin.service.UserRoleService;
 import com.jj.stu.attendance.base.basic.Result;
@@ -25,9 +26,8 @@ import java.util.stream.Collectors;
  * 用户角色关系Controller
  *
  * @author 任人子
- * @date 2022/5/15  - {TIME}
  */
-@Api(tags = "userRoleRelationController", description = "用户角色关系管理")
+@Api(tags = "用户角色关系管理")
 @RequestMapping("/user/role/relation")
 @RestController
 public class UserRoleRelationController {
@@ -64,7 +64,7 @@ public class UserRoleRelationController {
         if (CollectionUtils.isEmpty(roleIds)) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, null);
         }
-        List<UserRole> roleList = userRoleService.listByIds(roleIds);
+        List<UserRole> roleList = userRoleService.listByIds(roleIds).stream().filter(userRole -> CommonStatusEnum.ENABLE.getCode().equals(userRole.getRoleStatus())).collect(Collectors.toList());
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, roleList);
     }
 }
