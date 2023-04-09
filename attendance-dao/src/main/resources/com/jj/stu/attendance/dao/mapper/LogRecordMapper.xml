@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jj.stu.attendance.dao.mapper.LogRecordMapper">
+  <resultMap id="BaseResultMap" type="com.jj.stu.attendance.dao.model.LogRecord">
+    <!--@mbg.generated-->
+    <!--@Table s_log_record-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="tenant" jdbcType="VARCHAR" property="tenant" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="sub_type" jdbcType="VARCHAR" property="subType" />
+    <result column="biz_no" jdbcType="VARCHAR" property="bizNo" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="action" jdbcType="VARCHAR" property="action" />
+    <result column="fail" jdbcType="VARCHAR" property="fail" />
+    <result column="extra" jdbcType="VARCHAR" property="extra" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, tenant, `type`, sub_type, biz_no, `operator`, `action`, fail, extra, create_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from s_log_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from s_log_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jj.stu.attendance.dao.model.LogRecord">
+    <!--@mbg.generated-->
+    insert into s_log_record (id, tenant, `type`, 
+      sub_type, biz_no, `operator`, 
+      `action`, fail, extra, 
+      create_date)
+    values (#{id,jdbcType=INTEGER}, #{tenant,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{subType,jdbcType=VARCHAR}, #{bizNo,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, 
+      #{action,jdbcType=VARCHAR}, #{fail,jdbcType=VARCHAR}, #{extra,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jj.stu.attendance.dao.model.LogRecord">
+    <!--@mbg.generated-->
+    insert into s_log_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tenant != null">
+        tenant,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="subType != null">
+        sub_type,
+      </if>
+      <if test="bizNo != null">
+        biz_no,
+      </if>
+      <if test="operator != null">
+        `operator`,
+      </if>
+      <if test="action != null">
+        `action`,
+      </if>
+      <if test="fail != null">
+        fail,
+      </if>
+      <if test="extra != null">
+        extra,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tenant != null">
+        #{tenant,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="subType != null">
+        #{subType,jdbcType=VARCHAR},
+      </if>
+      <if test="bizNo != null">
+        #{bizNo,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="action != null">
+        #{action,jdbcType=VARCHAR},
+      </if>
+      <if test="fail != null">
+        #{fail,jdbcType=VARCHAR},
+      </if>
+      <if test="extra != null">
+        #{extra,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jj.stu.attendance.dao.model.LogRecord">
+    <!--@mbg.generated-->
+    update s_log_record
+    <set>
+      <if test="tenant != null">
+        tenant = #{tenant,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="subType != null">
+        sub_type = #{subType,jdbcType=VARCHAR},
+      </if>
+      <if test="bizNo != null">
+        biz_no = #{bizNo,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        `operator` = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="action != null">
+        `action` = #{action,jdbcType=VARCHAR},
+      </if>
+      <if test="fail != null">
+        fail = #{fail,jdbcType=VARCHAR},
+      </if>
+      <if test="extra != null">
+        extra = #{extra,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jj.stu.attendance.dao.model.LogRecord">
+    <!--@mbg.generated-->
+    update s_log_record
+    set tenant = #{tenant,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR},
+      sub_type = #{subType,jdbcType=VARCHAR},
+      biz_no = #{bizNo,jdbcType=VARCHAR},
+      `operator` = #{operator,jdbcType=VARCHAR},
+      `action` = #{action,jdbcType=VARCHAR},
+      fail = #{fail,jdbcType=VARCHAR},
+      extra = #{extra,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
