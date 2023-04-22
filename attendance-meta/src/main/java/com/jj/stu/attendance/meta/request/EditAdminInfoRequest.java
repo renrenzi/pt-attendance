@@ -14,4 +14,9 @@ public class EditAdminInfoRequest {
     @NotBlank
     private String password;
 
+    @NotNull
+    private Integer updateUserId;
+
+    @NotNull
+    private String updateUserName;
 }

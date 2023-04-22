@@ -84,16 +84,21 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
                 if (Objects.nonNull(student)) {
                     detail.setUserId(student.getId());
                     detail.setUsername(student.getUsername());
+                } else {
+                    throw new ApiException("该用户的角色不是"+RoleNameEnum.STUDENT.getDesc() +",请重新选择");
                 }
             } else if (RoleNameEnum.TEACHER.getRoleName().equals(roleName)) {
                 Teacher teacher = teacherMapper.selectOne(new QueryWrapper<Teacher>().lambda().eq(Teacher::getAdminId, admin.getId()));
                 if (Objects.nonNull(teacher)) {
                     detail.setUserId(teacher.getId());
                     detail.setNickName(teacher.getUsername());
+                }else {
+                    throw new ApiException("该用户的角色不是"+RoleNameEnum.TEACHER.getDesc() +",请重新选择");
                 }
             }
             detail.setAdminId(admin.getId());
             detail.setUsername(admin.getUserName());
+            detail.setRoleName(roleName);
             return detail;
         }
         return null;

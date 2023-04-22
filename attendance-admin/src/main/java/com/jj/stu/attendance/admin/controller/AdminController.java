@@ -5,6 +5,7 @@ import com.jj.stu.attendance.admin.service.AdminService;
 import com.jj.stu.attendance.admin.util.ValidateUtil;
 import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.basic.ResultGenerator;
+import com.jj.stu.attendance.base.basic.StpUserDetail;
 import com.jj.stu.attendance.base.constants.LogRecordType;
 import com.jj.stu.attendance.meta.request.EditAdminInfoRequest;
 import com.jj.stu.attendance.meta.request.MiniLoginRequest;
@@ -64,7 +65,9 @@ public class AdminController {
 
     @ApiOperation("修改账号信息")
     @PostMapping("/edit/admin/info")
-    public Result<String> editAdminInfo(@RequestBody EditAdminInfoRequest request) {
+    public Result<String> editAdminInfo(@RequestBody EditAdminInfoRequest request, StpUserDetail detail) {
+        request.setUpdateUserId(detail.getUserId());
+        request.setUpdateUserName(detail.getNickName());
         ValidateUtil.validate(request);
         return ResultGenerator.getResultByOk(adminService.editAdminInfo(request));
     }

@@ -35,4 +35,5 @@ public class StpUserDetail {
      */
     private String nickName;
 
+    private String roleName;
 }
