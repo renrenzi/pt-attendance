@@ -4,10 +4,14 @@ import com.jj.stu.attendance.admin.basic.PageResult;
 import com.jj.stu.attendance.admin.service.AdminService;
 import com.jj.stu.attendance.admin.util.ValidateUtil;
 import com.jj.stu.attendance.base.basic.Result;
+import com.jj.stu.attendance.base.basic.ResultGenerator;
+import com.jj.stu.attendance.base.constants.LogRecordType;
+import com.jj.stu.attendance.meta.request.EditAdminInfoRequest;
 import com.jj.stu.attendance.meta.request.MiniLoginRequest;
 import com.jj.stu.attendance.meta.request.PageAdminListRequest;
 import com.jj.stu.attendance.meta.request.UserLoginRequest;
 import com.jj.stu.attendance.meta.response.PageAdminInfoResponse;
+import com.mzt.logapi.starter.annotation.LogRecord;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,4 +55,18 @@ public class AdminController {
         ValidateUtil.validate(request);
         return adminService.pageAdminInfoList(request);
     }
+
+    @LogRecord(
+            fail = "修改账号信息失败，失败原因：「{{#_errorMsg}}」",
+            subType = "MANAGER_VIEW",
+            success = "{{#detail.userId}}修改账号信息「{{#request.adminId}}」,修改结果:{{#_ret}}",
+            operator = "{{#detail.nickName}}", type = LogRecordType.ADMIN_USER, bizNo = "{{#request.adminId}}")
+
+    @ApiOperation("修改账号信息")
+    @PostMapping("/edit/admin/info")
+    public Result<String> editAdminInfo(@RequestBody EditAdminInfoRequest request) {
+        ValidateUtil.validate(request);
+        return ResultGenerator.getResultByOk(adminService.editAdminInfo(request));
+    }
+
 }
