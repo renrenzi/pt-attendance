@@ -35,6 +35,8 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static com.jj.stu.attendance.base.constants.StringConstants.USER_INFO_MAP_KET;
+
 @Service
 public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements AdminService {
     @Resource
@@ -56,8 +58,9 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
             throw new ApiException("账号或密码错误");
         }
         StpUtil.login(admin.getId());
-        // todo 将用户信息到redis中
-        return ResultGenerator.getResultByOk(new UserLoginResponse(StpUtil.getTokenValue(), buildStpUserDetail(admin, null)));
+        StpUserDetail detail = buildStpUserDetail(admin, null);
+        redisService.hSet(USER_INFO_MAP_KET, admin.getIdJoinUsername(), detail);
+        return ResultGenerator.getResultByOk(new UserLoginResponse(StpUtil.getTokenValue(), detail));
     }
 
     @Override
@@ -68,8 +71,9 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
             throw new ApiException(String.format("账号或密码错误 userName:%s, roleName:%s", request.getUserName(), request.getRoleName()));
         }
         StpUtil.login(admin.getId());
-        // todo 将用户信息到redis中
-        return ResultGenerator.getResultByOk(new UserLoginResponse(StpUtil.getTokenValue(), buildStpUserDetail(admin, request.getRoleName())));
+        StpUserDetail detail = buildStpUserDetail(admin, request.getRoleName());
+        redisService.hSet(USER_INFO_MAP_KET, admin.getIdJoinUsername(), detail);
+        return ResultGenerator.getResultByOk(new UserLoginResponse(StpUtil.getTokenValue(), detail));
     }
 
     /**
