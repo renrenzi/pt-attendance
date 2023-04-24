@@ -34,12 +34,7 @@ public class RouterInterceptor implements WebMvcConfigurer {
                     Map<Object, Object> roleResourceMap = redisService.hGetAll(StringConstants.RESOURCE_ROLE_MAP_KEY);
 
                     if (!CollectionUtils.isEmpty(roleResourceMap)) {
-                        /*String reqUrl = "/" + req.getUrl().split("/")[3] + "/**";
-                        log.info("reqUrl ----> {}", reqUrl);
-                        String[] roleList = ((List<String>) roleResourceMap.getOrDefault(reqUrl, new ArrayList<>())).stream().map(
-                                item -> item.split("_")[1]).toArray(String[]::new);
-                        SaRouter.match(reqUrl, r -> StpUtil.checkRoleOr(roleList));*/
-                        for (Map.Entry<Object, Object> entry : roleResourceMap.entrySet()) {
+                          for (Map.Entry<Object, Object> entry : roleResourceMap.entrySet()) {
                             String url = (String) entry.getKey();
                             String[] roleList = ((List<String>) (entry.getValue())).stream().map(
                                     item -> item.split("_")[1]).toArray(String[]::new);
