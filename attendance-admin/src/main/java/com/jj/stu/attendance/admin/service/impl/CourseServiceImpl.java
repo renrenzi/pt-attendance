@@ -86,6 +86,9 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
             // 根据课程名字模糊查询, 按时间逆序排序
             wrapper.lambda().like(Course::getName, request.getCourse().getName());
         }
+        if (request.getCourse() != null && request.getCourse().getTeacherId() != null) {
+            wrapper.lambda().eq(Course::getTeacherId, request.getCourse().getTeacherId());
+        }
         wrapper.lambda().orderByDesc(Course::getCourseDate);
         Page<Object> page = PageHelper.startPage(request.getPageNum(), request.getPageSize());
         List<Course> courseList = courseMapper.selectList(wrapper);
