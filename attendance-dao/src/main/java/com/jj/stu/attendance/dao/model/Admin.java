@@ -1,13 +1,14 @@
 package com.jj.stu.attendance.dao.model;
 
-import java.util.Date;
-
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.jj.stu.attendance.base.constants.StringConstants;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.util.Date;
 
 /**
  * 管理员表
@@ -55,4 +56,11 @@ public class Admin {
      * 是否有效
      */
     private Integer state;
+
+    /**
+     * 获取 id + : + username
+     */
+    public String getIdJoinUsername() {
+        return StringConstants.USER_INFO + ":" + id;
+    }
 }

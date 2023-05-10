@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.jj.stu.attendance.admin.basic.PageResult;
 import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.dao.model.Admin;
+import com.jj.stu.attendance.meta.request.EditAdminInfoRequest;
 import com.jj.stu.attendance.meta.request.MiniLoginRequest;
 import com.jj.stu.attendance.meta.request.PageAdminListRequest;
 import com.jj.stu.attendance.meta.request.UserLoginRequest;
@@ -39,4 +40,11 @@ public interface AdminService extends IService<Admin> {
      * @return {@link Result}
      */
     Result userLoginInfo(UserLoginRequest request);
+
+    /**
+     * 修改用户信息
+     * @param request
+     * @return
+     */
+    String editAdminInfo(EditAdminInfoRequest request);
 }

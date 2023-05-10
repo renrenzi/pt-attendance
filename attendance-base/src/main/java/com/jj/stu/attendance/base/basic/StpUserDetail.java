@@ -1,7 +1,6 @@
 package com.jj.stu.attendance.base.basic;
 
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * 登录用户详细信息
@@ -11,7 +10,15 @@ import lombok.ToString;
  */
 @Data
 @ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class StpUserDetail {
+
+    /**
+     * 账号id（唯一标识）
+     */
+    private Integer adminId;
 
     /**
      * 用户id
@@ -28,4 +35,5 @@ public class StpUserDetail {
      */
     private String nickName;
 
+    private String roleName;
 }

@@ -8,6 +8,7 @@ import com.github.pagehelper.PageHelper;
 import com.jj.stu.attendance.admin.constants.AttendanceTypeEnum;
 import com.jj.stu.attendance.admin.service.AttendanceService;
 import com.jj.stu.attendance.base.basic.Result;
+import com.jj.stu.attendance.base.basic.ResultGenerator;
 import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.dao.mapper.AttendanceMapper;
 import com.jj.stu.attendance.dao.mapper.CourseMapper;
@@ -21,6 +22,8 @@ import com.jj.stu.attendance.meta.request.ManageAttendanceRequest;
 import com.jj.stu.attendance.meta.request.PageAttendanceRequest;
 import com.jj.stu.attendance.meta.request.PunchTheClockRequest;
 import com.jj.stu.attendance.meta.response.PageAttendanceResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -37,6 +40,7 @@ import java.util.stream.Collectors;
  * @date 2022/11/19
  */
 @Service
+@Slf4j
 public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attendance> implements AttendanceService {
     @Resource
     private AttendanceMapper attendanceMapper;
@@ -137,9 +141,17 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
         attendance.setDate(request.getClockingTime());
         attendance.setCourseId(request.getCourseId());
         attendance.setStudentId(student.getId());
+        attendance.setCreateTime(new Date());
+        // todo 从用户中取
+        attendance.setCreateUserId(1);
         checkAttendanceState(attendance, course);
-        attendanceMapper.insert(attendance);
-        return null;
+        try {
+            attendanceMapper.insert(attendance);
+        }catch (DuplicateKeyException e) {
+            log.info("e",e);
+            throw new ApiException("打卡失败, 用户可能已经打卡过！");
+        }
+        return ResultGenerator.getResultByOk("打卡成功");
     }
 
     /**

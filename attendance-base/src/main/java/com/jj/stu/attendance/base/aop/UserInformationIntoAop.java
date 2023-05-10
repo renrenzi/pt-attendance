@@ -4,7 +4,9 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.jj.stu.attendance.base.basic.StpUserDetail;
+import com.jj.stu.attendance.base.constants.StringConstants;
 import com.jj.stu.attendance.base.exception.ApiException;
+import com.jj.stu.attendance.base.service.RedisService;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -17,6 +19,9 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.method.HandlerMethod;
 
+import javax.annotation.Resource;
+import java.util.Objects;
+
 /**
  * @author zhangjunjie
  * @description
@@ -25,6 +30,10 @@ import org.springframework.web.method.HandlerMethod;
 @Slf4j
 @Component
 public class UserInformationIntoAop {
+
+    @Resource
+    private RedisService redisService;
+
     @SneakyThrows
     @Around(value = "@within(org.springframework.web.bind.annotation.RestController)")
     public Object around(ProceedingJoinPoint pjp) {
@@ -43,10 +52,15 @@ public class UserInformationIntoAop {
                                 ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
                                 String tokenValue = servletRequestAttributes.getRequest().getHeader("Authorization");
                                 Integer loginId = Integer.valueOf((String) StpUtil.getLoginIdByToken(tokenValue));
-                                detail.setUserId(1);
-                                detail.setUsername("test");
-                                detail.setNickName("test");
-                                // todo 用户信息从redis中取
+                                StpUserDetail userDetail = (StpUserDetail)(redisService.hGet(StringConstants.USER_INFO_MAP_KET, StringConstants.USER_INFO + ":" + loginId));
+                                if (Objects.isNull(userDetail)) {
+                                    throw new ApiException("缓存中不存在改用户信息");
+                                }
+                                detail.setAdminId(userDetail.getAdminId());
+                                detail.setUserId(userDetail.getUserId());
+                                detail.setUsername(userDetail.getUsername());
+                                detail.setNickName(userDetail.getUsername());
+                                detail.setRoleName(userDetail.getRoleName());
                                 log.info("detail -> {}", obj.toString());
                             }
                         }

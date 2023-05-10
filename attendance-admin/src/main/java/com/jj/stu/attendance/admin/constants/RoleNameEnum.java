@@ -9,19 +9,20 @@ import com.jj.stu.attendance.base.exception.ApiException;
  */
 public enum RoleNameEnum {
 
-    STUDENT(7, "student"),
-    TEACHER(8, "teacher"),
-    MANAGER(9, "manager"),
+    STUDENT(7, "student", "学生"),
+    TEACHER(8, "teacher", "教师"),
+    MANAGER(9, "manager", "管理员"),
     ;
 
     private final Integer roleId;
 
     private final String roleName;
 
-
-    RoleNameEnum(Integer roleId, String roleName) {
+    private final String desc;
+    RoleNameEnum(Integer roleId, String roleName, String desc) {
         this.roleId = roleId;
         this.roleName = roleName;
+        this.desc = desc;
     }
 
     public Integer getRoleId() {
@@ -30,6 +31,10 @@ public enum RoleNameEnum {
 
     public String getRoleName() {
         return roleName;
+    }
+
+    public String getDesc() {
+        return desc;
     }
 
     public static RoleNameEnum getRole(Integer roleId) {

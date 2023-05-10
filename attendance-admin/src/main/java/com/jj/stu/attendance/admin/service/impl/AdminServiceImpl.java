@@ -3,6 +3,7 @@ package com.jj.stu.attendance.admin.service.impl;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.crypto.digest.DigestUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -11,6 +12,7 @@ import com.jj.stu.attendance.admin.constants.RoleNameEnum;
 import com.jj.stu.attendance.admin.service.AdminService;
 import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.basic.ResultGenerator;
+import com.jj.stu.attendance.base.basic.StpUserDetail;
 import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.base.service.RedisService;
 import com.jj.stu.attendance.dao.mapper.AdminMapper;
@@ -19,10 +21,12 @@ import com.jj.stu.attendance.dao.mapper.TeacherMapper;
 import com.jj.stu.attendance.dao.model.Admin;
 import com.jj.stu.attendance.dao.model.Student;
 import com.jj.stu.attendance.dao.model.Teacher;
+import com.jj.stu.attendance.meta.request.EditAdminInfoRequest;
 import com.jj.stu.attendance.meta.request.MiniLoginRequest;
 import com.jj.stu.attendance.meta.request.PageAdminListRequest;
 import com.jj.stu.attendance.meta.request.UserLoginRequest;
 import com.jj.stu.attendance.meta.response.PageAdminInfoResponse;
+import com.jj.stu.attendance.meta.response.UserLoginResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +34,8 @@ import javax.annotation.Resource;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static com.jj.stu.attendance.base.constants.StringConstants.USER_INFO_MAP_KET;
 
 @Service
 public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements AdminService {
@@ -45,28 +51,61 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     private ApplicationContext context;
 
     @Override
-    public Result userLoginInfo(UserLoginRequest request) {
+    public Result<UserLoginResponse> userLoginInfo(UserLoginRequest request) {
         request.setPassword(DigestUtil.md5Hex(request.getPassword()));
         Admin admin = adminMapper.findAdminByCondition(request.getUserName(), request.getPassword());
         if (admin == null) {
             throw new ApiException("账号或密码错误");
         }
         StpUtil.login(admin.getId());
-        String token = StpUtil.getTokenValue();
-        return ResultGenerator.getResultByOk(token);
+        StpUserDetail detail = buildStpUserDetail(admin, null);
+        redisService.hSet(USER_INFO_MAP_KET, admin.getIdJoinUsername(), detail);
+        return ResultGenerator.getResultByOk(new UserLoginResponse(StpUtil.getTokenValue(), detail));
     }
 
     @Override
-    public Result miniLoginInfo(MiniLoginRequest request) {
+    public Result<UserLoginResponse> miniLoginInfo(MiniLoginRequest request) {
         request.setPassword(DigestUtil.md5Hex(request.getPassword()));
         Admin admin = adminMapper.findAdminByCondition(request.getUserName(), request.getPassword());
         if (admin == null) {
             throw new ApiException(String.format("账号或密码错误 userName:%s, roleName:%s", request.getUserName(), request.getRoleName()));
         }
         StpUtil.login(admin.getId());
-        String token = StpUtil.getTokenValue();
+        StpUserDetail detail = buildStpUserDetail(admin, request.getRoleName());
+        redisService.hSet(USER_INFO_MAP_KET, admin.getIdJoinUsername(), detail);
+        return ResultGenerator.getResultByOk(new UserLoginResponse(StpUtil.getTokenValue(), detail));
+    }
 
-        return ResultGenerator.getResultByOk(token);
+    /**
+     * 构建用户详情
+     */
+    private StpUserDetail buildStpUserDetail(Admin admin, String roleName) {
+
+        if (Objects.nonNull(admin)) {
+            StpUserDetail detail = new StpUserDetail();
+            if (RoleNameEnum.STUDENT.getRoleName().equals(roleName)) {
+                Student student = studentMapper.selectOne(new QueryWrapper<Student>().lambda().eq(Student::getAdminId, admin.getId()));
+                if (Objects.nonNull(student)) {
+                    detail.setUserId(student.getId());
+                    detail.setUsername(student.getUsername());
+                } else {
+                    throw new ApiException("该用户的角色不是"+RoleNameEnum.STUDENT.getDesc() +",请重新选择");
+                }
+            } else if (RoleNameEnum.TEACHER.getRoleName().equals(roleName)) {
+                Teacher teacher = teacherMapper.selectOne(new QueryWrapper<Teacher>().lambda().eq(Teacher::getAdminId, admin.getId()));
+                if (Objects.nonNull(teacher)) {
+                    detail.setUserId(teacher.getId());
+                    detail.setNickName(teacher.getUsername());
+                }else {
+                    throw new ApiException("该用户的角色不是"+RoleNameEnum.TEACHER.getDesc() +",请重新选择");
+                }
+            }
+            detail.setAdminId(admin.getId());
+            detail.setUsername(admin.getUserName());
+            detail.setRoleName(roleName);
+            return detail;
+        }
+        return null;
     }
 
     @Override
@@ -92,9 +131,15 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
             BeanUtil.copyProperties(admin, pageAdminInfoResponse);
             if (roleId != null) {
                 if (RoleNameEnum.STUDENT.getRoleId().equals(roleId)) {
+                    if (!adminIdToStudentMap.containsKey(admin.getId())){
+                        continue;
+                    }
                     pageAdminInfoResponse.setInfo(adminIdToStudentMap.get(admin.getId()));
                 }
                 if (RoleNameEnum.TEACHER.getRoleId().equals(roleId)) {
+                    if (!adminIdToTeacherMap.containsKey(admin.getId())){
+                        continue;
+                    }
                     pageAdminInfoResponse.setInfo(adminIdToTeacherMap.get(admin.getId()));
                 }
                 pageAdminInfoResponse.setRoleName(Objects.requireNonNull(RoleNameEnum.getRole(roleId)).getRoleName());
@@ -104,7 +149,22 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         }
         PageResult<PageAdminInfoResponse> pageResult = new PageResult<>();
         pageResult.setData(result);
-        pageResult.setTotalSize(page.getTotal());
+        pageResult.setTotalSize((long) (RoleNameEnum.STUDENT.getRoleId().equals(roleId) ? adminIdToStudentMap.size() : adminIdToTeacherMap.size()));
         return ResultGenerator.getResultByOk(pageResult);
     }
+
+    @Override
+    public String editAdminInfo(EditAdminInfoRequest request) {
+        Admin admin = adminMapper.selectByPrimaryKey(request.getAdminId());
+        if (Objects.isNull(admin)) {
+            throw new ApiException("修改失败, 未查询到账号信息");
+        }
+        admin.setPassWord(DigestUtil.md5Hex(request.getPassword()));
+        int res = adminMapper.updateByPrimaryKey(admin);
+        if (res != 1) {
+            throw new ApiException("修改失败");
+        }
+        return null;
+    }
+
 }
