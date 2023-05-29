@@ -7,6 +7,7 @@ import com.jj.stu.attendance.admin.service.UserRoleService;
 import com.jj.stu.attendance.base.basic.Result;
 import com.jj.stu.attendance.base.basic.ResultGenerator;
 import com.jj.stu.attendance.base.constants.HttpStatusEnum;
+import com.jj.stu.attendance.base.exception.ApiException;
 import com.jj.stu.attendance.dao.model.UserRole;
 import com.jj.stu.attendance.dao.model.UserRoleRelation;
 import io.swagger.annotations.Api;
@@ -62,7 +63,7 @@ public class UserRoleRelationController {
                 .map(UserRoleRelation::getRoleId)
                 .collect(Collectors.toList());
         if (CollectionUtils.isEmpty(roleIds)) {
-            return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, null);
+            throw new ApiException("当前用户未分配任何角色");
         }
         List<UserRole> roleList = userRoleService.listByIds(roleIds).stream().filter(userRole -> CommonStatusEnum.ENABLE.getCode().equals(userRole.getRoleStatus())).collect(Collectors.toList());
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, roleList);

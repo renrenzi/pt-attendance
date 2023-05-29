@@ -62,7 +62,6 @@ public class AdminController {
             subType = "MANAGER_VIEW",
             success = "{{#detail.userId}}修改账号信息「{{#request.adminId}}」,修改结果:{{#_ret}}",
             operator = "{{#detail.nickName}}", type = LogRecordType.ADMIN_USER, bizNo = "{{#request.adminId}}")
-
     @ApiOperation("修改账号信息")
     @PostMapping("/edit/admin/info")
     public Result<String> editAdminInfo(@RequestBody EditAdminInfoRequest request, StpUserDetail detail) {
