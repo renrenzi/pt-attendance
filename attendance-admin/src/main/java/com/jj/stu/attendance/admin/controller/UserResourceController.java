@@ -89,7 +89,7 @@ public class UserResourceController {
      */
     @ApiOperation("修改资源")
     @PostMapping("/editResource")
-    public Result editResource(UserResource userResource) {
+    public Result<String> editResource(UserResource userResource) {
         if (userResource == null || userResource.getId() == null) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
@@ -105,7 +105,7 @@ public class UserResourceController {
 
     @ApiOperation("批量删除资源")
     @PostMapping("/deleteResources")
-    public Result deleteResources(@RequestParam List<Integer> ids) {
+    public Result<String> deleteResources(@RequestParam List<Integer> ids) {
         if (CollectionUtils.isEmpty(ids)) {
             return ResultGenerator.getResultByHttp(HttpStatusEnum.BAD_REQUEST);
         }
@@ -116,5 +116,4 @@ public class UserResourceController {
         userResourceService.initRoleResourceMap();
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK);
     }
-
 }
