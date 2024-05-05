@@ -24,11 +24,11 @@ spring:
       test-while-idle: false
   redis:
     database: 0
-    host: 175.178.127.92
+    host: localhost
     port: 6379
     password: wBa3u2KqvDKET.B
   rabbitmq:
-    host: 175.178.127.92
+    host: localhost
     username: admin
     port: 5672
     password: 123456
