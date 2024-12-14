@@ -1,6 +1,7 @@
 server:
   port: 9527
-
+  servlet:
+    context-path: /api
 spring:
   banner:
     charset: UTF-8
@@ -9,9 +10,9 @@ spring:
     active: prod
   datasource:
     driver-class-name: org.gjt.mm.mysql.Driver
-    url: jdbc:mysql://localhost:3306/stu_attendance?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: 123456
+    url: jdbc:mysql://Ip:端口/stu_attendence?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: 你的账号
+    password: 你的密码
     druid:
       initial-size: 5 #连接池初始化大小
       min-idle: 10 #最小空闲连接数
@@ -24,11 +25,11 @@ spring:
       test-while-idle: false
   redis:
     database: 0
-    host: localhost
+    host: IP
     port: 6379
-    password:
+    password: 密码
   rabbitmq:
-    host: localhost
+    host: IP
     username: 用户名
     port: 5672
     password:  密码
