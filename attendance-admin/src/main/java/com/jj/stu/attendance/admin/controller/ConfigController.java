@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,7 +37,7 @@ public class ConfigController {
     public Result<List<Config>> getConfigList() {
         List<Config> ConfigList = configService.list();
         if (CollectionUtils.isEmpty(ConfigList)) {
-            return ResultGenerator.getResultByHttp(HttpStatusEnum.INTERNAL_SERVER_ERROR);
+            return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, new ArrayList<>());
         }
         return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, ConfigList);
     }

@@ -11,14 +11,12 @@ import com.jj.stu.attendance.meta.request.EditAdminInfoRequest;
 import com.jj.stu.attendance.meta.request.MiniLoginRequest;
 import com.jj.stu.attendance.meta.request.PageAdminListRequest;
 import com.jj.stu.attendance.meta.request.UserLoginRequest;
+import com.jj.stu.attendance.meta.response.AdminCountInfoResponse;
 import com.jj.stu.attendance.meta.response.PageAdminInfoResponse;
 import com.mzt.logapi.starter.annotation.LogRecord;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -70,6 +68,12 @@ public class AdminController {
         request.setUpdateUserName(detail.getNickName());
         ValidateUtil.validate(request);
         return ResultGenerator.getResultByOk(adminService.editAdminInfo(request));
+    }
+
+    @ApiOperation("获取计数")
+    @GetMapping("/get/count/info")
+    public Result<AdminCountInfoResponse> getCountInfo() {
+        return ResultGenerator.getResultByOk(new AdminCountInfoResponse());
     }
 
 }

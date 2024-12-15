@@ -37,7 +37,7 @@ public class LinkServiceImpl extends ServiceImpl<LinkMapper, Link> implements Li
         linkMapper.selectPage(page, query);
         List<Link> records = page.getRecords();
         if (CollectionUtils.isEmpty(records)) {
-            return ResultGenerator.getResultByHttp(HttpStatusEnum.INTERNAL_SERVER_ERROR);
+            return ResultGenerator.getResultByHttp(HttpStatusEnum.OK, new PageResult<>(2000, null, 0L, null));
         }
         PageResult<Link> result = new PageResult<>();
         result.setData(records);

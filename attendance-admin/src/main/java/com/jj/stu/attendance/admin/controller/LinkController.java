@@ -118,6 +118,7 @@ public class LinkController {
         }
         boolean flag;
         if (Link.getLinkId() == null) {
+            Link.setIsDeleted(0);
             flag = linkService.save(Link.setCreateTime(DateUtils.getLocalCurrentTime()));
         } else {
             flag = linkService.updateById(Link);
